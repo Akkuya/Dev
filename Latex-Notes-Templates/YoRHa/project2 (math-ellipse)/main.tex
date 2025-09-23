@@ -1,0 +1,1244 @@
+\documentclass[twocolumn]{article}
+
+% Imports the catppuccin theme, using the mocha flavor,
+% from the directory above. Actual implementation
+% wouldn't need the import package unless the theme
+% and the document are in different directories.
+\usepackage{import}
+\usepackage{xcolor}
+\usepackage{cancel}
+\usepackage{mathtools}
+
+\newcommand\Myperm[2][^n]{\prescript{#1\mkern-2.5mu}{}P_{#2}}
+\newcommand\Mycomb[2]{\prescript{#1\mkern-0.5mu}{}C_{#2}}
+
+
+\definecolor{yorhabg}{HTML}{C8C2AA}
+\definecolor{yorhafg}{HTML}{4D493E}
+\definecolor{yorhagrid}{HTML}{B5AF9C}
+\definecolor{mred}{HTML}{D24545}
+
+\pagecolor{yorhabg}
+\color{yorhafg}
+
+\import{project2 (math-ellipse)}{preamble.sty}
+
+% Removes padding above title
+\usepackage{titling}
+\setlength{\droptitle}{-10em}
+
+% Font package
+\usepackage[T1]{fontenc}
+
+\usepackage{fouriernc}
+
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[skins]{tcolorbox}
+
+\DeclareMathOperator{\sgn}{sgn}
+
+\usepackage{tikz}
+\usepackage{eso-pic}
+\usetikzlibrary{calc,shadows.blur}
+\usetikzlibrary{3d}
+
+\AddToShipoutPictureBG{%
+\begin{tikzpicture}[remember picture, overlay,
+                    help lines/.append style={line width=0.05pt, color=yorhagrid}]
+  \draw[help lines] (current page.south west) grid[step=5pt]
+                    (current page.north east);
+\end{tikzpicture}%
+}
+
+% Margins
+\topmargin=0in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\AtBeginEnvironment{tcolorbox}{\small}
+
+\newtcolorbox{question}{%
+    enhanced,
+    colback=yorhabg,
+    colframe=yorhafg,
+    coltext=yorhafg,
+    coltitle=yorhabg,
+    title=\textbf{Question.},
+    arc=0pt,
+    outer arc=0pt,
+    drop shadow southeast,
+    sharp corners
+}
+
+\newcommand\bb[1]{\textcolor{yorhafg}{\textbf{#1}}}
+
+\title{\textbf{Mathematics misc.}}
+\author{ Blxke }
+\date{\today}
+
+\begin{document}
+\maketitle    
+
+\begin{question}
+    \begin{small}
+         Let \(A, B, C\) be \( 3\times 3 \) matrices such that \(A\) is symmetric and \( B\) and \( C\) are skew-symmetric. Consider the statements.
+
+        \bb{Statement 1 : } \(A^{13} B^{26} - B^{26}A^{13}  \) is symmetric. 
+
+        \bb{Statement 2 : } \(A^{26} C^{13}  - C^{13} A^{26}  \) is symmetric.     
+    \end{small}
+\end{question}
+
+
+\vspace*{0.5in}
+
+\bb{\underline{Solution: }} 
+
+Let, 
+\[
+    P = A^{13} B^{26} - B^{26}A^{13}
+\]
+
+Then,
+
+\[
+     P^T = (A^{13} B^{26} - B^{26}A^{13})^T
+\]
+
+\[
+    P^T = (B^{26})^T (A^{13})^T - (A^{13})^T (B^{26})^T    
+\]
+
+\[
+    P^T = B^{26}A^{13} - A^{13} B^{26}  
+\]
+
+Therefore, 
+
+\[
+    P^T = -P 
+\]
+
+Hence, \(P\) is skew-symmetric and \textbf{Statement 1 is false.} 
+
+Now, 
+
+\[
+    P = A^{26} C^{13}  - C^{13} A^{26}
+\]
+
+\[
+    P^T = (A^{26} C^{13}  - C^{13} A^{26})^T
+\]
+
+\[
+    P^T = (C^{13})^T (A^{26} )^T - (A^{26})^T (C^{13} )^T
+\]
+
+\[
+    P^T = -C^{13} A^{26} - A^{26} (-C^{13} )
+\]
+
+\[
+    P^T = A^{26} C^{13}  - C^{13} A^{26}
+\]
+
+Therefore, \(P^T = P\) and hence \(P\) is symmetric and Statement 2 is true. 
+
+\vspace*{0.1in}
+
+\hrule
+
+\vspace*{0.1in}
+
+\begin{question}
+    A unit vector is orthogonal to \(5 \hat{\imath}  + 2 \hat{\jmath} + 6\hat{k} \)  and is coplanar to \(2 \hat{\imath}  + \hat{\jmath}  + \hat{k} \) and \(\hat{\imath} -\hat{\jmath} +\hat{k} \) then the vector is ?  
+\end{question}
+
+Let the vector \(\vec{a} \) be,
+
+\[
+    \vec{a}  = \alpha ( 2 \hat{\imath} + \hat{\jmath} + \hat{k}) + \beta (\hat{\imath}  - \hat{\jmath} + \hat{k} )
+\]
+
+Since \(\vec{a} \) is a unit vector.
+
+\[
+    |\vec{a} | = (2\alpha + \beta )^{2} + (\alpha -\beta)^{2} + (\alpha + \beta)^{2} = 1  
+\]
+
+\[
+    6\alpha^2 + 4\alpha \beta + 3\beta^{2} = 1 \tag{1}
+\]
+
+Now, since \(\vec{a}\) is orthogonal to \(5 \hat{\imath} +2\hat{\jmath} + 6\hat{k} \)
+
+\[
+    \vec{a} . (5\hat{\imath}  + 2\hat{\jmath} + 6\hat{k} ) = 0
+\]
+
+\[
+    5(2\alpha + \beta) + 2(\alpha -\beta ) + 6(\alpha + \beta ) = 0
+\]
+
+\[
+    18\alpha + 9\beta = 0
+\]
+
+\[
+    \beta = -2\alpha 
+\]
+
+Therefore, 
+
+\[
+    6\alpha ^2 - 8\alpha ^{2} + 6\alpha ^{2} = 1
+\]
+
+\[
+    \alpha  = \pm \frac{1}{\sqrt{10} }
+\]
+
+\[
+    \beta = \mp\frac{2}{\sqrt{10} }
+\]
+
+Hence, the required vector is,
+
+\[\boxed{
+    \vec{a} = \frac{3 \hat{\imath}  + \hat{k} }{\sqrt{10} }\ \text{or}\ \frac{3 \hat{\jmath}  - \hat{k} }{\sqrt{10} }}
+\]
+
+\hrule
+
+\begin{question}
+    If \(\vec{a}\), \(\vec{b} \) and \(\vec{c} \) are unit vectors such that \(\vec{a}  + 2 \vec{b} + 2\vec{c} = 0\), then \( |\vec{a} \times \vec{c}| \) is equal to ?  
+\end{question}
+
+Here, 
+
+\[
+    \vec{a} + 2\vec{c}  = -2\vec{b} 
+\]
+
+Squaring both sides,
+
+\[
+    |\vec{a}|^{2} + 4|\vec{c}|^{2} + 4\vec{a}.\vec{c} = 4|\vec{b} |
+\]
+
+Since, they are all unit vectors, 
+
+\[
+    1 + 4 + 4\cos \theta = 4
+\]
+
+\[
+    \cos \theta = -\frac{1}{4}
+\]
+
+Therefore, 
+
+\[
+    \sin \theta = \sqrt{1 - (-\frac{1}{4})^{2} } 
+\]
+
+\[
+    \sin \theta = \frac{\sqrt{15}}{4} 
+\]
+
+Hence, 
+
+\[
+    \boxed{|\vec{a}\times \vec{c}| = \frac{\sqrt{15}}{4} }
+\]
+
+\hrule 
+
+\begin{question}
+    If \(z = 4 + i \sqrt{7} \), then find the value of \(z^3 - 4z^2 - 9z + 91\).   
+\end{question}
+
+We have, 
+
+\[
+    z = 4 + i \sqrt{7} 
+\]
+
+\[
+    z-4 = i\sqrt{7} 
+\]
+
+Squaring, 
+
+\[
+    z^{2} + 16 - 8z = -7
+\]
+
+\[
+    z^{2} -8z + 23 = 0 \tag{1}
+\]
+
+Now, to find the value of \(z^3 - 4z^{2} - 9z + 91\), we can divide it by (1) and then the remainder will be the answer. 
+
+\[
+    z^3 - 4z^{2}  - 9z + 91 = (z^{2}  - 8z + 23)(z + 4) - 1
+\]
+
+Now, since \(z^{2} - 8z + 23 = 0\), 
+
+\[
+    \boxed{z^3 - 4z^{2}  - 9z + 91 = -1}
+\]
+
+\hrule
+
+\begin{question}
+    Find the value of \((1+i)^6 + (1-i)^6\).
+\end{question}
+
+\[
+    z = (1+ i)^6 + (1 - i)^6 = [(1+i)^2]^3 + [(1- i)^2]^3
+\]
+
+\[
+    z = (2i)^3 + (-2i)^3
+\]
+
+Therefore, 
+
+\[
+    \boxed{z = (8-8)i^3 = 0}
+\]
+
+\hrule
+
+\begin{question}
+    Consider two A.P.'s: 
+    \[
+        S_1 : 2, 7, 12, 17, \dots 500 \text{ terms}
+    \] 
+    \[
+        S_2 : 1, 8, 15, 22, \dots 300 \text{ terms}
+    \]
+    Find the no.of common terms. Also find the last common term. 
+\end{question}
+
+Last terms of the respective A.P.'s are, 
+
+\[
+    l_1 = 2 + 5(499) = 2497
+\]
+\[
+    l_2 = 1 + 7(299) = 2094
+\]
+
+
+And we have \(d_1 = 5\) and \(d_2 = 7\). Therefore, the common difference of the series of common terms will be, \(d = d_1 d_2 = 35\). 
+
+\vspace*{0.1in}
+
+By observation, we can notice that the first common term is 22. 
+
+\[
+    S_c = 22 , 57, 92, \dots 
+\]
+
+The maximum term can be 2094.
+
+\[
+    t_{n} = 22 + 35(n-1) = 2094
+\]
+
+\[
+    n-1 = \frac{2072}{35}
+\]
+
+\[
+    n = 60
+\]
+
+So, there are 60 common terms between the two series . And the last term is \(22 + 35 (59) = \boxed{2087}\).
+
+\vspace*{0.1in}
+
+\hrule
+
+\begin{question}
+    Solve?
+    \[
+        \int \sqrt{a^{2} - x^{2} }\ dx
+    \]
+\end{question}
+
+Let \(x = a\sin \theta \), then 
+
+\[
+    I = \int a \cos \theta. a\cos \theta \ d \theta 
+\]
+
+\[
+    I = a^{2} \int \cos ^{2}  \theta \ d \theta 
+\]
+
+\[
+    I = a^{2} \int  (\frac{ 1 + \cos 2\theta }{2})\ d \theta 
+\]
+
+\[
+    I = \frac{a^{2}}{2} \int (1 + \cos 2 \theta )\ d \theta 
+\]
+
+\[
+    I = \frac{a^{2} \theta }{2} + \frac{a^{2}}{4}\sin (2 \theta ) + c
+\]
+
+\[
+    I = \frac{a^{2}}{2}(\sin \theta)(\cos \theta ) + \frac{a^{2}}{2}\sin^{-1} (\frac{x}{a}) + c 
+\]
+
+\[
+    \boxed{I = \frac{x}{2}\sqrt{a^{2} -x^{2}} + \frac{a^{2}}{2} \sin^{-1} (\frac{x}{a}) + c}
+\]
+
+\hrule 
+
+\begin{question}
+    If \(3 \sin \theta + 5 \cos  \theta = 5\), then find the value of \(5\sin \theta  - 3\cos \theta\)  
+\end{question}
+
+Given, 
+
+\[
+    3\sin \theta + 5\cos \theta = 5
+\]
+
+Let, \(5\sin \theta  - 3\cos \theta  = x\)
+
+\vspace*{0.1in}
+Squaring and adding, you wil get some shit.
+\vspace*{0.1in}
+
+\hrule 
+
+\begin{question}
+    Find the value of \(a\) for which \(a^{2} - 6\sin x - 5a \le 0, \forall\ x \in \mathbb{R} \) 
+\end{question}
+
+\[
+    \frac{a^{2}  - 5a}{6} \le \sin x\ \forall\ x \in \mathbb{R}
+\]
+
+So, 
+
+\[
+    \frac{a^{2}  - 5a}{6} \le - 1
+\]
+
+\[
+    a^{2}  - 5a + 6 \le 0
+\]
+
+\[
+    (a-2)(a-3) \le 0
+\]
+
+Therefore, 
+
+\[
+    a \in [2, 3]
+\]
+
+\hrule 
+
+\begin{question}
+    Find the range of 
+    \[
+        f(x) = \sin ^{2} x - 3 \sin x + 2
+    \]
+\end{question}
+
+\[
+    f(x) = (\sin x - \frac{3}{2})^{2} - \frac{1}{4}
+\]
+
+Now, 
+
+\[
+    \sin x \in [-1, 1]
+\]
+
+\[
+    \sin x - \frac{3}{2} \in [-\frac{5}{2}, -\frac{1}{2}]
+\]
+
+\[
+    (\sin x - \frac{3}{2})^{2} \in [\frac{1}{4}, \frac{25}{4}]
+\]
+
+\[
+    (\sin x - \frac{3}{2})^{2} - \frac{1}{4} \in [0, 6]
+\]
+
+\[
+    \boxed{f(x) \in [0, 6]}
+\]
+
+\hrule 
+
+\begin{question}
+    If \((x + iy)^5 = p + iq\), then prove that \((y + ix)^5 = q + ip\)
+\end{question}
+
+We have, 
+
+\[
+    (x = iy)^5 = p + iq 
+\]
+
+Taking conjugate on both sides,
+
+\[
+    \overline{(x + iy)^5} = \overline{p + iq}
+\]
+
+\[
+    (x - iy)^5 = p - iq
+\]
+
+\[
+    i^5 (x - iy)^5 = i^5 p - i^6 q
+\]
+
+\[
+    \boxed{(y + ix)^5 = q + ip}
+\]
+
+\hrule 
+
+\begin{question}
+    Two vertices of a triangle are (3,-2) and (-2, 3) and its orthocentre is (-6, 1). The coordinates of its third vertex are-
+\end{question}
+
+Let, \(B \equiv (3, -2)\) and \(C \equiv (-2, 3)\) and the orthocentre be \(H\) and the third vertex be, \(A \equiv (\alpha , \beta )\). Since, \(AH \perp BC\), 
+
+\[
+    \frac{\beta  -1}{\alpha = 6} = 1
+\]
+
+\[
+    \beta - \alpha = 7 \tag{i}
+\]
+
+Now, since orthocentre is the concurrency of all the altitudes of the triangle, then \(CH \perp AB\).
+
+\[
+    \frac{\beta +2}{\alpha - 3} = - (\frac{-4}{-2})
+\]
+
+\[
+    \beta + 2 = -2\alpha - 6
+\]
+
+\[
+    2\alpha + \beta = 4 \tag{ii}
+\]
+
+Now, solving (i) and (ii), 
+
+\[
+    \alpha = -1 \ ; \beta = 6
+\]
+
+Therefore the third vertex is, \(\boxed{A \equiv (-1, 6)}\) 
+
+\vspace*{0.1in}
+
+\hrule 
+
+\begin{question}
+    Possible value of \(\displaystyle \tan (\frac{1}{4}\sin^{-1}(\frac{\sqrt{63}}{8}))\). 
+\end{question}
+
+Let 
+
+\[
+    T = \tan (\frac{1}{4}\sin^{-1}(\frac{\sqrt{63}}{8}))
+\]
+
+\[
+    T = \tan (\frac{1}{4} \cos^{-1}(\frac{1}{8}) )
+\]
+
+Let, \(\cos^{-1}(\frac{1}{8})= \theta \) 
+
+\[
+    T = \tan (\frac{\theta}{4})
+\]
+
+Now, 
+
+\[
+    \cos \theta = \frac{1}{8}
+\]
+
+\[
+    2\cos ^{2} \frac{\theta}{2} - 1 = \frac{1}{8} \implies  \cos (\frac{\theta}{2}) = \frac{9}{16} 
+\]
+
+\[
+    \cos (\frac{\theta}{2}) = \frac{1 - \tan ^{2} \frac{\theta}{4} }{1 + \tan ^{2} \frac{\theta}{4}} = \frac{9}{16}
+\]
+
+Therefore, 
+
+\[
+    \boxed{T = \tan (\frac{\theta}{4}) = \frac{1}{\sqrt{7} }}
+\]
+
+\hrule
+
+\begin{question}
+    Let \(\vec{a} = 4\hat{\imath} +  3\hat{\jmath} + 5\hat{k} \) and \(\vec{b} = \hat{\imath} + 2\hat{\jmath} - 4\hat{k} \). Let \(\vec{b_1}\) be parallel to \(\vec{a}\) and \(\vec{b_2}\) be perpendicular to \(\vec{a}\). If \(\vec{b} = \vec{b_1} + \vec{b_2} \), then the value of \(5 \vec{b_2} . (\hat{\imath} + \hat{\jmath} + \hat{k})\) is-     
+\end{question}
+
+Since, \(\vec{b_1}\) is parallel to \(\vec{a}\), we can write 
+
+\[
+    \vec{b_1} = \lambda \vec{a} 
+\]
+
+Now,
+
+\[
+    \vec{b}. \vec{a} = (\vec{b_1} + \vec{b_2}).\vec{a} \implies \vec{b_1}.\vec{a} + \vec{b_2}.\vec{a} 
+\]
+
+\[
+    4 + 6 - 20 = \lambda \vert \vec{a}  \vert^{2} + 0 
+\]
+
+\[
+    \lambda = -\frac{10}{50} = -\frac{1}{5}
+\]
+
+Now, 
+
+\[
+    \vec{b} = -\frac{1}{5}\vec{a} + \vec{b_2} 
+\]
+
+\[
+    5\vec{b_2} = 5\vec{b} + \vec{a} = 9\hat{\imath} + 13\hat{\jmath} - 15\hat{k} 
+\]
+
+Therefore,
+
+\[
+    \boxed{5\vec{b}.(\hat{\imath} + \hat{\jmath} + \hat{k} ) = 7}
+\]
+
+\hrule
+
+\begin{question}
+    Let \(f, g\) and \(h\) be real valued functions defined on \(\mathbb{R}\) as, \(f(x) = \begin{cases}
+            \frac{x}{\vert x \vert }, & x \ne 0  ;\\
+            1, & x= 0; .
+        \end{cases}\) ,\\
+        \[g(x) = \begin{cases}
+            \frac{\sin (x+1)}{x+1}, &\text{ if } x \ne -1 ;\\
+            1, &\text{ if } x = -1;
+        \end{cases}\] and \(h(x) = 2 [x]- f(x)\) where \([x]\) if G.I.F. Then the value of \(\lim_{x \to 1} g(h(x-1))\) is-   
+\end{question}
+
+We have, 
+
+\[
+    f(x) = \sgn (x)
+\]
+
+Therefore, 
+
+\[
+    h(x) = 2[x] - \sgn (x)
+\]
+
+And we have to find the value of \(h(x) \to 1\). 
+
+\[
+    \lim_{x \to 1^-}(h(x - 1)) = 2[-1] - (- 1) = -1
+\]
+
+\[
+    \lim_{x \to 1^{+}} (h(x - 1)) = 2[0] - 1 = -1
+\]
+
+\[
+    \lim_{x \to 1} (h(x-1)) = 2[0] - 1 = -1
+\]
+
+Since, LHL = RHL = L, limit exists at \(x \to 1\)
+
+\[
+    \lim_{x \to 1} (g(-1)) = \lim_{x \to 1} \frac{\sin (x +1)}{x+ 1} = 1 \tag{\(\because x+1 \to 0\) when \(x\to-1\)  }
+\]
+
+Hence, 
+
+\[
+    \boxed{\lim_{x \to 1} g(h(x-1)) = 1} 
+\]
+
+\hrule
+
+\begin{question}
+    Let \(f(x)\) be a differentiable function on \([0,2]\) such that \(f^{\prime} (x) = f^{\prime} (2- x)\) for all \(x \in (0, 2)\), \(f(0) = 1\) and \(f(2)  = e^{2}\). Then the value of \(\displaystyle \int_{0}^2 f(x)\ dx\) is-   
+\end{question}
+
+We have, 
+
+\[
+    f^{\prime} (x)  = f^{\prime} (2 -x)
+\]
+
+Integrating,
+
+\[
+    f(x) = - f(2 - x) + c
+\]
+
+at \(x = 0\) 
+
+\[
+    f(0) = -f(2) + c
+\]
+
+\[
+    c = 1 + e^{2} 
+\]
+
+Now, 
+
+\[
+    f(x) + f(2 - x) = 1 + e^{2} 
+\]
+
+\[
+    \int_0 ^2 f(x) dx = \int_0 ^1 \{f(x) + f(2-x)\} dx
+\]
+
+Therefore, 
+
+\[
+    \boxed{\int_{0} ^2 f(x)dx = 1 + e^{2} }
+\]
+
+\hrule 
+
+\begin{question}
+    Find the locus of midpoint of family of chords \(\lambda x + y = 5\) (\(\lambda\) is a parameter) of the parabola \(x^{2} = 20y\).   
+\end{question}
+
+Let the equation of family of chords be rewritten as, 
+
+\[
+    (y-5)+ \lambda (x - 0) = 0
+\]
+
+Which indicate that this family of lines, intersect at \((0, 5)\). Which happens to be the focus of the parabola.
+
+\vspace*{0.1in}
+
+Now, let the midpoint be \(M \equiv (h, k)\). Then the equation of the chord will be,  
+
+\[
+    ky - 10(h + x) = h^{2} - 20k
+\]
+
+Now, since the chord passes through \((0, 5)\) 
+
+\[
+    5k - 10h  = h^{2} - 20k
+\]
+
+Therefore the locus will be, 
+
+\[
+    \boxed{x^{2} + 10x - 25y = 0}
+\]
+
+\hrule 
+
+\begin{question}
+    Equation \(y^{2} + 2y - x + 5 = 0\)  represents a parabola. Find its vertex, equation of axis, equation of latus rectum, coordinates of the focus equation of the directrix, extremeties of latus rectum and the length of the latus rectum.  
+\end{question}
+
+We have, 
+
+\[
+    y^{2}  + 2y + 5 = x
+\]
+
+\[
+    (y+  1)^{2} = (x-4)
+\]
+
+\[
+    (y + 1)^{2} = 4 (\frac{1}{4}) (x-4)
+\]
+
+Therefore, the vertex is \(\boxed{(4, -1)}\). 
+
+\vspace*{0.1in}
+
+We know that if, the vertex is \((h, k)\), the focus will be \((h + a, k)\) and the equation of directrix will be, \(x = -(h+a), k\). Therefore, 
+
+\[
+    \text{Focus}  = \boxed{(\frac{17}{4}, -1)}
+\]
+
+\[
+    \text{Directrix} : \boxed{x = -\frac{17}{4}}
+\]
+
+The equation of its axis is the line passing through focus and the vertex. 
+
+\[
+    \text{Vertex} : \boxed{y = -1}
+\]
+
+Now, the latus rectum is the chord perpendicular to the axis and passing through the focus. So, the equation of L.R can be given by, 
+
+\[
+    \text{L.R } : \boxed{x = \frac{17}{4}}
+\]
+
+The length of the latus rectum is \(4a\) units. Therefore, 
+\[
+    \boxed{\text{Length of L.R} = 1}
+\]
+
+The extremeties of the L.R lies \(2a\) units above and below the axis of the parabola. Therefore, 
+
+\[
+    \text{Extremeties of L.R} = \boxed{\{(\frac{17}{4}, -\frac{1}{2}), (\frac{17}{4}, -\frac{3}{2})\}}
+\]
+
+\hrule 
+
+\begin{question}
+    The parametric equation of a parabola is \(x  = t^{2} +1, y = 2t + 1\). Find the equation of directrix. 
+\end{question}
+
+We have, 
+
+\[
+    t = \frac{y-1}{2}
+\]
+
+Substituting it in the equation for \(x\), 
+
+\[
+    x = (\frac{y-1}{2})^{2} + 1
+\]
+
+The equation of parabola is, 
+
+\[
+    (y-1)^{2} = 4(1)(x-1)
+\]
+
+The directrix is a line perpendicular to the axis of the parabola and is \(a\) units away from the vertex of the parabola. Therefore, the equation of directrix will be, 
+
+\[
+    \boxed{\text{Directrix}: x = 1-1 \implies x = 0} 
+\]
+
+\hrule
+
+\begin{question}
+    Find the equation of parabola having focus at \((1, 1)\) and vertex at \((-3, -3)\) 
+\end{question}
+
+From the information we can see that the axis of the parabola is \(x-y = 0\). And since the vertex is the mid-point of focus and directrix, the directrix point of intersection of directrix with the axis is \((-7, -7)\).
+
+\vspace*{0.1in}
+
+Now, since the directrix is perpendicular to the axis, the equation of the directrix will be, 
+
+\[
+    x + y + \lambda = 0 
+\]
+
+Since, directrix passes through, \((-7,-7)\). The equation of directrix will be, 
+
+\[
+    x+y + 14 = 0
+\]
+
+Now the equation of parabola will be the locus of point which is equidistant to the focus as well as directrix. 
+
+\[
+    \sqrt{(x-1)^{2} + (y-1)^{2}} = \frac{|x+y+14|}{\sqrt{2} }
+\]
+
+We get,  
+
+\[
+    \boxed{x^{2} +  y^{2} - 2xy - 32x - 32y- 192 = 0}
+\]
+
+Which is the equation of the required parabola. 
+
+\vspace*{0.1in}
+
+\hrule
+
+\begin{question}
+    Find the equation of ellipse whose focus is \(S  (-1, 1)\), the corresponding directrix is \(x-y+3 = 0\) and the eccentricity is 1/2. Also, find its centre, the second focus, the equation of the second directrix, and the length of the latus rectum. 
+\end{question}
+
+Since the base equation of an ellipse can be defined as, 
+
+\[
+    \sqrt{(x-a)^{2} + (y-b)^{2} } = e \frac{\vert lx + my + n \vert }{\sqrt{l^{2} + m^{2} } } 
+\]
+
+\[
+    (x+1)^{2} + (y-1)^{2} = \frac{1}{4} \frac{(x-y+3)^{2} }{2}
+\]
+
+Therefore, we have, 
+
+\[
+    7x^{2} + 7y^{2} + 2xy  + 10x - 10y + 7= 0
+\]
+
+\begin{center}
+    \begin{tikzpicture}
+        \draw[<->] (-4, 0) -- (4, 0);
+        \draw[mred] (0,0) ellipse (2cm and 1cm);
+        \draw[<->] (0, -2) -- (0, 2);
+        \draw[<->, mred] (-3.5, -1.5) -- (-3.5, 1.5) node[right, scale=0.8, yorhafg]{\(x-y+3= 0\) };
+        \draw[<->, mred] (3.5, -1.5) --  (3.5, 1.5);
+        \fill (-1, 0) circle (0.05) node[below, scale=0.8]{\(S(-1,1)\) };
+        \fill (1, 0) circle (0.05) node[below, scale=0.8]{\(S^{\prime}\) };
+        \fill (-2, 0) circle (0.05) node[anchor=north east, scale=0.8]{\(A\)};
+        \fill (2, 0) circle (0.05) node[anchor=north west, scale=0.8]{\(A^{\prime}\) };
+        \fill (-3.5, 0) circle (0.05) node[anchor=north east, scale=0.8]{\(Z\)};
+        \fill (3.5, 0) circle (0.05) node[anchor=north west, scale=0.8]{\(Z^{\prime}\) };
+        \fill[mred] (0, 0) circle (0.05) node[anchor=north west, scale=0.8, yorhafg]{\(C\) };
+
+    \end{tikzpicture}
+\end{center}
+
+The major axis is perpendicular to the directrix and has the equation \(x+y+ \lambda = 0\). Since, major axis passes through \((-1,1)\), the equation of major axis will be, 
+
+\[
+    x+y = 0 \implies x = -y
+\]
+
+Therefore, \(Z  \equiv (-\frac{3}{2}, \frac{3}{2})\)
+
+\vspace*{0.1in}
+
+Now, \(A\) divides \(ZS\) internally in the ratio 2:1, 
+
+\[
+    A\equiv (-\frac{7}{6}, \frac{7}{6})
+\]
+
+And, \(A^{\prime}\) divides \(ZS\) externally in the ratio 2:1 i.e \(ZA : SA = 2:1\). Therefore, 
+
+\[
+    A^{\prime} \equiv (-\frac{1}{2}, \frac{1}{2})
+\]
+
+\(C\)  is the mid-point of \(A A^{\prime} \). 
+
+\[
+    C \equiv (-\frac{5}{6}, \frac{5}{6})
+\]
+
+\(C\) is also the mid-point of \(Z  Z^{\prime} \), 
+
+\[
+    Z^{\prime}  \equiv  (-\frac{1}{6}, \frac{1}{6})
+\]
+
+Since, the second directrix is parallel to the first directrix and passes through (-1/6, 1/6), its equation will be
+
+\[
+    x-y + \frac{1}{3} = 0
+\]
+
+And, the length of the Latus rectum is
+
+\[
+    \text{L.R} = 2e \times ZS
+\]
+
+\[
+    \text{L.R} = 2 (\frac{1}{2}) \frac{\vert -1 -1 + 3 \vert }{\sqrt{2} } = \frac{1}{\sqrt{2} }
+\]
+
+\hrule 
+
+\begin{question}
+    Variable  complex number \(z\) satsifies the equation \(\vert z-1 + 2i \vert + \vert z + 3 - i \vert =  10\). Prove that locus of complex number \(z\) is an ellipse. Also, find centre, foci and eccentricity of the ellipse. 
+\end{question}
+
+The expression \(\vert z- (1 - 2i) \vert\) represents the distance of \(z\) from \(1-2i\) in the argand plane. Similarly, \(\vert z - (-3+i) \vert \) represents the distance of \(z\) from \(i-3\). 
+
+\vspace*{0.1in}
+
+The expression, \(\vert z-1+2i \vert + \vert z+3-i \vert = 10 \) conveys that the sum of the distances is constant and is equal to 10, which can only be the case, if \(z\) is an ellipse.  
+
+\vspace*{0.1in}
+
+Here, the foci are, \(S_1 (1, -2)\) and \(S_2 (-3, 1)\). And the centre is, \((-1,-\frac{1}{2})\) 
+
+\vspace*{0.1in}
+
+Distance between foci is \(2c = 2ae\). So, 
+
+\[
+    2ae = (10)e =  5
+\]
+
+\[
+    e = \frac{1}{2}
+\]
+
+\hrule 
+
+\begin{question}
+    Integrate 
+    \[
+        \int \frac{dx}{\sqrt[4]{(x-1)^3 (x+2)^5} }
+    \]
+\end{question}
+
+\[
+    I = \int \frac{dx}{(x-1)^{3/4} (x+2)^{5/4} }
+\]
+
+Multiplying and dividng by, \((x-1)^\frac{5}{4}\)
+
+\[
+    I = \int \frac{dx}{(\dfrac{x+2}{x-1})^{5/4} (x-1)^{2} }
+\]
+
+Now, let \(t = \dfrac{x+2}{x-1}\) 
+
+\[
+    I = -\frac{1}{3}\int \frac{dt}{t^{5/4} }
+\]
+
+\[
+    \boxed{I = \frac{4}{3} (\frac{x-1}{x+2})^{1/4} + c }
+\]
+
+\hrule 
+
+\begin{question}
+    The value of \(\displaystyle \sum_{r = 0}^{22} \Mycomb{22}{r} \Mycomb{23}{r} \) 
+\end{question}
+
+Somehow, 
+
+\[
+    \sum_{r=0}^{22} \Mycomb{22}{r} \Mycomb{23}{r} = \sum_{r=0} ^{22} \Mycomb{22}{r} \Mycomb{23}{23-r} 
+\]
+
+Therefore, 
+
+\[
+    \sum_{r=0} ^{22} \Mycomb{22}{r} \Mycomb{23}{23-r} = \boxed{\Mycomb{45}{23}}
+\]
+
+This result is due to an identity called the Van Der Mond Identity. Which is as follows, 
+
+\[
+    \Mycomb{m+n}{k} = \sum_{r=0} ^{k} \Mycomb{m}{r} \Mycomb{n}{k-r}  
+\]
+
+\vspace{0.1in}
+
+\hrule
+
+\begin{question}
+    Let \(A, B, C\) be three angles such that \(A + B + C = \pi\). If \(\tan A \tan B = 2\), then find the value of \(\dfrac{\cos A \cos B}{\cos C}\).   
+\end{question}
+
+\[
+    \frac{\cos A \cos B}{\cos C} = - \frac{\cos A \cos B}{\cos (A + B)}
+\]
+
+\[
+    T = -\frac{\cos A \cos B}{\cos A \cos B - \sin A \sin B} = \frac{1}{\tan A \tan B -1}
+\]
+
+\[
+    T = \frac{1}{2-1} = 1 
+\]
+
+\hrule
+
+\begin{question}
+    If \(\alpha, \beta, \gamma\) are three consecutive terms of a non-constant G.P such that the equations \(\alpha x^{2} + 2\beta x + \gamma = 0\) and \(x^{2} + x -1 = 0\) have a common root, then \(\alpha (\beta+ \gamma)\) is equal to ?    
+\end{question}
+
+Given that, 
+
+\[
+    \alpha , \beta, \gamma = a, ar, ar^{2} 
+\]
+
+\[
+    \alpha x^{2} + 2\beta x + \gamma = ax^{2} + 2arx + ar^{2} = 0
+\]
+\[
+    \implies x^{2} + 2rx + r^{2} = 0 \tag{i}
+\]
+
+Which has a common root with, 
+
+\[
+    x^{2} + x - 1 = 0 \tag{ii}
+\]
+
+Subtracting, (ii) from (i)
+
+\[
+    (2r - 1)x + r^{2} - 1 = 0
+\]
+
+\[
+    x = \frac{1-r^{2}}{2r-1}
+\]
+
+Now, substituting in (ii)
+
+\[
+    (\frac{1-r^{2}}{2r-1})^{2} + \frac{1-r^{2}}{2r-1} - 1 = 0
+\]
+
+\[
+    r ^{4} - 2r ^{3} - r^{2} + 2r + 1 = 0
+\]
+
+Dividing, by \(x^{2}\).  
+
+\[
+    r^{2} + \frac{1}{r^{2}} - 2(r - \frac{1}{r}) - 1 = 0
+\]
+
+\[
+    (r - \frac{1}{r})^{2} - 2(r - \frac{1}{r}) + 1 = 0
+\]
+
+And then u do shit. 
+
+\vspace{0.1in}
+
+\hrule 
+
+\begin{question}
+    If, \( \displaystyle y = \tan ^{-1} (\frac{1}{1+x+x^{2}}) + \tan ^{-1} (\frac{1}{x^{2} + 3x + 3}) + \tan ^{-1} (\frac{1}{x^{2} +5x + 7 }) + \cdots\ n\text{ terms} \) then find the value of \(y^{\prime} (0)\).   
+\end{question}
+
+Here, 
+
+\[
+    y = \tan ^{-1} \frac{(x+1)-1}{1 + (x+1)(x)} + \tan ^{-1} \frac{(x+2)-(x+1)}{1 + (x+2)(x+1)} + \cdots 
+\]
+
+\[
+    y = \tan ^{-1} (x+1) - \tan ^{-1} x + \tan ^{-1} (x+2) - \tan ^{-1}(x+1) + \dots + \tan^{-1} (x+n) 
+\]
+
+\[
+    y = \tan^{-1} (x+n) - \tan ^{-1} x
+\]
+
+\[
+    y^{\prime} (x) = \frac{1}{1 + (x+n)^{2}} - \frac{1}{1+x^{2} }
+\]
+
+Therefore, 
+
+\[
+    \boxed{y^{\prime} (0) = \frac{-n^{2}}{1 + n^{2} + 1}}
+\]
+
+\hrule
+
+\subsection*{Derivate of inverse of a function.}
+
+Let \(f(x) : \mathbb{R} \to \mathbb{R}\) be one-one and differentiable. Then, let 
+
+\[
+    f^{-1} (x) = g(x)
+\]
+\[
+    x = f(g(x))
+\]
+
+Differentiating,
+\[
+    f^{\prime} (g(x)). g^{\prime} (x) = 1 
+\]
+
+Then, 
+
+\[
+    g^{\prime} (x) = \frac{1}{f^{\prime} (g(x))}
+\]
+
+\[
+    \boxed{(\frac{d}{dx}f^{-1} (x))_{x=a} = \frac{1}{f^{\prime} (g(a))}}
+\]
+
+\hrule 
+
+\section*{Plane}
+
+\begin{center}
+    \begin{tikzpicture}[scale=2.5]
+        % Define the coordinates
+        \coordinate (O) at (0,0,0);
+        \coordinate (P1) at (1,1,1);
+        \coordinate (P2) at (1,1,-1);
+        \coordinate (P3) at (1,0,1);
+        \coordinate (P4) at (1,0,-1);
+        
+        % Draw the plane
+        \filldraw[fill=gray!30,opacity=0.6] (P1) -- (P3) -- (P4) -- (P2) -- cycle;
+        
+        % Draw the axes
+        \draw[->] (O) -- (1.5,0,0) node[anchor=north east]{$x$};
+        \draw[->] (O) -- (0,1.5,0) node[anchor=north west]{$y$};
+        \draw[->] (O) -- (0,0,1.5) node[anchor=south]{$z$};
+        
+        \fill (O) circle (0.5pt);
+
+        \fill (1, 0.5, 0) circle (0.8pt) node[right]{\(N\) };
+
+        % Draw a vector perpendicular to the plane from the origin
+        \draw[->,thick] (O) -- (1, 0.5, 0) node[midway,below]{$\vec{n}$};
+        \draw[->, dashed, thick] (1, 0.5, 0) -- (1, 0.7, -0.5);
+        \fill[mred] (1, 0.7, -0.5) circle (0.8pt) node[right]{\(P\) };
+        \draw[->, thick, mred] (O) -- (1, 0.7, -0.5) node[midway, left]{\(\vec{r}\)};
+    \end{tikzpicture}
+\end{center}
+
+
+\end{document}
