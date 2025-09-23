@@ -216,7 +216,18 @@ they are not. (Clearly state what you are proving!) Do not use truth tables.
     $\therefore$ The two expressions are not equivalent. $\blacksquare$
 \end{center}
 
-
+\begin{question}
+    $a \iff b$ and $\neg a \iff \neg b$
+\end{question}
+\begin{align*}
+    & a \iff b & & \neg a \iff \neg b \\
+    \Rightarrow\; & (a \rightarrow b) \land (b \rightarrow a) \quad \text{(Biconditional Law)} & \Rightarrow & (\neg a \rightarrow \neg b) \land (\neg b \rightarrow \neg a) \quad \text{(Biconditional Law)}\\
+    \Rightarrow\; & (\neg a \lor b) \land (\neg b \lor a) \quad \text{(Conditional Law)} & \Rightarrow & (\neg\neg a \lor \neg b) \land (\neg\neg b \lor \neg a) \quad \text{(Conditional Law)}\\
+    & & \Rightarrow & (a \lor \neg b) \land (b \lor \neg a) \quad \text{(Double Negation law)} \\
+\end{align*}
+\begin{center}
+    $\therefore$ The two expressions are equivalent. $\blacksquare$
+\end{center}
 
 
 
