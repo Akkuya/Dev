@@ -62,24 +62,29 @@ def get_price(player: str) -> int:
     if price[1] == "-":
         return int(price[0])
     return int(price)
-    
-def can_afford(budget: int, player: str) -> bool:
-    """Return True if and only if budget is at least the price of player.
+  
+# provided
+def get_position(player: str) -> str:
+    """Return the position of player if player is non-empty;
+    otherwise return the empty string.
 
-    Precondition: budget >= 0, player is the string of player stats
-                  as seen in players.txt
+    Precondition: player is the string of player stats
+    as seen in players.txt
 
-    >>> can_afford(10, 'MGO_PD_G0-_A14_DC43_H70_Pr5-')
-    True
-    >>> can_afford(4, 'NSH_PF_G7-_A14_DC20_H73_Pr10')
-    False
-    >>> can_afford(0, '')
-    False
+    >>> get_position('MGO_PD_G0-_A14_DC43_H70_Pr5-')
+    'D'
+    >>> get_position('NSH_PF_G7-_A14_DC20_H73_Pr10')
+    'F'
+    >>> get_position('CLA_PG_GAA2.23_SV0.910_Pr20')
+    'G'
+    >>> get_position('')
+    ''
 
     """
+
     if len(player) == 0:
-        return False
-    return budget >= get_price(player)
+        return ""
+    return player[5]
 
 # provided as example of calling another function as helper
 def is_player_available(player: str, players_available: str) -> bool:
@@ -105,29 +110,59 @@ def is_player_available(player: str, players_available: str) -> bool:
         return False
     return get_player_id(player) in players_available
 
+def can_select(player: str, num_forwards: int, num_defencemen: int, num_goalies: int) -> bool:
+    pass
+    #TODO
 
-# provided
-def get_position(player: str) -> str:
-    """Return the position of player if player is non-empty;
-    otherwise return the empty string.
+def can_afford(budget: int, player: str) -> bool:
+    """Return True if and only if budget is at least the price of player.
 
-    Precondition: player is the string of player stats
-    as seen in players.txt
+    Precondition: budget >= 0, player is the string of player stats
+                  as seen in players.txt
 
-    >>> get_position('MGO_PD_G0-_A14_DC43_H70_Pr5-')
-    'D'
-    >>> get_position('NSH_PF_G7-_A14_DC20_H73_Pr10')
-    'F'
-    >>> get_position('CLA_PG_GAA2.23_SV0.910_Pr20')
-    'G'
-    >>> get_position('')
-    ''
+    >>> can_afford(10, 'MGO_PD_G0-_A14_DC43_H70_Pr5-')
+    True
+    >>> can_afford(4, 'NSH_PF_G7-_A14_DC20_H73_Pr10')
+    False
+    >>> can_afford(0, '')
+    False
 
     """
-
     if len(player) == 0:
-        return ""
-    return player[5]
+        return False
+    return budget >= get_price(player)
+
+def update_budget(budget: int, player: str) -> int:    
+    pass
+    #TODO
+
+def add_to_team(player: str, player_ids: str) -> str:
+    pass
+    #TODO
+    
+def remove_player(player_ids: str, player_index: int) -> str:
+    pass
+    #TODO
+
+def compute_dc_points(player: str) -> int:
+    pass
+    #TODO
+
+def compute_goal_points(player: str) -> int:
+    pass
+    #TODO
+
+def compute_assist_points(player: str) -> int:
+    pass
+    #TODO
+
+def compute_hit_points(player: str) -> float:
+    pass
+    #TODO
+
+def compute_fantasy_score(player: str) -> float:
+    pass
+    #TODO
 
 if __name__ == "__main__":
     import doctest
