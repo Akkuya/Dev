@@ -173,6 +173,9 @@ they are not. (Clearly state what you are proving!) Do not use truth tables.
 \begin{question}
     $a \iff b$ and $(a \land b) \lor (\neg a \land \neg b)$
 \end{question}
+\begin{center}
+    \text{We are proving that the two expressions \bb{are} equivalent.}
+\end{center}
 \begin{align*}
     & a \iff b & & \mathbf{(a \land b) \lor (\neg a \land \neg b)} \\
     \Rightarrow\; & (a \rightarrow b) \land (b \rightarrow a) \quad \text{(Biconditional Law)} \\
@@ -187,6 +190,9 @@ they are not. (Clearly state what you are proving!) Do not use truth tables.
 \begin{question}
     $a \rightarrow (b \rightarrow (c \rightarrow d))$ and $(a \land b \land c) \rightarrow d$
 \end{question}
+\begin{center}
+    \text{We are proving that the two expressions \bb{are} equivalent.}
+\end{center}
 \begin{align*}
     & a \rightarrow (b \rightarrow (c \rightarrow d)) & & \mathbf{(a \land b) \lor (\neg a \land \neg b)} \\
     \Rightarrow\; & \neg a \lor (\neg b \lor (\neg c \lor d)) \quad \text{(Conditional Law)} \\
@@ -219,6 +225,9 @@ they are not. (Clearly state what you are proving!) Do not use truth tables.
 \begin{question}
     $a \iff b$ and $\neg a \iff \neg b$
 \end{question}
+\begin{center}
+    \text{We are proving that the two expressions \bb{are} equivalent.}
+\end{center}
 \begin{align*}
     & a \iff b & & \neg a \iff \neg b \\
     \Rightarrow\; & (a \rightarrow b) \land (b \rightarrow a) \quad \text{(Biconditional Law)} & \Rightarrow & (\neg a \rightarrow \neg b) \land (\neg b \rightarrow \neg a) \quad \text{(Biconditional Law)}\\
@@ -229,6 +238,63 @@ they are not. (Clearly state what you are proving!) Do not use truth tables.
     $\therefore$ The two expressions are equivalent. $\blacksquare$
 \end{center}
 
+\begin{question}
+    $(a \land b) \rightarrow (c \land d)$ and $((a \rightarrow c) \land (a \rightarrow d)) \land ((b \rightarrow c) \land (b \rightarrow d))$
+\end{question}
+\begin{center}
+        \text{We are proving that the two expressions are not equivalent.} \\
+        \text{Consider the case where } a = \text{True}, b = \text{False}, c = \text{False}, d = \text{False}.\\
+\end{center}
+\begin{align*}
+    & (a \land b) \rightarrow (c \land d) & & ((a \rightarrow c) \land (a \rightarrow d)) \land ((b \rightarrow c) \land (b \rightarrow d))\\
+    \Rightarrow\; & (T \land F) \rightarrow (F \land F) & \Rightarrow\; & ((T \rightarrow F) \land (T \rightarrow F)) \land ((F \rightarrow F) \land (F \rightarrow F)) \\
+    \Rightarrow\; & F \lor T & \Rightarrow\; &  (F \land F) \land (T \land T)\\
+    \Rightarrow\; & \mathbf{T} & \Rightarrow\; & F \land F \\
+    & &  \Rightarrow\; & \mathbf{F} \\
+\end{align*}
+\begin{center}
+    $\therefore$ The two expressions are not equivalent. $\blacksquare$
+\end{center}
 
+\begin{question}
+        $(a \lor b) \rightarrow (c \land d)$ and $((a \rightarrow c) \land (a \rightarrow d)) \land ((b \rightarrow c) \land (b \rightarrow d))$
+\end{question}
+\begin{center}
+        \text{We are proving that the two expressions are equivalent.} \\
+\end{center}
+\begin{align*}
+    & (a \lor b) \rightarrow (c \land d) & & ((a \rightarrow c) \land (a \rightarrow d)) \land ((b \rightarrow c) \land (b \rightarrow d))\\
+    \Rightarrow\; & \neg(a \lor b) \lor (c \land d) \quad \text{(Conditional Law)} & \Rightarrow\; & ((\neg a \lor c) \land (\neg a \lor d)) \land ((\neg b\rightarrow c) \land (\neg b \lor d)) \quad \text{(Conditional Law)}\\
+    &  & \Rightarrow\; &  (\neg a \lor (c \land d))\land (\neg b \lor (c \land d)) \quad \text{(Distributive Law)}\\
+    & & \Rightarrow\; & (\neg a \land \neg b ) \lor (c \land d) \quad \text{(Distributive Law)} \\
+    & &  \Rightarrow\; & \neg(a \lor b) \lor (c \land d) \quad \text{(De Morgan's law)} \\
+\end{align*}
+\begin{center}
+    $\therefore$ The two expressions are equivalent. $\blacksquare$
+\end{center}
+
+\section*{2. Logical Equivalence}
+Determine whether each statement below is a tautology, a contradiction, or neither. Prove your result. Do not
+use truth tables.
+\vspace{0.1in}
+\hrule
+\vspace{0.1in}
+\begin{question}
+    $(a \rightarrow b) \lor (b\ \rightarrow a)$
+\end{question}
+\begin{align*}
+    & (a \rightarrow b) \lor (b \rightarrow a) \\
+    \Rightarrow & (\neg a \lor b) \lor (\neg b \lor a) \quad \text{(Conditional Law)} \\
+    \Rightarrow & (\neg a \lor a) \lor (\neg b \lor b) \quad \\
+    \Rightarrow&  (t)  \lor (t) \quad \text{(Tautology Law)} \\
+    \Rightarrow & \mathbf{t} \quad \text{(Tautology Law)}
+\end{align*}
+\begin{center}
+    $\therefore$ The statement is a tautology. $\blacksquare$
+\end{center}
+
+\begin{question}
+    $(((a \rightarrow b) \land (b \rightarrow c) \land a) \land \neg c$
+\end{question}
 
 \end{document}
