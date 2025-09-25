@@ -276,6 +276,10 @@ they are not. (Clearly state what you are proving!) Do not use truth tables.
 \section*{2. Logical Equivalence}
 Determine whether each statement below is a tautology, a contradiction, or neither. Prove your result. Do not
 use truth tables.
+
+\begin{center}
+    Note that for this section, I will refer to tautologies with $\top$ and contradictions with $\bot$.
+\end{center}
 \vspace{0.1in}
 \hrule
 \vspace{0.1in}
@@ -284,17 +288,99 @@ use truth tables.
 \end{question}
 \begin{align*}
     & (a \rightarrow b) \lor (b \rightarrow a) \\
-    \Rightarrow & (\neg a \lor b) \lor (\neg b \lor a) \quad \text{(Conditional Law)} \\
-    \Rightarrow & (\neg a \lor a) \lor (\neg b \lor b) \quad \\
-    \Rightarrow&  (t)  \lor (t) \quad \text{(Tautology Law)} \\
-    \Rightarrow & \mathbf{t} \quad \text{(Tautology Law)}
+    \Rightarrow\; & (\neg a \lor b) \lor (\neg b \lor a) \quad \text{(Conditional Law)} \\
+    \Rightarrow\; & (\neg a \lor a) \lor (\neg b \lor b) \quad \\
+    \Rightarrow\;&  (t)  \lor (t) \quad \text{(Tautology Law)} \\
+    \Rightarrow\; & \mathbf{t} \quad \text{(Tautology Law)}
 \end{align*}
 \begin{center}
     $\therefore$ The statement is a tautology. $\blacksquare$
 \end{center}
 
 \begin{question}
-    $(((a \rightarrow b) \land (b \rightarrow c) \land a) \land \neg c$
+    $(((a \rightarrow b) \land (b \rightarrow c)) \land a) \land \neg c$
 \end{question}
+\begin{align*}
+    & (((a \rightarrow b) \land (b \rightarrow c)) \land a) \land \neg c \\
+    \Rightarrow\; & (((\neg a \lor b) \land (\neg b \lor c)) \land a) \land \neg c \quad \text{(Conditional Law)} \\
+    \Rightarrow\; & ((\neg a \land a) \lor (a\land b) \land (\neg b \lor c)) \land \neg c \quad \text{(Distributive Law)} \\
+    \Rightarrow\; & (\bot \lor (a\land b) \land (\neg b \lor c)) \land \neg c \quad \text{(Contradiction Law)} \\
+    \Rightarrow\; & ((a\land b) \land (\neg b \lor c)) \land \neg c \quad \text{(Contradiction Law)} \\
+    \Rightarrow\; & ((a \land \neg b \land b) \lor (a \land b \land c)) \land \neg c \quad \text{(Distributive Law)} \\
+    \Rightarrow\; & ((a \land \bot) \lor (a\land b\land c)) \land \neg c \quad \text{(Contradiction Law)} \\
+    \Rightarrow\; & (\bot \lor (a\land b\land c)) \land \neg c \quad \text{(Contradiction Law)} \\
+    \Rightarrow\; & (a\land b\land c) \land \neg c \quad \text{(Contradiction Law)} \\
+    \Rightarrow & a \land b \land c \land \neg c \quad \\
+    \Rightarrow\; & a \land b \land \bot \quad \text{(Contradiction Law)} \\
+    \Rightarrow\; & \bot \quad \text{(Contradiction Law)}
+\end{align*}
+\begin{center}
+    $\therefore$ The statement is a contradiction. $\blacksquare$
+\end{center}
+\vspace{1.7in}
+\begin{question}
+    $(((a \rightarrow b) \land (b \rightarrow c)) \land a) \land  c$
+\end{question}
+\begin{align*}
+    & (((a \rightarrow b) \land (b \rightarrow c)) \land a) \land c \\
+    \Rightarrow\; & (((\neg a \lor b) \land (\neg b \lor c)) \land a) \land c \quad \text{(Conditional Law)} \\
+    \Rightarrow\; & ((\neg a \land a) \lor (a\land b) \land (\neg b \lor c)) \land c \quad \text{(Distributive Law)} \\
+    \Rightarrow\; & (\bot \lor (a\land b) \land (\neg b \lor c)) \land c \quad \text{(Contradiction Law)} \\
+    \Rightarrow\; & ((a\land b) \land (\neg b \lor c)) \land c \quad \text{(Contradiction Law)} \\
+    \Rightarrow\; & ((a \land \neg b \land b) \lor (a \land b \land c)) \land  c \quad \text{(Distributive Law)} \\
+    \Rightarrow\; & ((a \land \bot) \lor (a\land b\land c)) \land  c \quad \text{(Contradiction Law)} \\
+    \Rightarrow\; & (\bot \lor (a\land b\land c)) \land c \quad \text{(Contradiction Law)} \\
+    \Rightarrow\; & (a\land b\land c) \land c \quad \text{(Contradiction Law)} \\
+    \Rightarrow\; & a \land b \land c \land c \quad \\
+    \Rightarrow\; & a \land b \land c \quad \text{(Idempotent Law)}
+\end{align*}
+\begin{center}
+    $\therefore$ The statement is a neither a tautology nor a contradiction. $\blacksquare$
+\end{center}
 
+\begin{question}
+    $a \rightarrow \neg a$
+\end{question}
+\begin{align*}
+    & a \rightarrow \neg a \\
+    \Rightarrow\; & \neg a \lor \neg a \quad \text{(Conditional Law)} \\
+    \Rightarrow\; & \neg a \quad \text{(Idempotent Law)} \\
+\end{align*}
+\begin{center}
+    $\therefore$ Therefore, the statement is neither a tautology nor a contradiction. $\blacksquare$
+\end{center}
+
+\begin{question}
+    $(a \land (a \rightarrow b)) \rightarrow b$
+\end{question}
+\begin{align*}
+    \Rightarrow\; & (a \land (a \rightarrow b)) \rightarrow b \\
+    \Rightarrow\; & \neg(a \land (a \rightarrow b)) \lor b \quad \text{(Conditional Law)} \\
+    \Rightarrow\; & \neg(a \land (\neg a \lor b)) \lor b \quad \text{(Conditional Law)} \\
+    \Rightarrow\; & \neg((a \land \neg a) \lor (a \land b)) \lor b \quad \text{(Distributive Law)} \\
+    \Rightarrow\; & \neg(\top \lor (a\land b)) \lor b \quad \text{(Tautology Law)}\\
+    \Rightarrow\; &  \neg(a \land b) \lor b \quad \text{(Tautology Law)} \\
+    \Rightarrow\; & \neg a \lor \neg b \lor b \quad \text{(De Morgan's Law)} \\
+    \Rightarrow\; & \neg a \lor \top \quad \text{(Tautology Law)} \\
+    \Rightarrow\; & \top \quad \text{(Tautology Law)}
+\end{align*}
+\begin{center}
+    $\therefore$ The statement is a tautology. $\blacksquare$
+\end{center}
+\section*{3. Deductive Reasoning}
+For each of the following arguments:
+
+\quad • If the argument is valid, you need to both:
+
+\quad \quad 1. Prove the argument is valid by using a truth table. The truth table must be in the format we used in class, and the variables must appear in alphabetical order.
+
+\quad \quad 2. Prove the argument is valid by using Rules of Inference.
+
+\quad • If the argument is not valid, provide an assignment of truth values to variables and demonstrate that it proves
+that the argument is not valid.
+\vspace{0.1in}
+\hrule
+\vspace{0.1in}
+
+JOISADJFIOJASF KILL ME NOW
 \end{document}
