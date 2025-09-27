@@ -8,14 +8,15 @@
 \usepackage{xcolor}
 \usepackage{cancel}
 \usepackage{mathtools}
+\usepackage{venndiagram}
 
 % For permutations and combinations
 \newcommand\Myperm[2][^n]{\prescript{#1\mkern-2.5mu}{}P_{#2}}
 \newcommand\Mycomb[2]{\prescript{#1\mkern-0.5mu}{}C_{#2}}
 
 % Colors
-\definecolor{yorhabg}{HTML}{131314}
-\definecolor{yorhafg}{HTML}{C9C7CD}
+\definecolor{yorhabg}{HTML}{FFFFFF}
+\definecolor{yorhafg}{HTML}{000000}
 \definecolor{yorhagrid}{HTML}{B5AF9C}
 \definecolor{mred}{HTML}{D67069}
 \definecolor{mblue}{HTML}{6887A1}
@@ -327,5 +328,45 @@ Use Venn diagrams to illustrate the following identities.
 \hrule
 \vspace{0.1in}
 1. $\overline{A \cup B} = \overline{A} \cap \overline{B}$
+
+
+\[
+\begin{tabular}{{c@{\hspace{1.5cm}}|@{\hspace{1.5cm}}c
+}}
+    $\mathbf{\overline{A \cup B}}$ & $\mathbf{\overline{A} \cap \overline{B}}$ \\
+    \\
+    \begin{venndiagram2sets}[tikzoptions={scale=0.8,thick}]
+        \fillA
+    \end{venndiagram2sets} 
+    &
+    \begin{venndiagram2sets}[tikzoptions={scale=0.8,thick}]
+        \fillNotA
+    \end{venndiagram2sets} 
+    \\
+    $A$ & $\overline{A}$ \\[1.5cm]
+    \begin{venndiagram2sets}[tikzoptions={scale=0.8,thick}]
+        \fillB
+    \end{venndiagram2sets}
+    &
+    \begin{venndiagram2sets}[tikzoptions={scale=0.8,thick}]
+        \fillNotB
+    \end{venndiagram2sets} \\
+    $B$ & $\overline{B}$ \\[1.5cm]
+    \begin{venndiagram2sets}[tikzoptions={scale=0.8,thick}]
+        \fillA
+        \fillB
+    \end{venndiagram2sets}
+    &
+    \begin{venndiagram2sets}[tikzoptions={scale=0.8,thick}]
+        \fillNotAorB
+    \end{venndiagram2sets} \\
+    $ A \cup B$ & $\overline{A} \cap \overline{B}$ \\[1.5cm]
+    \begin{venndiagram2sets}[tikzoptions={scale=0.8,thick}]
+        \fillNotAorB
+    \end{venndiagram2sets} \\
+    $\overline{A \cup B}$ & \fbox{$\therefore \overline{A \cup B} = \overline{A} \cap \overline{B}$}\\
+    
+\end{tabular}
+\]
 \end{document}
 

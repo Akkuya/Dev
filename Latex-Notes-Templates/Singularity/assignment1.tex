@@ -14,8 +14,8 @@
 \newcommand\Mycomb[2]{\prescript{#1\mkern-0.5mu}{}C_{#2}}
 
 % Colors
-\definecolor{yorhabg}{HTML}{131314}
-\definecolor{yorhafg}{HTML}{C9C7CD}
+\definecolor{yorhabg}{HTML}{FFFFFF}
+\definecolor{yorhafg}{HTML}{000000}
 \definecolor{yorhagrid}{HTML}{B5AF9C}
 \definecolor{mred}{HTML}{D67069}
 \definecolor{mblue}{HTML}{6887A1}
@@ -115,9 +115,9 @@ they are not. (Clearly state what you are proving!) Do not use truth tables.
 \end{center}
 \begin{align*}
     & (a \rightarrow b) \land (b \rightarrow c) & & a \rightarrow c\\
-    \Rightarrow\; & (T \rightarrow F) \land (F \rightarrow T) & \Rightarrow\; & T \rightarrow T\\
-    \Rightarrow\; & F \land T & \Rightarrow\; & \bb{T}\\
-    \Rightarrow\; & \bb{F} && \\
+    \equiv\; & (T \rightarrow F) \land (F \rightarrow T) & \equiv\; & T \rightarrow T\\
+    \equiv\; & F \land T & \equiv\; & \bb{T}\\
+    \equiv\; & \bb{F} && \\
 \end{align*}
 \begin{center}
     $\therefore$ The two expressions are not equivalent. $\blacksquare$
@@ -132,9 +132,9 @@ they are not. (Clearly state what you are proving!) Do not use truth tables.
 \end{center}
 \begin{align*}
     & a \land (a \rightarrow b) &  & a \rightarrow b \\
-    \Rightarrow\; & F \land (F \rightarrow T)  & \Rightarrow\; & F \rightarrow T\\
-    \Rightarrow\; & F \land T & \Rightarrow\; \bb{T} \\
-    \Rightarrow\; & \bb{F}
+    \equiv\; & F \land (F \rightarrow T)  & \equiv\; & F \rightarrow T\\
+    \equiv\; & F \land T & \equiv\; \bb{T} \\
+    \equiv\; & \bb{F}
 \end{align*}
 \begin{center}
     $\therefore$ The two expressions are not equivalent. $\blacksquare$
@@ -148,8 +148,8 @@ they are not. (Clearly state what you are proving!) Do not use truth tables.
 \end{center}
 \begin{align*}
     & (a \rightarrow b) \land (a \rightarrow c) & & a \rightarrow (b \land c) \\
-    \Rightarrow\; & (\neg a \lor b) \land (\neg a \lor c) \quad \text{(Conditional Law)} & \Rightarrow\; & \mathbf{\neg a \lor (b \land c)} \quad \text{(Conditional Law)} \\
-    \Rightarrow\; & \mathbf{\neg a \lor (b \land c)} \quad \text{(Distributive Law)} & & \\
+    \equiv\; & (\neg a \lor b) \land (\neg a \lor c) \quad \text{(Conditional Law)} & \equiv\; & \mathbf{\neg a \lor (b \land c)} \quad \text{(Conditional Law)} \\
+    \equiv\; & \mathbf{\neg a \lor (b \land c)} \quad \text{(Distributive Law)} & & \\
 \end{align*}
 \begin{center}
     $\therefore$ The two expressions are equivalent. $\blacksquare$
@@ -163,8 +163,8 @@ they are not. (Clearly state what you are proving!) Do not use truth tables.
 \end{center}
 \begin{align*}
     & (a \rightarrow c) \lor (b \rightarrow c) & & (a \lor b) \rightarrow c \\
-    \Rightarrow\; & (\neg a \lor c) \land (\neg b \lor c) \quad \text{(Conditional Law)} & \Rightarrow\; & \neg(a \lor b) \lor c \quad \text{(Conditional Law)} \\
-    \Rightarrow\; & \mathbf{(\neg a \land \neg b) \lor c} \quad \text{(Distributive Law)} & \Rightarrow\; & \mathbf{(\neg a \land \neg b) \lor c} \quad \text{(De Morgan's Theorem)} \\
+    \equiv\; & (\neg a \lor c) \land (\neg b \lor c) \quad \text{(Conditional Law)} & \equiv\; & \neg(a \lor b) \lor c \quad \text{(Conditional Law)} \\
+    \equiv\; & \mathbf{(\neg a \land \neg b) \lor c} \quad \text{(Distributive Law)} & \equiv\; & \mathbf{(\neg a \land \neg b) \lor c} \quad \text{(De Morgan's Theorem)} \\
 \end{align*}
 \begin{center}
     $\therefore$ The two expressions are equivalent. $\blacksquare$
@@ -178,10 +178,10 @@ they are not. (Clearly state what you are proving!) Do not use truth tables.
 \end{center}
 \begin{align*}
     & a \iff b & & \mathbf{(a \land b) \lor (\neg a \land \neg b)} \\
-    \Rightarrow\; & (a \rightarrow b) \land (b \rightarrow a) \quad \text{(Biconditional Law)} \\
-    \Rightarrow\; & (\neg a \lor b ) \land (\neg b \lor a) \quad \text{(Conditional Law)} \\
-    \Rightarrow\; & (\neg a \land \neg b) \lor (\neg a \land a) \lor (b \land \neg b) \lor (b \land a) \quad \text{(Distributive Law)} \\ 
-    \Rightarrow\; & \mathbf{(\neg a \land \neg b) \lor (a \land b)} \quad \text{(Negation Law)}
+    \equiv\; & (a \rightarrow b) \land (b \rightarrow a) \quad \text{(Biconditional Law)} \\
+    \equiv\; & (\neg a \lor b ) \land (\neg b \lor a) \quad \text{(Conditional Law)} \\
+    \equiv\; & (\neg a \land \neg b) \lor (\neg a \land a) \lor (b \land \neg b) \lor (b \land a) \quad \text{(Distributive Law)} \\ 
+    \equiv\; & \mathbf{(\neg a \land \neg b) \lor (a \land b)} \quad \text{(Negation Law)}
 \end{align*}
 \begin{center}
     $\therefore$ The two expressions are equivalent. $\blacksquare$
@@ -194,11 +194,11 @@ they are not. (Clearly state what you are proving!) Do not use truth tables.
     \text{We are proving that the two expressions \bb{are} equivalent.}
 \end{center}
 \begin{align*}
-    & a \rightarrow (b \rightarrow (c \rightarrow d)) & & \mathbf{(a \land b) \lor (\neg a \land \neg b)} \\
-    \Rightarrow\; & \neg a \lor (\neg b \lor (\neg c \lor d)) \quad \text{(Conditional Law)} \\
-    \Rightarrow\; & (\neg a \lor \neg b \lor \neg c) \lor d \\
-    \Rightarrow\; & \neg(a \land b \land c) \lor d \quad \text{(De Morgan's)} \\
-    \Rightarrow\; & \mathbf{(a \land b \land c) \rightarrow d} \quad \text{(Conditional Law)} \\
+    & a \rightarrow (b \rightarrow (c \rightarrow d)) & & \mathbf{(a \land b \land c) \rightarrow d} \\
+    \equiv\; & \neg a \lor (\neg b \lor (\neg c \lor d)) \quad \text{(Conditional Law)} \\
+    \equiv\; & (\neg a \lor \neg b \lor \neg c) \lor d \\
+    \equiv\; & \neg(a \land b \land c) \lor d \quad \text{(De Morgan's)} \\
+    \equiv\; & \mathbf{(a \land b \land c) \rightarrow d} \quad \text{(Conditional Law)} \\
 \end{align*}
 \begin{center}
     $\therefore$ The two expressions are equivalent. $\blacksquare$
@@ -212,11 +212,11 @@ they are not. (Clearly state what you are proving!) Do not use truth tables.
         \text{Consider the case where } a = \text{True}, b = \text{False}. \\
 \end{center}
 \begin{align*}
-    & (a \rightarrow b) \land (b \rightarrow a) & & a \iff b\\
-    \Rightarrow\; & (T \rightarrow F) \lor (F \rightarrow T) & \Rightarrow\; & (a \rightarrow b) \land (b \rightarrow a) \quad \text{(Biconditional Law)}\\
-    \Rightarrow\; & F \lor T & \Rightarrow\; &  (T \rightarrow F) \land (F \rightarrow T)\\
-    \Rightarrow\; & \mathbf{T} & \Rightarrow\; & F \land T \\
-    & &  \Rightarrow\; & \mathbf{F} \\
+    & (a \rightarrow b) \lor (b \rightarrow a) & & a \iff b\\
+    \equiv\; & (T \rightarrow F) \lor (F \rightarrow T) & \equiv\; & (a \rightarrow b) \land (b \rightarrow a) \quad \text{(Biconditional Law)}\\
+    \equiv\; & F \lor T & \equiv\; &  (T \rightarrow F) \land (F \rightarrow T)\\
+    \equiv\; & \mathbf{T} & \equiv\; & F \land T \\
+    & &  \equiv\; & \mathbf{F} \\
 \end{align*}
 \begin{center}
     $\therefore$ The two expressions are not equivalent. $\blacksquare$
@@ -230,9 +230,9 @@ they are not. (Clearly state what you are proving!) Do not use truth tables.
 \end{center}
 \begin{align*}
     & a \iff b & & \neg a \iff \neg b \\
-    \Rightarrow\; & (a \rightarrow b) \land (b \rightarrow a) \quad \text{(Biconditional Law)} & \Rightarrow & (\neg a \rightarrow \neg b) \land (\neg b \rightarrow \neg a) \quad \text{(Biconditional Law)}\\
-    \Rightarrow\; & (\neg a \lor b) \land (\neg b \lor a) \quad \text{(Conditional Law)} & \Rightarrow & (\neg\neg a \lor \neg b) \land (\neg\neg b \lor \neg a) \quad \text{(Conditional Law)}\\
-    & & \Rightarrow & (a \lor \neg b) \land (b \lor \neg a) \quad \text{(Double Negation law)} \\
+    \equiv\; & (a \rightarrow b) \land (b \rightarrow a) \quad \text{(Biconditional Law)} & \equiv & (\neg a \rightarrow \neg b) \land (\neg b \rightarrow \neg a) \quad \text{(Biconditional Law)}\\
+    \equiv\; & (\neg a \lor b) \land (\neg b \lor a) \quad \text{(Conditional Law)} & \equiv & (\neg\neg a \lor \neg b) \land (\neg\neg b \lor \neg a) \quad \text{(Conditional Law)}\\
+    & & \equiv & (a \lor \neg b) \land (b \lor \neg a) \quad \text{(Double Negation law)} \\
 \end{align*}
 \begin{center}
     $\therefore$ The two expressions are equivalent. $\blacksquare$
@@ -247,10 +247,10 @@ they are not. (Clearly state what you are proving!) Do not use truth tables.
 \end{center}
 \begin{align*}
     & (a \land b) \rightarrow (c \land d) & & ((a \rightarrow c) \land (a \rightarrow d)) \land ((b \rightarrow c) \land (b \rightarrow d))\\
-    \Rightarrow\; & (T \land F) \rightarrow (F \land F) & \Rightarrow\; & ((T \rightarrow F) \land (T \rightarrow F)) \land ((F \rightarrow F) \land (F \rightarrow F)) \\
-    \Rightarrow\; & F \lor T & \Rightarrow\; &  (F \land F) \land (T \land T)\\
-    \Rightarrow\; & \mathbf{T} & \Rightarrow\; & F \land F \\
-    & &  \Rightarrow\; & \mathbf{F} \\
+    \equiv\; & (T \land F) \rightarrow (F \land F) & \equiv\; & ((T \rightarrow F) \land (T \rightarrow F)) \land ((F \rightarrow F) \land (F \rightarrow F)) \\
+    \equiv\; & F \lor T & \equiv\; &  (F \land F) \land (T \land T)\\
+    \equiv\; & \mathbf{T} & \equiv\; & F \land F \\
+    & &  \equiv\; & \mathbf{F} \\
 \end{align*}
 \begin{center}
     $\therefore$ The two expressions are not equivalent. $\blacksquare$
@@ -264,10 +264,10 @@ they are not. (Clearly state what you are proving!) Do not use truth tables.
 \end{center}
 \begin{align*}
     & (a \lor b) \rightarrow (c \land d) & & ((a \rightarrow c) \land (a \rightarrow d)) \land ((b \rightarrow c) \land (b \rightarrow d))\\
-    \Rightarrow\; & \neg(a \lor b) \lor (c \land d) \quad \text{(Conditional Law)} & \Rightarrow\; & ((\neg a \lor c) \land (\neg a \lor d)) \land ((\neg b\rightarrow c) \land (\neg b \lor d)) \quad \text{(Conditional Law)}\\
-    &  & \Rightarrow\; &  (\neg a \lor (c \land d))\land (\neg b \lor (c \land d)) \quad \text{(Distributive Law)}\\
-    & & \Rightarrow\; & (\neg a \land \neg b ) \lor (c \land d) \quad \text{(Distributive Law)} \\
-    & &  \Rightarrow\; & \neg(a \lor b) \lor (c \land d) \quad \text{(De Morgan's law)} \\
+    \equiv\; & \neg(a \lor b) \lor (c \land d) \quad \text{(Conditional Law)} \quad \vrule & \equiv\; & ((\neg a \lor c) \land (\neg a \lor d)) \land ((\neg b\rightarrow c) \land (\neg b \lor d)) \quad \text{(Conditional Law)}\\
+    & \quad \vrule & \equiv\; &  (\neg a \lor (c \land d))\land (\neg b \lor (c \land d)) \quad \text{(Distributive Law)}\\
+    & \quad \vrule & \equiv\; & (\neg a \land \neg b ) \lor (c \land d) \quad \text{(Distributive Law)} \\
+    & \quad \vrule &  \equiv\; & \neg(a \lor b) \lor (c \land d) \quad \text{(De Morgan's law)} \\
 \end{align*}
 \begin{center}
     $\therefore$ The two expressions are equivalent. $\blacksquare$
@@ -288,10 +288,10 @@ use truth tables.
 \end{question}
 \begin{align*}
     & (a \rightarrow b) \lor (b \rightarrow a) \\
-    \Rightarrow\; & (\neg a \lor b) \lor (\neg b \lor a) \quad \text{(Conditional Law)} \\
-    \Rightarrow\; & (\neg a \lor a) \lor (\neg b \lor b) \quad \\
-    \Rightarrow\;&  (t)  \lor (t) \quad \text{(Tautology Law)} \\
-    \Rightarrow\; & \mathbf{t} \quad \text{(Tautology Law)}
+    \equiv\; & (\neg a \lor b) \lor (\neg b \lor a) \quad \text{(Conditional Law)} \\
+    \equiv\; & (\neg a \lor a) \lor (\neg b \lor b) \quad \\
+    \equiv\;&  \top \lor \top \quad \text{(Tautology Law)} \\
+    \equiv\; & \top \quad \text{(Tautology Law)}
 \end{align*}
 \begin{center}
     $\therefore$ The statement is a tautology. $\blacksquare$
@@ -302,17 +302,17 @@ use truth tables.
 \end{question}
 \begin{align*}
     & (((a \rightarrow b) \land (b \rightarrow c)) \land a) \land \neg c \\
-    \Rightarrow\; & (((\neg a \lor b) \land (\neg b \lor c)) \land a) \land \neg c \quad \text{(Conditional Law)} \\
-    \Rightarrow\; & ((\neg a \land a) \lor (a\land b) \land (\neg b \lor c)) \land \neg c \quad \text{(Distributive Law)} \\
-    \Rightarrow\; & (\bot \lor (a\land b) \land (\neg b \lor c)) \land \neg c \quad \text{(Contradiction Law)} \\
-    \Rightarrow\; & ((a\land b) \land (\neg b \lor c)) \land \neg c \quad \text{(Contradiction Law)} \\
-    \Rightarrow\; & ((a \land \neg b \land b) \lor (a \land b \land c)) \land \neg c \quad \text{(Distributive Law)} \\
-    \Rightarrow\; & ((a \land \bot) \lor (a\land b\land c)) \land \neg c \quad \text{(Contradiction Law)} \\
-    \Rightarrow\; & (\bot \lor (a\land b\land c)) \land \neg c \quad \text{(Contradiction Law)} \\
-    \Rightarrow\; & (a\land b\land c) \land \neg c \quad \text{(Contradiction Law)} \\
-    \Rightarrow & a \land b \land c \land \neg c \quad \\
-    \Rightarrow\; & a \land b \land \bot \quad \text{(Contradiction Law)} \\
-    \Rightarrow\; & \bot \quad \text{(Contradiction Law)}
+    \equiv\; & (((\neg a \lor b) \land (\neg b \lor c)) \land a) \land \neg c \quad \text{(Conditional Law)} \\
+    \equiv\; & ((\neg a \land a) \lor (a\land b) \land (\neg b \lor c)) \land \neg c \quad \text{(Distributive Law)} \\
+    \equiv\; & (\bot \lor (a\land b) \land (\neg b \lor c)) \land \neg c \quad \text{(Contradiction Law)} \\
+    \equiv\; & ((a\land b) \land (\neg b \lor c)) \land \neg c \quad \text{(Contradiction Law)} \\
+    \equiv\; & ((a \land \neg b \land b) \lor (a \land b \land c)) \land \neg c \quad \text{(Distributive Law)} \\
+    \equiv\; & ((a \land \bot) \lor (a\land b\land c)) \land \neg c \quad \text{(Contradiction Law)} \\
+    \equiv\; & (\bot \lor (a\land b\land c)) \land \neg c \quad \text{(Contradiction Law)} \\
+    \equiv\; & (a\land b\land c) \land \neg c \quad \text{(Contradiction Law)} \\
+    \equiv & a \land b \land c \land \neg c \quad \\
+    \equiv\; & a \land b \land \bot \quad \text{(Contradiction Law)} \\
+    \equiv\; & \bot \quad \text{(Contradiction Law)}
 \end{align*}
 \begin{center}
     $\therefore$ The statement is a contradiction. $\blacksquare$
@@ -323,16 +323,16 @@ use truth tables.
 \end{question}
 \begin{align*}
     & (((a \rightarrow b) \land (b \rightarrow c)) \land a) \land c \\
-    \Rightarrow\; & (((\neg a \lor b) \land (\neg b \lor c)) \land a) \land c \quad \text{(Conditional Law)} \\
-    \Rightarrow\; & ((\neg a \land a) \lor (a\land b) \land (\neg b \lor c)) \land c \quad \text{(Distributive Law)} \\
-    \Rightarrow\; & (\bot \lor (a\land b) \land (\neg b \lor c)) \land c \quad \text{(Contradiction Law)} \\
-    \Rightarrow\; & ((a\land b) \land (\neg b \lor c)) \land c \quad \text{(Contradiction Law)} \\
-    \Rightarrow\; & ((a \land \neg b \land b) \lor (a \land b \land c)) \land  c \quad \text{(Distributive Law)} \\
-    \Rightarrow\; & ((a \land \bot) \lor (a\land b\land c)) \land  c \quad \text{(Contradiction Law)} \\
-    \Rightarrow\; & (\bot \lor (a\land b\land c)) \land c \quad \text{(Contradiction Law)} \\
-    \Rightarrow\; & (a\land b\land c) \land c \quad \text{(Contradiction Law)} \\
-    \Rightarrow\; & a \land b \land c \land c \quad \\
-    \Rightarrow\; & a \land b \land c \quad \text{(Idempotent Law)}
+    \equiv\; & (((\neg a \lor b) \land (\neg b \lor c)) \land a) \land c \quad \text{(Conditional Law)} \\
+    \equiv\; & ((\neg a \land a) \lor (a\land b) \land (\neg b \lor c)) \land c \quad \text{(Distributive Law)} \\
+    \equiv\; & (\bot \lor (a\land b) \land (\neg b \lor c)) \land c \quad \text{(Contradiction Law)} \\
+    \equiv\; & ((a\land b) \land (\neg b \lor c)) \land c \quad \text{(Contradiction Law)} \\
+    \equiv\; & ((a \land \neg b \land b) \lor (a \land b \land c)) \land  c \quad \text{(Distributive Law)} \\
+    \equiv\; & ((a \land \bot) \lor (a\land b\land c)) \land  c \quad \text{(Contradiction Law)} \\
+    \equiv\; & (\bot \lor (a\land b\land c)) \land c \quad \text{(Contradiction Law)} \\
+    \equiv\; & (a\land b\land c) \land c \quad \text{(Contradiction Law)} \\
+    \equiv\; & a \land b \land c \land c \quad \\
+    \equiv\; & a \land b \land c \quad \text{(Idempotent Law)}
 \end{align*}
 \begin{center}
     $\therefore$ The statement is a neither a tautology nor a contradiction. $\blacksquare$
@@ -343,8 +343,8 @@ use truth tables.
 \end{question}
 \begin{align*}
     & a \rightarrow \neg a \\
-    \Rightarrow\; & \neg a \lor \neg a \quad \text{(Conditional Law)} \\
-    \Rightarrow\; & \neg a \quad \text{(Idempotent Law)} \\
+    \equiv\; & \neg a \lor \neg a \quad \text{(Conditional Law)} \\
+    \equiv\; & \neg a \quad \text{(Idempotent Law)} \\
 \end{align*}
 \begin{center}
     $\therefore$ Therefore, the statement is neither a tautology nor a contradiction. $\blacksquare$
@@ -354,15 +354,15 @@ use truth tables.
     $(a \land (a \rightarrow b)) \rightarrow b$
 \end{question}
 \begin{align*}
-    \Rightarrow\; & (a \land (a \rightarrow b)) \rightarrow b \\
-    \Rightarrow\; & \neg(a \land (a \rightarrow b)) \lor b \quad \text{(Conditional Law)} \\
-    \Rightarrow\; & \neg(a \land (\neg a \lor b)) \lor b \quad \text{(Conditional Law)} \\
-    \Rightarrow\; & \neg((a \land \neg a) \lor (a \land b)) \lor b \quad \text{(Distributive Law)} \\
-    \Rightarrow\; & \neg(\top \lor (a\land b)) \lor b \quad \text{(Tautology Law)}\\
-    \Rightarrow\; &  \neg(a \land b) \lor b \quad \text{(Tautology Law)} \\
-    \Rightarrow\; & \neg a \lor \neg b \lor b \quad \text{(De Morgan's Law)} \\
-    \Rightarrow\; & \neg a \lor \top \quad \text{(Tautology Law)} \\
-    \Rightarrow\; & \top \quad \text{(Tautology Law)}
+    \equiv\; & (a \land (a \rightarrow b)) \rightarrow b \\
+    \equiv\; & \neg(a \land (a \rightarrow b)) \lor b \quad \text{(Conditional Law)} \\
+    \equiv\; & \neg(a \land (\neg a \lor b)) \lor b \quad \text{(Conditional Law)} \\
+    \equiv\; & \neg((a \land \neg a) \lor (a \land b)) \lor b \quad \text{(Distributive Law)} \\
+    \equiv\; & \neg(\top \lor (a\land b)) \lor b \quad \text{(Tautology Law)}\\
+    \equiv\; &  \neg(a \land b) \lor b \quad \text{(Tautology Law)} \\
+    \equiv\; & \neg a \lor \neg b \lor b \quad \text{(De Morgan's Law)} \\
+    \equiv\; & \neg a \lor \top \quad \text{(Tautology Law)} \\
+    \equiv\; & \top \quad \text{(Tautology Law)}
 \end{align*}
 \begin{center}
     $\therefore$ The statement is a tautology. $\blacksquare$
@@ -376,11 +376,231 @@ For each of the following arguments:
 
 \quad \quad 2. Prove the argument is valid by using Rules of Inference.
 
+
+
 \quad • If the argument is not valid, provide an assignment of truth values to variables and demonstrate that it proves
 that the argument is not valid.
 \vspace{0.1in}
 \hrule
 \vspace{0.1in}
 
-JOISADJFIOJASF KILL ME NOW
+\begin{question}
+    If the weather is good, I either go running or swimming. I don’t go running and swimming at the same time.
+Therefore, if the weather is good and I go running, then I do not go swimming. Also, if the weather is good and
+I go swimming, then I do not go running.
+\end{question}
+\[
+    \text{Statements} = \begin{cases}
+        W = \text{The weather is good.} \\
+        R = \text{I go running.} \\
+        S = \text{I go swimming.}
+    \end{cases} \\
+\]
+    
+\begin{center}
+    \text{Thus, our our premises and conclusions are:}
+\end{center}    
+\begin{align*}
+    W \rightarrow (R \land S) & \quad (1) \\
+    \neg(R \land S) & \quad (2) \\
+    \overline{((W \land R) \rightarrow \neg S) \land ((W \land S) \rightarrow \neg R)} &  \quad \text{Conclusion}
+\end{align*}
+
+
+\begin{figure}[h!]
+    \includegraphics[totalheight=15cm, angle=90]{images/Q3P1.jpg}
+    \caption{Truth Table for Question 3.1}
+\end{figure}
+
+\begin{center}
+    \text{Since the conclusion is true in all cases where the premises are true, the argument is valid.} \\
+    \text{Now, we will prove the argument is valid using Rules of Inference.}\\
+    \text{Some new statements we can create are:}
+\end{center}
+\begin{align*}
+    \neg W \quad & \text{(1), (2), Modus Tollens} \hfill & \text{(3)} \\
+    \neg W \lor \neg R \quad & \text{(3), Addition} \hfill & \text{(4)} \\ 
+    \neg(W \land R) \quad & \text{(4), De Morgan's Theorem} \hfill & \text{(5)} \\
+    \neg(W \land R) \lor \neg S \quad & \text{(5), Addition} \hfill & \text{(6)} \\
+    (W \land R) \rightarrow \neg S \quad & \text{(6), Conditional Law} \hfill & \text{(7)} \\
+    \neg W \lor \neg S \quad & \text{(3), Addition} \hfill & \text{(8)} \\
+    \neg(W \land S) \quad & \text{(8), De Morgan's Theorem} \hfill & \text{(9)} \\
+    \neg(W \land S) \lor \neg R \quad & \text{(9), Addition} \hfill & \text{(10)} \\
+    (W \land S) \rightarrow \neg R \quad & \text{(10), Conditional Law} \hfill & \text{(11)} \\
+    ((W \land R) \rightarrow \neg S) \land ((W \land S) \rightarrow \neg R) \quad & \text{(7), (11), Conjunction} \hfill & \text{(12)} \\
+\end{align*}
+\begin{center}
+    $\therefore$ Since (12) = Conclusion, The argument is valid. $\blacksquare$
+\end{center}
+
+\begin{question}
+    To get a good grade in CSCA67, it is necessary for me to attend lectures and do the assigned readings. I attend
+lectures and I do the assigned readings. Therefore, I will get a good grade in CSCA67.
+\end{question}
+\[
+    \text{Statements} = \begin{cases}
+        G = \text{I get a good grade in CSCA67.} \\         
+        L = \text{I attend lectures.} \\
+        R = \text{I do the assigned readings.}
+    \end{cases} \\
+\]
+    
+\begin{center}
+    \text{Thus, our our premises and conclusions are:}
+\end{center}    
+\begin{align*}
+    G \rightarrow (L \land R) & \quad (1) \\
+    \underline{L \land R} & \quad (2) \\
+    G &  \quad \text{Conclusion}
+\end{align*}
+\begin{center}
+    \text{This argument is not valid. Consider the case where }  \\
+    G = \text{False}, L = \text{True}, R = \text{True} \\
+    \text{Note that L and R must be true, due to premise (2). Therefore the only variable we assigned a value to is G.} \\
+\end{center}
+\begin{align*}
+    & \underline{\text{Premise (1)}} & & \underline{\text{Premise (2)}} & & \underline{\text{Conclusion}} \\
+    & G \rightarrow (L \land R) & & L \land R & & G \\
+    \equiv\; & F \rightarrow (T \land T) & \equiv\; & T & \equiv\; & F \\
+    \equiv\; & T & & & & \\
+\end{align*}
+\begin{center}
+    $\therefore$ The argument is not valid, as the premises are true while the conclusion is false. $\blacksquare$
+\end{center}
+
+\begin{question}
+    To get a good grade in CSCA67, it is sufficient for me to attend lectures and do the assigned readings and solve
+all assigned exercises or to already know all course material perfectly from before. I attend lectures and I do
+the assigned readings. I solve all assigned exercises. Therefore, I will get a good grade in CSCA67.
+\end{question}
+
+\[
+    \text{Statements} = \begin{cases}
+        G = \text{I get a good grade in CSCA67.} \\         
+        L = \text{I attend lectures.} \\
+        E = \text{I solve all assigned exercises.} \\
+        K = \text{I already know all course material perfectly from before.} \\
+        R = \text{I do the assigned readings.} \\
+    \end{cases}
+\]
+\begin{center}
+    \text{Thus, our our premises and conclusions are:}
+\end{center}
+\begin{align*}
+    ((L \land R \land E) \lor K) \rightarrow G & \quad (1) \\
+    L \land R & \quad (2) \\
+    E & \quad (3) \\
+    \overline{G} &  \quad \text{Conclusion}
+\end{align*}
+\begin{figure}[h!]
+    \begin{center}
+        \includegraphics[totalheight=8cm]{images/Q3P3.jpg}
+        
+    \end{center}
+    \caption{Since (1) $\land$ (2) $\land$ (3) $\to$ Conclusion is is a tautology, the argument is valid. $\blacksquare$}
+    \caption{Truth Table for Question 3.3}
+\end{figure}
+\begin{center}
+    \text{Since the conclusion is true in all cases where the premises are true, the argument is valid.} \\
+    \text{Now, we will prove the argument is valid using Rules of Inference.}\\
+    \text{Some new statements we can create are:}
+\end{center}
+\begin{align*}
+    L \land R \land E \quad & \text{(2), (3), Conjunction} \hfill & \text{(4)} \\
+    (L \land R \land E) \lor K \quad & \text{(4), Addition} \hfill & \text{(5)} \\
+    G \quad & \text{(1), (5), Modus Ponens} \hfill & \text{(6)} \\
+\end{align*}
+\begin{center}
+    $\therefore$ Since (6) = Conclusion, The argument is valid. $\blacksquare$
+\end{center}
+
+\begin{question}
+    If the butler was in the living room, then he couldn’t have committed the murder. Or, if the cook was in the
+kitchen, then she must be innocent. Either the butler is guilty or the cook is guilty. Therefore, either the butler
+was not in the living room, or the cook was not in the kitchen.
+\end{question}
+\[  
+    \text{Statements} = 
+    \begin{cases}
+        B = \text{The butler is guilty.} \\
+        C = \text{The cook is guilty.} \\
+        L = \text{The butler was in the living room.} \\
+        K = \text{The cook was in the kitchen.}
+    \end{cases}
+\]
+\begin{center}
+    Thus, our premises and conclusions are:
+\end{center}
+
+\begin{align*}
+    (L \rightarrow \neg B) \lor (K \rightarrow \neg C) & \quad (1) \\
+    B \lor C & \quad (2) \\
+    \overline{\neg L \lor \neg K} & \quad \text{Conclusion}
+\end{align*}
+
+\begin{center}
+    \text{This argument is not valid. Consider the case where }  \\
+    B = \text{True}, C = \text{False}, K = \text{True}, L = \text{True} \\
+\end{center}
+\begin{align*}
+    & \underline{\text{Premise (1)}} & & \underline{\text{Premise (2)}} & & \underline{\text{Conclusion}} \\
+    & (L \rightarrow \neg B) \lor (K \rightarrow \neg C) & & B \lor C & & \neg L \lor \neg K \\
+    \equiv\; & (T \rightarrow F) \lor (T \rightarrow T) & \equiv\; & T \lor F & \equiv\; & \neg T \lor \neg T \\
+    \equiv\; & F \lor T & \equiv\; &  T & \equiv\; & F \\
+    \equiv\; & T & & & & \\
+\end{align*}
+\begin{center}
+    $\therefore$ The argument is not valid, as the premises are true while the conclusion is false. $\blacksquare$
+\end{center}
+\begin{question}
+    If the butler was in the living room, then he couldn’t have committed the murder. Also, if the cook was in the
+kitchen, then she must be innocent. Either the butler is guilty or the cook is guilty. Therefore, either the butler
+was not in the living room, or the cook was not in the kitchen.
+\end{question}
+
+\[  
+    \text{Statements} = 
+    \begin{cases}
+        B = \text{The butler is guilty.} \\
+        C = \text{The cook is guilty.} \\
+        L = \text{The butler was in the living room.} \\
+        K = \text{The cook was in the kitchen.}
+    \end{cases}
+\]
+\begin{center}
+    Thus, our premises and conclusions are:
+\end{center}
+
+\begin{align*}
+    L \rightarrow \neg B & \quad (1) \\
+    K \rightarrow \neg C & \quad (2) \\
+    B \lor C & \quad (3) \\
+    \overline{\neg L \lor \neg K} & \quad \text{Conclusion}
+\end{align*}
+
+
+\begin{figure}[h!]
+    \begin{center}
+        \includegraphics[totalheight=10cm]{images/Q3P5.jpg}
+        
+    \end{center}
+    \caption{Truth Table for Question 3.5}
+\end{figure}
+
+
+\begin{center}
+    \text{Since the conclusion is true in all cases where the premises are true, the argument is valid.} \\
+    \text{Now, we will prove the argument is valid using Rules of Inference.}\\
+    \text{Some new statements we can create are:}
+\end{center}
+\begin{align*}
+    \neg K \lor \neg C \quad & \text{(2), Conditional Law} \hfill & \text{(4)} \\
+    \neg K \lor B \quad & \text{(4), (3) Resolution} \hfill & \text{(5)} \\
+    \neg L \lor \neg B \quad & \text{(1) Conditional Law} \hfill & \text{(6)} \\
+    \neg L \lor \neg K \quad & \text{(6), (5) Resolution} \hfill & \text{(7)} \\
+\end{align*}
+\begin{center}
+    $\therefore$ Since (7) = Conclusion, The argument is valid. $\blacksquare$
+\end{center}
 \end{document}
+
