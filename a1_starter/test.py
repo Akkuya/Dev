@@ -1,2 +1,7 @@
-x="CHO_PF_G25_A29_DC11_H40_Pr20"
-print(x[-2:])
+
+def x(player):
+    gaa = player[10:14]
+    sv =  player[17:22]
+
+    print(gaa, sv)
+x("CLA_PG_GAA2.23_SV0.910_Pr20")
