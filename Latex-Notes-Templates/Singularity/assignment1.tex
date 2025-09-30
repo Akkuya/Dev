@@ -156,13 +156,13 @@ they are not. (Clearly state what you are proving!) Do not use truth tables.
 \end{center}
 
 \begin{question}
-    $(a \rightarrow c) \lor (b \rightarrow c)$ and $(a \lor b) \rightarrow c$
+    $(a \rightarrow c) \land (b \rightarrow c)$ and $(a \lor b) \rightarrow c$
 \end{question}
 \begin{center}
     \text{We are proving that the two expressions \bb{are} equivalent.}
 \end{center}
 \begin{align*}
-    & (a \rightarrow c) \lor (b \rightarrow c) & & (a \lor b) \rightarrow c \\
+    & (a \rightarrow c) \land (b \rightarrow c) & & (a \lor b) \rightarrow c \\
     \equiv\; & (\neg a \lor c) \land (\neg b \lor c) \quad \text{(Conditional Law)} & \equiv\; & \neg(a \lor b) \lor c \quad \text{(Conditional Law)} \\
     \equiv\; & \mathbf{(\neg a \land \neg b) \lor c} \quad \text{(Distributive Law)} & \equiv\; & \mathbf{(\neg a \land \neg b) \lor c} \quad \text{(De Morgan's Theorem)} \\
 \end{align*}
@@ -264,7 +264,7 @@ they are not. (Clearly state what you are proving!) Do not use truth tables.
 \end{center}
 \begin{align*}
     & (a \lor b) \rightarrow (c \land d) & & ((a \rightarrow c) \land (a \rightarrow d)) \land ((b \rightarrow c) \land (b \rightarrow d))\\
-    \equiv\; & \neg(a \lor b) \lor (c \land d) \quad \text{(Conditional Law)} \quad \vrule & \equiv\; & ((\neg a \lor c) \land (\neg a \lor d)) \land ((\neg b\rightarrow c) \land (\neg b \lor d)) \quad \text{(Conditional Law)}\\
+    \equiv\; & \neg(a \lor b) \lor (c \land d) \quad \text{(Conditional Law)} \quad \vrule & \equiv\; & ((\neg a \lor c) \land (\neg a \lor d)) \land ((\neg b\lor c) \land (\neg b \lor d)) \quad \text{(Conditional Law)}\\
     & \quad \vrule & \equiv\; &  (\neg a \lor (c \land d))\land (\neg b \lor (c \land d)) \quad \text{(Distributive Law)}\\
     & \quad \vrule & \equiv\; & (\neg a \land \neg b ) \lor (c \land d) \quad \text{(Distributive Law)} \\
     & \quad \vrule &  \equiv\; & \neg(a \lor b) \lor (c \land d) \quad \text{(De Morgan's law)} \\
@@ -358,8 +358,8 @@ use truth tables.
     \equiv\; & \neg(a \land (a \rightarrow b)) \lor b \quad \text{(Conditional Law)} \\
     \equiv\; & \neg(a \land (\neg a \lor b)) \lor b \quad \text{(Conditional Law)} \\
     \equiv\; & \neg((a \land \neg a) \lor (a \land b)) \lor b \quad \text{(Distributive Law)} \\
-    \equiv\; & \neg(\top \lor (a\land b)) \lor b \quad \text{(Tautology Law)}\\
-    \equiv\; &  \neg(a \land b) \lor b \quad \text{(Tautology Law)} \\
+    \equiv\; & \neg(\bot \lor (a\land b)) \lor b \quad \text{(Contradiction Law)}\\
+    \equiv\; &  \neg(a \land b) \lor b \quad \text{(Contradiction Law)} \\
     \equiv\; & \neg a \lor \neg b \lor b \quad \text{(De Morgan's Law)} \\
     \equiv\; & \neg a \lor \top \quad \text{(Tautology Law)} \\
     \equiv\; & \top \quad \text{(Tautology Law)}
@@ -401,14 +401,17 @@ I go swimming, then I do not go running.
     \text{Thus, our our premises and conclusions are:}
 \end{center}    
 \begin{align*}
-    W \rightarrow (R \land S) & \quad (1) \\
+    W \rightarrow (R \lor S) & \quad (1) \\
     \neg(R \land S) & \quad (2) \\
     \overline{((W \land R) \rightarrow \neg S) \land ((W \land S) \rightarrow \neg R)} &  \quad \text{Conclusion}
 \end{align*}
 
-
 \begin{figure}[h!]
-    \includegraphics[totalheight=15cm, angle=90]{images/Q3P1.jpg}
+    \begin{center}
+        \includegraphics[totalheight=4cm]{images/Q3P1.jpg}
+        
+    \end{center}
+    \caption{Since (1) $\land$ (2) $\to$ Conclusion is is a tautology, the argument is valid. $\blacksquare$}
     \caption{Truth Table for Question 3.1}
 \end{figure}
 
@@ -418,19 +421,18 @@ I go swimming, then I do not go running.
     \text{Some new statements we can create are:}
 \end{center}
 \begin{align*}
-    \neg W \quad & \text{(1), (2), Modus Tollens} \hfill & \text{(3)} \\
-    \neg W \lor \neg R \quad & \text{(3), Addition} \hfill & \text{(4)} \\ 
-    \neg(W \land R) \quad & \text{(4), De Morgan's Theorem} \hfill & \text{(5)} \\
-    \neg(W \land R) \lor \neg S \quad & \text{(5), Addition} \hfill & \text{(6)} \\
-    (W \land R) \rightarrow \neg S \quad & \text{(6), Conditional Law} \hfill & \text{(7)} \\
-    \neg W \lor \neg S \quad & \text{(3), Addition} \hfill & \text{(8)} \\
-    \neg(W \land S) \quad & \text{(8), De Morgan's Theorem} \hfill & \text{(9)} \\
-    \neg(W \land S) \lor \neg R \quad & \text{(9), Addition} \hfill & \text{(10)} \\
-    (W \land S) \rightarrow \neg R \quad & \text{(10), Conditional Law} \hfill & \text{(11)} \\
-    ((W \land R) \rightarrow \neg S) \land ((W \land S) \rightarrow \neg R) \quad & \text{(7), (11), Conjunction} \hfill & \text{(12)} \\
+    \neg W \lor R \lor S \quad & \text{(1), Conditional Law} \hfill & \text{(3)} \\
+    \neg R \lor \neg S \quad & \text{(2), De Morgan's Theorem} \hfill & \text{(4)} \\
+    \neg S \lor S \lor \neg W \quad & \text{(3), (4), Resolution} \hfill & \text{(5)} \\
+    \neg W \lor \neg S \lor \neg R \quad & \text{(4), (5), Resolution} \hfill & \text{(6)} \\
+    \neg (W \land R) \lor \neg S \quad & \text{(6), De Morgan's Theorem} \hfill & \text{(7)} \\
+    \neg (W \land S) \lor \neg R \quad & \text{(6), De Morgan's Theorem} \hfill & \text{(8)} \\
+    (W \land R) \rightarrow \neg S \quad & \text{(7), Conditional Law} \hfill & \text{(9)} \\
+    (W \land S) \rightarrow \neg R \quad & \text{(8), Conditional Law} \hfill & \text{(10)} \\
+    ((W \land R) \rightarrow \neg S) \land ((W \land S) \rightarrow \neg R) \quad & \text{(9), (10), Conjunction} \hfill & \text{(11)} \\
 \end{align*}
 \begin{center}
-    $\therefore$ Since (12) = Conclusion, The argument is valid. $\blacksquare$
+    $\therefore$ Since (11) = Conclusion, The argument is valid. $\blacksquare$
 \end{center}
 
 \begin{question}

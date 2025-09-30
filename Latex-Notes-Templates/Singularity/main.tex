@@ -368,5 +368,72 @@ Use Venn diagrams to illustrate the following identities.
     
 \end{tabular}
 \]
+
+2. $\overline{A \cap B} = \overline{A} \cup \overline{B}$
+
+
+\[
+\begin{tabular}{{c@{\hspace{1.5cm}}|@{\hspace{1.5cm}}c
+}}
+    $\mathbf{\overline{A \cap B}}$ & $\mathbf{\overline{A} \cup \overline{B}}$ \\
+    \\
+    \begin{venndiagram2sets}[tikzoptions={scale=0.8,thick}]
+        \fillA
+    \end{venndiagram2sets} 
+    &
+    \begin{venndiagram2sets}[tikzoptions={scale=0.8,thick}]
+        \fillNotA
+    \end{venndiagram2sets} 
+    \\
+    $A$ & $\overline{A}$ \\[1.5cm]
+    \begin{venndiagram2sets}[tikzoptions={scale=0.8,thick}]
+        \fillB
+    \end{venndiagram2sets}
+    &
+    \begin{venndiagram2sets}[tikzoptions={scale=0.8,thick}]
+        \fillNotB
+    \end{venndiagram2sets} \\
+    $B$ & $\overline{B}$ \\[1.5cm]
+    \begin{venndiagram2sets}[tikzoptions={scale=0.8,thick}]
+        \fillACapB
+    \end{venndiagram2sets}
+    &
+    \begin{venndiagram2sets}[tikzoptions={scale=0.8,thick}]
+        \fillNotAorB
+        \fillANotB
+        \fillBNotA
+    \end{venndiagram2sets} \\
+    $ A \cap B$ & $\overline{A} \cup \overline{B}$ \\[1.5cm]
+    \begin{venndiagram2sets}[tikzoptions={scale=0.8,thick}]
+        \fillNotAorB
+        \fillANotB
+        \fillBNotA
+    \end{venndiagram2sets} \\
+    $\overline{A \cap B}$ & \fbox{$\therefore \overline{A \cap B} = \overline{A} \cup \overline{B}$}\\
+    
+\end{tabular}
+\]
+
+\vspace{1.2in}
+Prove the identities in part (a), by writing out (using logical symbols) what it means for anobject x to be an element of each set and then using logical equivalences.
+\vspace{0.1in}
+\hrule
+\vspace{0.1in}
+1. $\overline{A \cup B} = \overline{A} \cap \overline{B}$
+
+\[
+\begin{tabular}{{c@{\hspace{1.5cm}}|@{\hspace{1.5cm}}c
+}}
+    $\mathbf{\overline{A \cup B}}$ & $\mathbf{\overline{A} \cap \overline{B}}$ \\
+    \\
+    $\{x \text{\textbar} x \in (\overline{A \cup B})\}$ & $x \in \overline{A} \cap \overline{B}$ \\
+        $\{x \text{\textbar} x \in \overline{A \cup B}\}$ & $\Rightarrow x \in \overline{A} \land x \in \overline{B}$ \\
+    $\Rightarrow x \notin A \land x \notin B$ & $\Rightarrow x \notin A \land x \notin B$ \\
+    $\Rightarrow x \in \overline{A} \land x \in \overline{B}$ & $\Rightarrow x \in \overline{A} \cap \overline{B}$\\
+    $x \in \overline{A} \cap \overline{B}$ & $x \in \overline{A} \cap \overline{B}$\\
+    & $\therefore  \overline{A \cup B} = \overline{A} \cap \overline{B}$\\
+\end{tabular}
+    \]
+
 \end{document}
 
