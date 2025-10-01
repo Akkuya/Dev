@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.9.18)  29 SEP 2025 20:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.9.18)  1 OCT 2025 01:32
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -702,7 +702,8 @@ LaTeX Font Info:    Font shape `T1/fnc/m/n' will be
  (c:/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-06-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count339
-) (./assignment1.aux)
+)
+No file assignment1.aux.
 \openout1 = `assignment1.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 98.
@@ -721,7 +722,7 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 98.
 LaTeX Font Info:    ... okay on input line 98.
 LaTeX Font Info:    Checking defaults for FML/fncmi/m/it on input line 98.
 LaTeX Font Info:    Trying to load font information for FML+fncmi on input line 98.
- (c:/texlive/2025/texmf-dist/tex/latex/fouriernc/fmlfncmi.fd
+(c:/texlive/2025/texmf-dist/tex/latex/fouriernc/fmlfncmi.fd
 File: fmlfncmi.fd 2005/12/20 Fontinst v1.928 font definitions for FML/fncmi.
 )
 LaTeX Font Info:    ... okay on input line 98.
@@ -878,15 +879,15 @@ L3 programming layer <2025-09-02>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 22683 strings out of 467797
- 482663 string characters out of 5435982
+ 22680 strings out of 467797
+ 482603 string characters out of 5435982
  923984 words of memory out of 5000000
- 50882 multiletter control sequences out of 15000+600000
+ 50881 multiletter control sequences out of 15000+600000
  668889 words of font info for 111 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  98i,11n,101p,463b,1375s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2025/texmf-dist/fonts/type1/public/fourier/fourier-mex.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/fourier/fourier-ms.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb><c:/texlive/2025/texmf-dist/fonts/type1/urw/ncntrsbk/uncb8a.pfb><c:/texlive/2025/texmf-dist/fonts/type1/urw/ncntrsbk/uncr8a.pfb><c:/texlive/2025/texmf-dist/fonts/type1/urw/ncntrsbk/uncri8a.pfb>
-Output written on assignment1.pdf (10 pages, 2827241 bytes).
+Output written on assignment1.pdf (10 pages, 2827240 bytes).
 PDF statistics:
  116 PDF objects out of 1000 (max. 8388607)
  62 compressed objects within 1 object stream
