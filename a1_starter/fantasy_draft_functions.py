@@ -53,8 +53,19 @@ def get_player_id(player: str) -> str:
 
 def get_price(player: str) -> int:
 
-    """Return the price of player
-       #TODO 
+    """Return the price of player if the string is non-empty;
+    otherwise return 0.
+
+    Precondition: player is the string of player stats as 
+    seen in players.txt
+
+    >>> get_price('MGO_PD_G0-_A14_DC43_H70_Pr5-')
+    5
+    >>> get_price('NSH_PF_G7-_A14_DC20_H73_Pr10')
+    10
+    >>> get_price('')
+    0
+    
     """
     if len(player) == 0:
         return 0
@@ -110,9 +121,17 @@ def is_player_available(player: str, players_available: str) -> bool:
     return get_player_id(player) in players_available
 
 def can_select(player: str, num_forwards: int, num_defencemen: int, num_goalies: int) -> bool:
-    if player == '':
-        return True
+    """Return True if and only the position of player is less than the needed amount of 
+    players with that same position. If player is the empty string, return True.
+
+
+
+    """
     
+    
+    if len(player) == 0:
+        return True
+
     position = get_position(player)
     if position == 'F' and (num_forwards < FORWARDS_NEEDED):
         return True
@@ -162,23 +181,54 @@ def add_to_team(player: str, player_ids: str) -> str:
     the ID of player. If player already exists in player_ids, return the 
     unchanged string of player_ids.
 
-    #TODO testcases
+    Precondition: player is in the string of player stats as seen in players.txt
+
+    >>> add_to_team('NSH_PF_G7-_A14_DC20_H73_Pr10', 'MGO_')
+    'MGO_NSH_'
+    >>> add_to_team('NSH_PF_G7-_A14_DC20_H73_Pr10', 'NSH_')
+    'NSH_'
+    >>> add_to_team('', 'NSH_')
+    'NSH_'
+
+
     """
+
+    if len(player) == 0:
+        return player_ids
+
     chosen_id = get_player_id(player)
     if chosen_id in player_ids:
         return player_ids
     return player_ids+chosen_id+'_'
     
 def remove_player(player_ids: str, player_index: int) -> str:
+    """Returns the updated string of all drafted players, after removing
+    the id preceding the seperator at index player_index from player_ids. 
+    If the characterat player_index is not a seperator, or player_index 
+    is negative, then return the unmodified string of player_ids.
+
+    >>> remove_player('DOL_NCA_MGO_AHS_', 7)
+    'OOL_MGO_AHS_'
+    >>> remove_player('DOL_NCA_MGO_AHS_', 8)
+    'DOL_NCA_MGO_AHS_'
+    >>> remove_player('DOL_NCA_MGO_AHS_', -1)
+    'DOL_NCA_MGO_AHS_'
+    
     """
-    #TODO docstring
-    """
-    if player_ids[player_index] != '_':
+    if player_ids[player_index] != '_' or player_index < 0:
         return player_ids
     return player_ids[:player_index-3] + player_ids[player_index+1:]
     
 
 def compute_dc_points(player: str) -> int:
+    """Return the defensive contribution points of player.  If the player
+    is a goalie or an empty string, return 0.
+
+    Precondition: player is in the string of player stats as seen in players.txt
+
+    >>> compute_dc_points('NSH_PF_G7-_A14_DC20_H73_Pr10')
+    
+    """
     position = get_position(player)
     if position == 'G' or player == '':
         return 0
@@ -188,9 +238,9 @@ def compute_dc_points(player: str) -> int:
     if dc[1] == '-':
         dc = dc[0]
     if position == 'F':
-        points = int(dc) * F_DCS_PER_POINT
+        points = int(dc) % F_DCS_PER_POINT
     elif position == 'D':
-        points = int(dc) * D_DCS_PER_POINT
+        points = int(dc) % D_DCS_PER_POINT
 
     return points
 
@@ -222,7 +272,7 @@ def compute_hit_points(player: str) -> float:
     return int(hits) * POINTS_PER_HIT
 
 def compute_fantasy_score(player: str) -> float:
-    if player == '':
+    if len(player) == 0:
         return 0.0
     
     if get_position(player) == 'G':
