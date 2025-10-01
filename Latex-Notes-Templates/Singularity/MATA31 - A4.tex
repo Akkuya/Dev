@@ -1,0 +1,197 @@
+\documentclass[]{article}
+
+% Imports the catppuccin theme, using the mocha flavor,
+% from the directory above. Actual implementation
+% wouldn't need the import package unless the theme
+% and the document are in different directories.
+\usepackage{import}
+\usepackage{xcolor}
+% \usepackage{fancyhdr}
+\usepackage{cancel}
+\usepackage{mathtools}
+
+% For permutations and combinations
+\newcommand\Myperm[2][^n]{\prescript{#1\mkern-2.5mu}{}P_{#2}}
+\newcommand\Mycomb[2]{\prescript{#1\mkern-0.5mu}{}C_{#2}}
+
+% Colors
+\definecolor{yorhabg}{HTML}{FFFFFF}
+\definecolor{yorhafg}{HTML}{000000}
+\definecolor{yorhagrid}{HTML}{B5AF9C}
+\definecolor{mred}{HTML}{D67069}
+\definecolor{mblue}{HTML}{6887A1}
+
+\pagecolor{yorhabg}
+\color{yorhafg}
+
+\usepackage{preamble}
+
+% Removes padding above title
+\usepackage{titling}
+\setlength{\droptitle}{-10em}
+
+% Font package
+\usepackage[T1]{fontenc}
+
+\usepackage{fouriernc}
+
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[skins, most]{tcolorbox}
+\usepackage{enumitem}
+
+\DeclareMathOperator{\sgn}{sgn}
+
+\usepackage{tikz}
+\usepackage{eso-pic}
+\usetikzlibrary{calc,shadows.blur}
+\usetikzlibrary{angles, quotes}
+\usetikzlibrary{3d}
+
+% Margins
+\topmargin=0in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\AtBeginEnvironment{tcolorbox}{\small}
+
+\newtcolorbox{imp}{enhanced,arc=0mm,colback=yorhabg,colframe=mred,leftrule=10mm,coltext=yorhafg,%
+overlay={\node[anchor=west,outer sep=2pt] at (frame.west) {\includegraphics[width=6mm]{images/imageb.png}}; }}
+
+\newtcolorbox{shortcut}{enhanced,arc=0mm,colback=yorhabg,colframe=mred,leftrule=10mm,coltext=yorhafg, coltitle=yorhabg, title=\texttt{Shortcut.}, 
+overlay={\node[anchor=west,outer sep=2pt] at (frame.west) {\includegraphics[width=6mm]{images/imageb.png}}; }}
+
+\newtcolorbox{question}[1]{
+    enhanced, 
+    colback=yorhabg,
+    colframe=mblue,
+    coltext=yorhafg,
+    coltitle=yorhabg,
+    attach boxed title to top left={yshift*=-\tcboxedtitleheight}, 
+    title=\texttt{#1},
+    boxed title size=title,
+    boxed title style={%
+        rounded corners=northeast, 
+        rounded corners=northwest, 
+        colback=tcbcolframe, 
+        boxrule=0pt,
+    },
+    underlay boxed title={%
+        \path[fill=tcbcolframe] (title.south west)--(title.south east) 
+            to[out=0, in=180] ([xshift=5mm]title.east)--
+            (title.center-|frame.east)
+            [rounded corners=5pt] |- 
+            (frame.north) -| cycle; 
+    },
+}
+% \pagestyle{fancy}
+% \fancyhf{}  % Clear all default header/footer
+% \fancyhead[L]{\small Satyajit Datta \\ 1012033336}  % Top-left, small font
+\newcommand\bb[1]{\textcolor{yorhafg}{\textbf{#1}}}
+
+\title{\textbf{MATA31 - Assignment \#4}}
+\author{ Satyajit Datta \\ 1012033336}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{question}{A}
+Consider the linear function
+\[
+f(x) = 3x + 1.
+\]
+
+We know intuitively that
+\[
+\lim_{x \to -1} f(x) = -2.
+\]
+
+\begin{enumerate}[label=\textbf{\Alph*.}]
+    \item How close to $-1$ does $x$ have to be such that $f(x)$ differs from $-2$
+    by less than $0.1$?
+    \item How close to $-1$ does $x$ have to be such that $f(x)$ differs from $-2$
+    by less than $0.01$?
+    \item How close to $-1$ does $x$ have to be such that $f(x)$ differs from $-2$
+    by less than $0.001$?
+\end{enumerate}
+\end{question}
+
+\begin{question}{B}
+    Provide the formal definition of the limit
+    \[
+    \lim_{x \to a} f(x) = L
+    \]
+    in two ways: one using intervals and one using absolute value inequalities. Use this definition to prove that
+    \[
+    \lim_{x \to 3} (2x+4) = 10
+    \]
+\end{question}
+
+\begin{question}{C}
+    Provide the formal definition of the limit
+    \[
+    \lim_{x \to a^+} f(x) = \infty
+    \]
+    in two ways: one using intervals and one using absolute value inequalities. Use this definition to prove that
+    \[
+    \lim_{x \to 1^+} \frac{1}{x-1} = \infty
+    \]
+\end{question}
+
+\begin{question}{D}
+    Provide the formal definition of the limit
+    \[
+    \lim_{x \to \infty} f(x) = L
+    \]
+    in two ways: one using intervals and one using absolute value inequalities. Use this definition to prove that
+    \[
+    \lim_{x \to \infty} \frac{2}{x+1} = 0
+    \]
+\end{question}
+
+\begin{question}{E}
+    Provide the formal definition of the limit
+    \[
+    \lim_{x \to \infty} f(x) = \infty
+    \]
+    in two ways: one using intervals and one using absolute value inequalities. Use this definition to prove that
+    \[
+    \lim_{x \to \infty} (x^2+1) = \infty
+    \]
+\end{question}
+
+\begin{question}{F}
+    Find the equation of a possible function $f$ with $f(0) = 5, \displaystyle{\lim_{x\to1^+}} f(x) = \infty$ and $\displaystyle{\lim_{x\to1^-}} f(x) = \infty$
+\end{question}
+
+\begin{question}{G}
+    Does
+    \[
+    \lim_{x \to 2} \frac{|x-2|}{x-2}
+    \]
+    exist? Explain why or why not.  
+\end{question}
+
+
+\begin{question}{H}
+    Find $\displaystyle{\lim_{x\to 3}} f(x)$ if it exists. Otherwise, explain by one-sided limits
+    
+    \[
+        f(x) =
+        \begin{cases}
+            x^2, & \text{if } x \leq 3, \\
+            3x + 2, & \text{if } x > 3.
+        \end{cases}
+    \]
+
+\end{question}
+
+\end{document}
