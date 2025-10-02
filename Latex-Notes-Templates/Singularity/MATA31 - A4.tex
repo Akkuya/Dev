@@ -135,6 +135,51 @@ We know intuitively that
     \]
 \end{question}
 
+\underline{\bf{Interval Definition}}
+
+\[
+    \forall \varepsilon > 0 \;\exists\;\delta > 0 \quad \text{s.t} \quad x \in(c - \delta, c)\cup(c, c+\delta)\Longrightarrow f(x) \in (L-\varepsilon, L+\varepsilon)
+\]
+
+\underline{\bf{Absolute value inequalities}}
+\[
+    \forall \varepsilon > 0\;\exists\; \delta>0 \quad \text{s.t} \quad 
+    0 < |x-c| < \delta \Longrightarrow |f(x) - L|  < \varepsilon
+\]
+
+\hrule
+\vspace{0.1in}
+We will use the absolute value inequality definition to prove this limit.
+
+Want to show: 
+\[
+    \forall \varepsilon > 0\;\exists\; \delta>0 \quad \text{s.t} \quad 
+    0 < |x-3| < \delta \Longrightarrow |(2x +4) - 10|  < \varepsilon
+\]
+
+\underline{\bf{Proof.}}
+
+\underline{Let} $\varepsilon > 0$ be arbitrary.
+
+\medbreak
+
+\underline{Choose} $\delta = \frac{\varepsilon}{3}$. Note $\delta > 0$.
+
+\medbreak
+
+\underline{Assume} $0 < |x-3| < \delta$. Then, 
+
+\begin{align*}
+    |(2x + 4) -10| & = |2x-6| \\
+    & = |2(x-2)| \\
+    & = |3||x-2| \\
+    & = 3|x-2| \\
+    & < 3\delta \\
+    & = 3(\frac{\varepsilon}{3}) \\
+    & = \varepsilon
+\end{align*}
+
+As required to show $\blacksquare$.
 \begin{question}{C}
     Provide the formal definition of the limit
     \[
@@ -146,6 +191,49 @@ We know intuitively that
     \]
 \end{question}
 
+
+\underline{\bf{Interval Definition}}
+
+\[
+    \forall M > 0 \;\exists\;\delta > 0 \quad \text{s.t} \quad x \in(a, a+\delta)\Longrightarrow f(x) \in (0, \;M)
+\]
+
+\underline{\bf{Absolute value inequalities}}
+\[
+    \forall M > 0\;\exists\; \delta>0 \quad \text{s.t} \quad 
+    0 < x-a < \delta \Longrightarrow f(x) >M
+\]
+
+\hrule
+\vspace{0.1in}
+We will use the absolute value inequality definition to prove this limit.
+
+Want to show:
+\[
+    \forall M > 0\;\exists\; \delta>0 \quad \text{s.t} \quad 
+    0 < x-1 < \delta \Longrightarrow \frac{1}{x-1} > M
+\]
+
+
+\underline{\bf{Proof.}}
+
+\underline{Let} $\varepsilon > 0$ be arbitrary.
+
+\medbreak
+
+\underline{Choose} $\delta = \frac{1}{M}$
+
+\medbreak
+
+\underline{Assume} $0 < x-1 < \delta$. Then:
+
+\begin{align*}
+    x - 1 & < \delta \\
+    \iff x - 1 & < \frac{1}{M} \\
+    \iff \frac{1}{x-1} & < M
+\end{align*}
+
+As required to show. $\blacksquare$.
 \begin{question}{D}
     Provide the formal definition of the limit
     \[
@@ -157,6 +245,22 @@ We know intuitively that
     \]
 \end{question}
 
+\underline{\bf{Interval Definition}}
+
+\[
+    \forall \varepsilon> 0 \;\exists\;N > 0 \quad \text{s.t} \quad x \in(0, \;N) \Longrightarrow f(x) \in (L -\varepsilon, \;L+\varepsilon)
+\]
+
+\underline{\bf{Absolute value inequalities}}
+\[
+    \forall \varepsilon > 0\;\exists\; N>0 \quad \text{s.t} \quad 
+    x > N \Longrightarrow |f(x) - L| < \varepsilon
+\]
+
+\hline
+\vspace{0.1in}
+We will use the absolute value inequality definition to prove this limit.
+
 \begin{question}{E}
     Provide the formal definition of the limit
     \[
@@ -167,6 +271,48 @@ We know intuitively that
     \lim_{x \to \infty} (x^2+1) = \infty
     \]
 \end{question}
+
+\underline{\bf{Interval Definition}}
+
+\[
+    \forall M > 0 \;\exists\;N > 0 \quad \text{s.t} \quad x \in(0, \;N) \Longrightarrow f(x) \in (0, \;M)
+\]
+
+\underline{\bf{Absolute value inequalities}}
+\[
+    \forall M > 0\;\exists\; N>0 \quad \text{s.t} \quad 
+    x > N \Longrightarrow f(x) > M
+\]
+
+\hline
+\vspace{0.1in}
+We will use the absolute value inequality definition to prove this limit.
+
+Want to show: 
+\[
+    \forall M > 0\;\exists\; N >0 \quad \text{s.t} \quad 
+    x > N \Longrightarrow x^2+1 > M
+\]
+
+\underline{\bf{Proof.}}
+
+\underline{Let} $M > 0$ be arbitrary
+
+\medbreak
+
+\underline{Choose} $N = \sqrt{M} $. Note that N > 0.
+
+\medbreak
+
+\underline{Assume} $x > N$. Then
+
+\begin{align*}
+    x^2 + 1 & > N^2 + 1 \\
+    & > M+1 \\
+    & > M
+\end{align*}
+
+As required to show $\blacksquare$.
 
 \begin{question}{F}
     Find the equation of a possible function $f$ with $f(0) = 5, \displaystyle{\lim_{x\to1^+}} f(x) = \infty$ and $\displaystyle{\lim_{x\to1^-}} f(x) = \infty$
