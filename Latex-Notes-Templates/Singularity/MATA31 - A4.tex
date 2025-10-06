@@ -124,6 +124,19 @@ We know intuitively that
 \end{enumerate}
 \end{question}
 
+\begin{center}
+    $\forall \varepsilon > 0\;\exists\; \delta>0 \quad \text{s.t} \quad 
+    0 < |x-(-1)| < \delta \Longrightarrow |3x+1 - (-2)|  < \varepsilon$
+\end{center}
+
+When solving the limit, we get $\delta = \frac{\epsilon}{3}$.
+
+\begin{enumerate}[label=\textbf{\Alph*.}]
+    \item If $\varepsilon = 0.1$, $x$ has to be within $0.1 \div 3 = 0.0\overline{3}$ of $-1$
+    \item If $\varepsilon = 0.01$, $x$ has to be within $0.01 \div 3 = 0.00\overline{3}$ of $-1$
+    \item If $\varepsilon = 0.001$, $x$ has to be within $0.001 \div 3 = 0.000\overline{3}$ of $-1$
+\end{enumerate}
+
 \begin{question}{B}
     Provide the formal definition of the limit
     \[
@@ -163,20 +176,27 @@ Want to show:
 
 \medbreak
 
-\underline{Choose} $\delta = \frac{\varepsilon}{3}$. Note $\delta > 0$.
+\underline{Choose} $\delta = \frac{\varepsilon}{2}$. Note $\delta > 0$.
 
 \medbreak
 
 \underline{Assume} $0 < |x-3| < \delta$. Then, 
 
 \begin{align*}
-    |(2x + 4) -10| & = |2x-6| \\
-    & = |2(x-2)| \\
-    & = |3||x-2| \\
-    & = 3|x-2| \\
-    & < 3\delta \\
-    & = 3(\frac{\varepsilon}{3}) \\
-    & = \varepsilon
+    |(2x + 4) -10| &= |2x-6| 
+        && \text{(by algebra)} \\[6pt]
+    &= |2(x-3)| 
+        && \text{(by algebra)} \\[6pt]
+    &= |2||x-3| 
+        && \text{(by properties of $|\cdot|$)} \\[6pt]
+    &= 2|x-3| 
+        && \text{(since $2>0$)} \\[6pt]
+    &< 2\delta 
+        && \text{(by assumption)} \\[6pt]
+    &= 2\!\left(\tfrac{\varepsilon}{2}\right) 
+        && \text{(by choice of $\delta$)} \\[6pt]
+    &= \varepsilon 
+        && \text{(by algebra).}
 \end{align*}
 
 As required to show $\blacksquare$.
@@ -228,9 +248,12 @@ Want to show:
 \underline{Assume} $0 < x-1 < \delta$. Then:
 
 \begin{align*}
-    x - 1 & < \delta \\
-    \iff x - 1 & < \frac{1}{M} \\
-    \iff \frac{1}{x-1} & < M
+    x - 1  & < \delta
+        && \text{(by algebra)} \\[6pt]
+    \Longrightarrow x-1 &= \frac{1}{M} 
+        && \text{(by our choice of $\delta$)} \\[6pt]
+    \Longrightarrow \frac{1}{x-1}  &> M
+        && \text{(since $x > 0$ and $M > 0$)} \\[6pt]
 \end{align*}
 
 As required to show. $\blacksquare$.
@@ -257,10 +280,44 @@ As required to show. $\blacksquare$.
     x > N \Longrightarrow |f(x) - L| < \varepsilon
 \]
 
-\hline
+\hrule
 \vspace{0.1in}
 We will use the absolute value inequality definition to prove this limit.
+Want to show:
 
+\begin{center}
+    $\forall \epsilon > 0\;\exists\; N>0 \quad \text{s.t} \quad 
+    x > N \Longrightarrow |\frac{2}{x+1} - 0| < \varepsilon$
+\end{center}
+\underline{\bf{Proof.}}
+
+\underline{Let} $\varepsilon > 0$ be arbitrary.
+
+\medbreak
+
+\underline{Choose} $N = \max\{ 1, \frac{2}{\varepsilon} - 1 \}$. Note that $N > 0$.
+
+\medbreak
+
+\underline{Assume} $x > N$. Then
+
+\begin{align*}
+    x  & >\; \frac{2}{\varepsilon} - 1
+        && \text{(by our choice of N)} \\[6pt]
+    \Longrightarrow x+1 &=\; \frac{2}{\varepsilon}
+        && \text{(by algebra)} \\[6pt]
+    \Longrightarrow \frac{1}{x+1}  &<\; \frac{\varepsilon}{2}
+        && \text{(since $x > 0$ and $\varepsilon > 0$)} \\[6pt]
+    \Longrightarrow \frac{2}{x+1}  &<\; \varepsilon
+        && \text{(by algebra)} \\[6pt]
+    \Longrightarrow \frac{2}{x+1} - 0 &<\; \varepsilon
+        && \text{(by algebra)} \\[6pt]
+    \Longrightarrow |\;\frac{2}{x+1}\; - 0\;| &<\; \varepsilon
+        && \text{(since $x > 0$)} \\[6pt]
+\end{align*}
+
+
+As required to show $\blacksquare$.
 \begin{question}{E}
     Provide the formal definition of the limit
     \[
@@ -284,7 +341,7 @@ We will use the absolute value inequality definition to prove this limit.
     x > N \Longrightarrow f(x) > M
 \]
 
-\hline
+\hrule
 \vspace{0.1in}
 We will use the absolute value inequality definition to prove this limit.
 
@@ -306,10 +363,14 @@ Want to show:
 
 \underline{Assume} $x > N$. Then
 
+
 \begin{align*}
-    x^2 + 1 & > N^2 + 1 \\
-    & > M+1 \\
+    x^2+1  & > N^2 + 1
+        && \text{(by algebra)} \\[6pt]
+    &= M+1 
+        && \text{(by our choice of $N$)} \\[6pt]
     & > M
+        && \text{(by properties of inequalities)} 
 \end{align*}
 
 As required to show $\blacksquare$.
@@ -317,6 +378,34 @@ As required to show $\blacksquare$.
 \begin{question}{F}
     Find the equation of a possible function $f$ with $f(0) = 5, \displaystyle{\lim_{x\to1^+}} f(x) = \infty$ and $\displaystyle{\lim_{x\to1^-}} f(x) = \infty$
 \end{question}
+
+The equation that we will choose is:
+
+\[
+    f(x) = \frac{1}{(x-1)^2} + 4
+\]
+
+The reason I chose this function is because I know $\frac{1}{(x-1)^2}$ has an asymptote at $x = 1$, so I squared the denominator to make the function approach $+\infty$ on both sides.
+The value of this function is 1 at $x=0$, so I then added $4$.
+
+\medbreak 
+
+\textbf{\underline{Prove f(0) = 5}}
+\begin{align*}
+    f(x) &= \frac{1}{(x-1)^2} + 4 \\
+    f(\bf{0}) &= \frac{1}{(\bf{0}-1)^2} + 4 \\
+    &= \frac{1}{(-1)^2} + 4 \\
+    &= \frac{1}{1} + 4 \\
+    &= 1 + 4\\
+    &= 5 
+\end{align*}
+
+As required to show. $\blacksquare$.
+
+\medbreak
+
+The limit as $x \rightarrow 1$ is $\infty$, making each one-sided limit also $\infty$.
+
 
 \begin{question}{G}
     Does
@@ -326,7 +415,7 @@ As required to show $\blacksquare$.
     exist? Explain why or why not.  
 \end{question}
 
-
+The numerator of this function is always positive, so we can disregard it, as the sign doesn't change whether $x \to 2^-$ or $x \to 2^+$. There is a vertical asymptote at $x = 2$. If $x < 2 \Rightarrow f(x) < 0$, and if $x > 2 \Rightarrow f(x) > 0$, Therefore the limit does not exist $\blacksquare$. 
 \begin{question}{H}
     Find $\displaystyle{\lim_{x\to 3}} f(x)$ if it exists. Otherwise, explain by one-sided limits
     
@@ -340,4 +429,117 @@ As required to show $\blacksquare$.
 
 \end{question}
 
+Lets look at each piece individually.
+
+\[
+    \lim_{x\to3} x^2 = 9
+\]
+
+Let us prove this.
+
+Want to show: 
+\[
+    \forall \varepsilon > 0\;\exists\;\delta >0 \quad \text{s.t} \quad 
+    0 < |x-3| < \delta \Longrightarrow |x^2-9| < \varepsilon
+\]
+
+\underline{\bf{Proof.}}
+
+\underline{Let} $\varepsilon > 0$ be arbitrary
+
+\medbreak
+
+\underline{Choose} $\delta = min\{1, \frac{\epsilon}{7}\} $. Note that N > 0.
+
+\medbreak
+
+\underline{Assume} $0 < |x-3| < \delta$.
+\medbreak
+Since $x^2 - 9 = (x+3)(x-3)$ and $x-3 < \delta$, we first need to obtain a bound on $|x+3|$. Then
+\begin{align*}
+    |x-3| < \delta &\Longrightarrow |x-3|<1
+        && \text{(since $\delta = \min\{ 1, \frac{\varepsilon}{7} \} \le 1$)} \\[6pt]
+    &\Longrightarrow -1 < x-3 < 1
+        && \text{(by properties of $|\cdot|$)} \\[6pt]
+    &\Longrightarrow 5 < x+3 < 7 
+        && \text{(by algebra)} \\[6pt]
+    &\Longrightarrow -7 < x+3 < 7
+        &&\text{(by properties of inequalities)} \\[6pt]
+    &\Longrightarrow |x+3| < 7
+        &&\text{(by properties of $|\cdot|$)} \\[6pt]
+\end{align*}
+
+Therefore, $|x+3| < 7$ $(\star)$.
+
+It now follows that:
+\begin{align*}
+    |x^2 - 9| &= |(x+3)(x-3)| 
+        && \text{(by algebra)} \\[6pt]
+    &= |x+3||x-3| 
+        && \text{(by properties of $|\cdot|$)} \\[6pt]
+    &< |x+3|\delta 
+        && \text{(by assumption)} \\[6pt]
+    &< 7\delta 
+        && \text{(by ($\star$))} \\[6pt]
+    &= 7\frac{\epsilon}{7} 
+        && \text{(by our choice of $\delta$)} \\[6pt]
+    &= \varepsilon 
+        && \text{(by algebra).}
+\end{align*}
+
+As required to show. $\blacksquare$.
+\vspace{0.1in}
+\hrule
+\vspace{0.1in}
+Now, lets look at 
+\[
+    \lim_{x\to3} 3x+2 = 11
+\]
+
+Let us prove this.
+
+Want to show: 
+\[
+    \forall \varepsilon > 0\;\exists\;\delta >0 \quad \text{s.t} \quad 
+    0 < |x-3| < \delta \Longrightarrow |(3x+2)-11| < \varepsilon
+\]
+
+\underline{\bf{Proof.}}
+
+\underline{Let} $\varepsilon > 0$ be arbitrary
+
+\medbreak
+
+\underline{Choose} $\delta = \frac{\epsilon}{3} $. Note that N > 0.
+
+\medbreak
+
+\underline{Assume} $0 < |x-3| < \delta$.
+
+\begin{align*}
+    |(3x + 2) -11| &= |3x-9| 
+        && \text{(by algebra)} \\[6pt]
+    &= |3(x-3)| 
+        && \text{(by algebra)} \\[6pt]
+    &= |3||x-3| 
+        && \text{(by properties of $|\cdot|$)} \\[6pt]
+    &= 3|x-3| 
+        && \text{(since $2>0$)} \\[6pt]
+    &< 3\delta 
+        && \text{(by assumption)} \\[6pt]
+    &= 3\frac{\varepsilon}{3}
+        && \text{(by choice of $\delta$)} \\[6pt]
+    &= \varepsilon 
+        && \text{(by algebra).}
+\end{align*}
+
+As required to show. $\blacksquare$.
+
+\vspace{0.1in}
+\hrule
+\vspace{0.1in}
+
+
+
+Since the left sided limit $\ne$ the right sided limit, the limit does not exist. $\blacksquare$.
 \end{document}
