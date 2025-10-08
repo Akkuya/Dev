@@ -1,7 +1,11 @@
 #include <iostream>
 
-int main()
-{
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
+struct X {
+    X() = default;
+    int i = 0;
+};
+
+int main() {
+    const X x;
+    std::cout << x.i;
 }
