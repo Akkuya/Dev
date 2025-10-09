@@ -123,15 +123,30 @@ The argument given is:
 \begin{question}{1.2}
 Every insect has six legs. At least one insect flies. Therefore, at least one six-legged being flies.
 
-Let $I(x)$ be "$x$ is an insect". $L(x)$ be "$x$ has six legs, $F(x)$ be "$x$ flies." Universe of discourse is live beings.
+Let $I(x)$ be "$x$ is an insect". $L(x)$ be "$x$ has six legs", $F(x)$ be "$x$ flies." Universe of discourse is live beings.
 \end{question}
+The argument given is: 
+\begin{align*} 
+    & \forall x(I(x) \rightarrow L(x)) & (1)\\ 
+    & \exists x, (I(x) \land F(x)) & (2)\\ 
+    & \overline{\exists x, (L(x) \land F(x))} & \text{(Conclusion)} 
+\end{align*} 
+\medbreak
 
-The argument given is:
-\begin{align*}
-    & \forall x(I(x) \rightarrow L(x)) & (1)\\
-    & \exists x, (I(x) \land F(x)) & (2)\\
-    & \overline{\exists x, (L(x) \land F(x))} & \text{(Conclusion)}
-\end{align*}
+\underline{\textbf{Proof.}}
+
+\begin{flalign*}
+  &\text{Take an element }c\text{ such that: }I(c)\land F(c) && (3)\ \text{(EI)}\\
+  &\quad I(c) && (4)\ \text{(3, simp.)}\\
+  &\quad F(c) && (5)\ \text{(3, simp.)}\\
+  &\quad L(c) && (6)\ \text{(1, 4, Universal Modus Ponens)}\\
+  &\quad L(c)\land F(c) && (7)\ \text{(5, 6, conj.)}\\
+  &\exists x\,(L(x)\land F(x)) && (8)\ \text{(7, EG)}
+\end{flalign*}
+\hrule
+\vspace{0.1in}
+$\therefore$ The argument is valid. $\blacksquare$
+
 
 \begin{question}{1.3}
 Every insect has six legs. Only insects fly. Therefore, every flying being has six legs.
@@ -145,6 +160,11 @@ The argument given is:
     & \forall x, (F(x) \rightarrow I(x)) & (2)\\
     & \overline{\forall x, (F(x) \rightarrow L(x))} & \text{(Conclusion)}
 \end{align*}
+
+\begin{align*}
+    &\text{Take an arbitrary}\; c &  \hfill & (3) \\
+    &\quad 
+\end{align*} 
 
 \begin{question}{1.4}
 All birds eat at least one species of insect. At least one species of insect can fly. Therefore, all birds
@@ -160,4 +180,4 @@ The argument given is:
     & \overline{\forall x, (B(x) \rightarrow \exists y(F(y) \land E(x, y)))} & \text{(Conclusion)}
 \end{align*}
 
-\end{document}$
+\end{document}
