@@ -95,7 +95,7 @@ overlay={\node[anchor=west,outer sep=2pt] at (frame.west) {\includegraphics[widt
 % \fancyhead[L]{\small Satyajit Datta \\ 1012033336}  % Top-left, small font
 \newcommand\bb[1]{\textcolor{yorhafg}{\textbf{#1}}}
 
-\title{\textbf{CSCA67 - Exercises \#4}}
+\title{\textbf{CSCA67 - Exercises \#5}}
 \author{Satyajit Datta \\ 1012033336}
 \date{\today}
 
@@ -118,14 +118,45 @@ The argument given is:
     & L(Charlotte) & (2)\\
     & \overline{I(Charlotte)} & \text{(Conclusion)}
 \end{align*}
+\medbreak
 
+Let $W$ be $\{Charlotte\} \subseteq U$, such that $\neg I(Charlotte)$, and $L(Charlotte)$. (perhaps Charlotte is an octopus :0)
 
+\underline{\bf{Premise (1)}}
+\begin{align*}
+     \forall x(I(x) \rightarrow L(x)) 
+\end{align*}
+Since Charlotte is the only element in our subset, we can rewrite the statement as such:
+
+\begin{align*}
+    & I(Charlotte) \rightarrow L(Charlotte) \\
+    \text{\bf{eqv}}\quad& F \rightarrow T \\ 
+   \text{\bf{eqv}}\quad & T
+\end{align*}
+
+\underline{\bf{Premise (2)}}
+\begin{align*}
+    & L(Charlotte) \\ 
+    \text{\bf{eqv}}\quad & T
+\end{align*}
+
+\underline{\bf{Conclusion}}
+\begin{align*}
+    & I(Charlotte) \\ 
+    \text{\bf{eqv}}\quad & F
+\end{align*}
+
+\hrule
+\vspace{0.1in}
+Thus, we have proved that there is a case such that all the premises are true, 
+while the conclusion is false, making this argument invalid. $\blacksquare$
 \begin{question}{1.2}
 Every insect has six legs. At least one insect flies. Therefore, at least one six-legged being flies.
 
 Let $I(x)$ be "$x$ is an insect". $L(x)$ be "$x$ has six legs", $F(x)$ be "$x$ flies." Universe of discourse is live beings.
 \end{question}
 The argument given is: 
+
 \begin{align*} 
     & \forall x(I(x) \rightarrow L(x)) & (1)\\ 
     & \exists x, (I(x) \land F(x)) & (2)\\ 
@@ -136,12 +167,12 @@ The argument given is:
 \underline{\textbf{Proof.}}
 
 \begin{flalign*}
-  &\text{Take an element }c\text{ such that: }I(c)\land F(c) && (3)\ \text{(EI)}\\
-  &\quad I(c) && (4)\ \text{(3, simp.)}\\
-  &\quad F(c) && (5)\ \text{(3, simp.)}\\
+  &\text{Choose }c\text{ such that: }I(c)\land F(c) && (3)\ \text{(Existential Instantiation)}\\
+  &\quad I(c) && (4)\ \text{(3, Simp.)}\\
+  &\quad F(c) && (5)\ \text{(3, Simp.)}\\
   &\quad L(c) && (6)\ \text{(1, 4, Universal Modus Ponens)}\\
-  &\quad L(c)\land F(c) && (7)\ \text{(5, 6, conj.)}\\
-  &\exists x\,(L(x)\land F(x)) && (8)\ \text{(7, EG)}
+  &\quad L(c)\land F(c) && (7)\ \text{(5, 6, Conj.)}\\
+  &\exists x\,(L(x)\land F(x)) && (8)\ \text{(3, 7, Existential Generalisation)}
 \end{flalign*}
 \hrule
 \vspace{0.1in}
@@ -161,10 +192,19 @@ The argument given is:
     & \overline{\forall x, (F(x) \rightarrow L(x))} & \text{(Conclusion)}
 \end{align*}
 
-\begin{align*}
-    &\text{Take an arbitrary}\; c &  \hfill & (3) \\
-    &\quad 
-\end{align*} 
+\begin{flalign*}
+    &\text{Take an arbitrary}\; c && (3) \\
+    &\quad I(c) \rightarrow L(c) && (4)\ \text{(1,3, Universal Instantiation)}\\ 
+    &\quad F(c) \rightarrow I(c) && (5)\ \text{(2,3, Universal Instantiation)}\\ 
+    &\quad \neg I(c) \lor L(c) && (6)\ \text{(4, Cond.)}\\ 
+    &\quad \neg F(c) \lor I(c) && (7)\ \text{(5, Cond.)}\\ 
+    &\quad \neg F(c) \lor L(c)  && (8)\ \text{(6, 7, Res.)}\\ 
+    &\quad F(c) \rightarrow L(c)  && (9)\ \text{(8, Cond.)}\\ 
+    &\forall x(F(c) \rightarrow L(c)) && (10)\ \text{(3, 9, Universal Generalisation)}
+\end{flalign*} 
+\hrule
+\vspace{0.1in}
+$\therefore$ The argument is valid. $\blacksquare$
 
 \begin{question}{1.4}
 All birds eat at least one species of insect. At least one species of insect can fly. Therefore, all birds
@@ -179,5 +219,67 @@ The argument given is:
     & \exists x, (I(x) \land F(x)) & (2)\\
     & \overline{\forall x, (B(x) \rightarrow \exists y(F(y) \land E(x, y)))} & \text{(Conclusion)}
 \end{align*}
+\hrule
+\vspace{0.1in}
+Let $W \subseteq U$ s.t. $W = \{i, j, b\}$
+\[
+\begin{array}{c|c|c}
+    \underline{i} & \underline{j} & \underline{b} \\ \hline
+    F(i) = \text{False} & F(j) = \text{True} & F(b) = \text{True} \\
+    I(i) = \text{True} & I(j) = \text{True} & I(b) = \text{False} \\
+    B(i) = \text{False} & B(j) = \text{False} & B(b) = \text{True} \\
+    E(i, j) = \text{False} & E(j, i) = \text{False} & E(b, j) = \text{False} \\
+    E(i, b) = \text{False} & E(j, b) = \text{False} & E(b, i) = \text{True}
+\end{array}
+\]
+
+\underline{\textbf{Premise (1)}}  
+\[
+\forall x\,(B(x) \rightarrow \exists y(I(y) \land E(x, y)))
+\]
+Since $\neg B(i)$ and $\neg B(j)$, the conditional is vacuously true for those cases.  
+We only need to check for $x = b$:
+\begin{align*}
+    B(b) &\rightarrow \exists y(I(y) \land E(b, y)) \\
+    &\text{Let } y = i \\
+    &B(b) \rightarrow (I(i) \land E(b, i)) \\
+    &T \rightarrow (T \land T) \\
+    &T \rightarrow T \\
+    &T
+\end{align*}
+
+
+\underline{\textbf{Premise (2)}}  
+\[
+\exists x\,(I(x) \land F(x))
+\]
+\begin{align*}
+    &\text{Let $x = j$:} \\
+    I(j) \land F(j) \\
+    T \land T \\
+    T
+\end{align*}
+
+
+\underline{\textbf{Conclusion}}  
+\[
+\forall x\,(B(x) \rightarrow \exists y(F(y) \land E(x, y)))
+\]
+Again, since $\neg B(i)$ and $\neg B(j)$, those are vacuously true.  
+We check $x = b$:
+\begin{align*}
+    B(b) &\rightarrow \exists y(F(y) \land E(b, y)) \\
+    &\text{Let } y = j \\
+    &B(b) \rightarrow (F(j) \land E(b, j)) \\
+    &T \rightarrow (T \land F) \\
+    &T \rightarrow F \\
+    &F
+\end{align*}
+
+
+\hrule
+\vspace{0.1in}
+Thus, we have proved that there is a case such that all the premises are true, 
+while the conclusion is false, making this argument invalid. $\blacksquare$
 
 \end{document}
