@@ -1,0 +1,7 @@
+ASSIGNMENT 2 PATCH NOTES
+
+Please check Piazza to verify if you need to redownload the starter files.
+
+Current Version: V1 (Oct. 17, 2025)
+    Notes: 
+        - This is the original assignment
