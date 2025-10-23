@@ -299,6 +299,112 @@ At least two Computer Science students take a Political Science class.
 \end{enumerate}
 
 \section{Deductive Reasoning}
+For each of the following arguments, either:
+
+• prove the argument is valid by using Rules of Inference and logical equivalence laws, OR
+
+• prove the argument is not valid by providing a world that makes the premises true and the conclusion false.
+
+
+\begin{question}{3.1}
+    There is a course, which all computer science and all statistics majors take. There is a course, which all
+    mathematics and all statistics majors take. Alice is a computer science student, and Bob is a mathematics
+    student. Therefore, they take at least one course together.
+    \medbreak
+Let $M(x)$ stand for “$x$ is a mathematics major student”, $C(x)$ stand for “$x$ is a computer science major student”,
+$S(x)$ stand for “$x$ is a statistics major student”, $R(x)$ stand for “$x$ is a course”, and $T(x, y)$ stand for “student
+$x$ takes course $y$”. Universe of discourse is students and courses.
+\end{question}
+
+\begin{question}{3.2}
+    Every CMS student is either a mathematics, computer science, or statistics major. All mathematics majors must
+take calculus. All statistics majors must take probability. All computer science majors must take databases.
+Therefore, each CMS student takes at least one of calculus, probability, or databases.
+\medbreak
+Let $D(x)$ stand for “$x$ is a CMS student”, $M(x)$ stand for “$x$ is a mathematics major student”, $C(x)$ stand for
+“$x$ is a computer science major student”, $S(x)$ stand for “$x$ is a statistics major student”, and $T(x, y)$ stand for
+“student $x$ takes course $y$”, $c$ stand for “the calculus course”, $p$ stand for “the probability course”, and $d$ stand
+for “the databases course”. Universe of discourse is students and courses.
+\end{question}
+    
+\begin{center}
+    Conclusion we want to reach:
+\end{center}
+\[
+    \forall x, D(x) \rightarrow (T(x, d) \lor T(x, c) \lor T(x, p))
+\]
+\underline{\textbf{Proof}}
+\begin{flalign}
+    &\forall x, D(x) \rightarrow (C(x) \lor M(x) \lor S(x)) && \text{(Premise 1)} \\
+    &\forall x, M(x) \rightarrow T(x, c) && \text{(Premise 2)} \\
+    &\forall x, C(x) \rightarrow T(x, d)  && \text{(Premise 3)} \\
+    &\forall x, S(x) \rightarrow T(x, p)  && \text{(Premise 4)} \\
+    &\text{Let } a \text{ be arbitrary} \\
+    &\quad D(a) \rightarrow (C(a) \lor M(a) \lor S(a)) && \text{(1, 5, U.I)} \\  
+    &\quad \text{Suppose } D(a) \\
+    &\quad\quad C(a) \lor M(a) \lor S(a) && \text{(6, 7, M.P)} \\ 
+    &\quad\quad \text{Suppose } C(a) \\
+    &\quad\quad\quad T(a, d) && \text{(3, 9, U.M.P)} \\
+    &\quad\quad\quad T(a, d) \lor T(a, c) \lor T(a, p) && \text{(10, add.)} \\
+    &\quad\quad C(a) \rightarrow (T(a, d) \lor T(a, c) \lor T(a, p)) && \text{(9, 11, imp.)} \\
+    &\quad\quad \text{Suppose } M(a) \\
+    &\quad\quad\quad T(a, c) && \text{(2, 13, U.M.P)} \\
+    &\quad\quad\quad T(a, d) \lor T(a, c) \lor T(a, p) && \text{(14, add.)} \\
+    &\quad\quad M(a) \rightarrow (T(a, d) \lor T(a, c) \lor T(a, p)) && \text{(13, 15, imp.)} \\
+    &\quad\quad \text{Suppose } S(a) \\
+    &\quad\quad\quad T(a, p) && \text{(4, 17, U.M.P)} \\
+    &\quad\quad\quad T(a, d) \lor T(a, c) \lor T(a, p) && \text{(18, add.)} \\
+    &\quad\quad S(a) \rightarrow (T(a, d) \lor T(a, c) \lor T(a, p)) && \text{(17, 19, imp.)} \\
+    &\quad\quad (C(a) \lor M(a) \lor S(a)) \rightarrow (T(a, d) \lor T(a, c) \lor T(a, p)) && \text{(12, 16, 20, Cases)} \\
+    &\quad\quad T(a, d) \lor T(a, c) \lor T(a, p) && \text{(8, 21, M.P)} \\
+    &\quad D(x) \rightarrow (T(a, d) \lor T(a, c) \lor T(a, p)) && \text{7, 22, imp.} \\
+    &\forall x, D(x) \rightarrow (T(x, d) \lor T(x, c) \lor T(x, p)) && \text{(5, 23, U.G)}
+\end{flalign}
+\begin{center}
+    As required to prove. $\blacksquare$
+\end{center}
+
+\begin{question}{3.3}
+    Every CMS student takes at least two mathematics courses. In every mathematics course, all students who take
+it must work hard in it. Therefore, every CMS student has at least two courses, in which they work hard.
+    \medbreak
+Let $C(x)$ stand for “$x$ is a CMS student”, $M(x)$ stand for “$x$ is a mathematics course”, $T(x, y)$ stand for “student
+$x$ takes course $y$”, and $W(x, y)$ stand for “student $x$ works hard in course $y$”. Universe of discourse is students
+and courses.
+\end{question}
+\begin{center}
+    Conclusion we want to reach:
+\end{center}
+\[
+    \forall x, C(x) \rightarrow (\exists y\exists z (M(y) \land M(z) \land y \ne z \land W(x, y) \land W(x, z)))
+\]
+\underline{\textbf{Proof.}}
+\begin{flalign}
+    &\forall x, C(x) \rightarrow (\exists y\exists z (M(y) \land M(z) \land y \ne z \land T(x, y) \land T(x, z))) && (\text{Premise 1}) \\
+    &\forall x, M(x) \rightarrow \forall y(T(x, y) \rightarrow W(x, y)) && \text{(Premise 2)} \\
+    &\text{Let } a \text{ be arbitrary} \\
+    &\quad C(a) \rightarrow (\exists y\exists z (M(y) \land M(z) \land y \ne z \land W(a, y) \land W(a, z))) && \text{(1, 3, U.I)} \\
+    &\quad \text{Assume } C(a) \\
+    &\quad\quad \exists y\exists z (M(y) \land M(z) \land y \ne z \land W(a, y) \land W(a, z)) && \text{(4, 5, M.P)} \\
+    &\quad\quad M(b) \land M(c) \land b \ne c \land W(a, b) \land W(a, c) && \text{(6, E.I)} \\
+    &\quad\quad M(b) && \text{(7, simp.)} \\
+    &\quad\quad \forall y, (T(y, b) \rightarrow W(y, b)) && \text{(2, 8, U.M.P)} \\
+    &\quad\quad T(a, b) && \text{(7, simp.)} \\
+    &\quad\quad W(a, b) && \text{(9, 10, U.M.P)} \\
+    &\quad\quad M(c) && \text{(7, simp.)} \\
+    &\quad\quad \forall y, (T(y, c) \rightarrow W(y, c)) && \text{(2, 12, U.M.P)} \\
+    &\quad\quad T(a, c) && \text{(7, simp.)} \\
+    &\quad\quad W(a, c) && \text{(13, 14, U.M.P)} \\
+    &\quad\quad b \ne c && \text{(7, simp.)} \\
+    &\quad\quad M(b) \land M(c) \land b \ne c \land W(a, b) \land W(a, c) && \text{(8, 11, 12, 15, 16, conj.)} \\
+    &\quad\quad \exists y\exists z (M(y) \land M(z) \land y \ne z \land W(a, y) \land W(a, z)) && \text{(17, E.G)} \\
+    &\quad C(a) \rightarrow (\exists y\exists z (M(y) \land M(z) \land y \ne z \land W(a, y) \land W(a, z))) && \text{(5, 18, imp.)} \\
+    &\forall x, C(x) \rightarrow (\exists y\exists z (M(y) \land M(z) \land y \ne z \land W(x, y) \land W(x, z))) && \text{(3, 19, U.G)}
+\end{flalign}
+
+\begin{center}
+    As required to show. $\blacksquare$
+\end{center}
 \section{Operations on Sets}
 \section{Quantifiers and Sets}
 \section{Quantifiers and Logical Equivalence}
