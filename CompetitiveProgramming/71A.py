@@ -1,6 +1,8 @@
-for i in range(int(input())):
-    x = input()
-    if len(x)>10:
-        print(f"{x[0]}{len(x)-2}{x[-1]}")
+def my_function(num:int) -> str:
+    if num % 2 == 0:
+        return "Even"
     else:
-        print(x)
+        return "Odd"
+
+my_function(0)
+print(type(result))

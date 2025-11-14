@@ -1,0 +1,273 @@
+\documentclass[]{article}
+
+% Imports the catppuccin theme, using the mocha flavor,
+% from the directory above. Actual implementation
+% wouldn't need the import package unless the theme
+% and the document are in different directories.
+\usepackage{import}
+\usepackage{xcolor}
+% \usepackage{fancyhdr}
+\usepackage{cancel}
+\usepackage{mathtools}
+
+% For permutations and combinations
+\newcommand\Myperm[2][^n]{\prescript{#1\mkern-2.5mu}{}P_{#2}}
+\newcommand\Mycomb[2]{\prescript{#1\mkern-0.5mu}{}C_{#2}}
+
+% Colors
+\definecolor{yorhabg}{HTML}{FFFFFF}
+\definecolor{yorhafg}{HTML}{000000}
+\definecolor{yorhagrid}{HTML}{B5AF9C}
+\definecolor{mred}{HTML}{D67069}
+\definecolor{mblue}{HTML}{6887A1}
+
+\pagecolor{yorhabg}
+\color{yorhafg}
+
+\usepackage{preamble}
+
+% Removes padding above title
+\usepackage{titling}
+\setlength{\droptitle}{-10em}
+
+% Font package
+\usepackage[T1]{fontenc}
+
+\usepackage{fouriernc}
+
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[skins, most]{tcolorbox}
+\usepackage{enumitem}
+
+\DeclareMathOperator{\sgn}{sgn}
+
+\usepackage{tikz}
+\usepackage{eso-pic}
+\usetikzlibrary{calc,shadows.blur}
+\usetikzlibrary{angles, quotes}
+\usetikzlibrary{3d}
+
+% Margins
+\topmargin=0in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\AtBeginEnvironment{tcolorbox}{\small}
+
+\newtcolorbox{imp}{enhanced,arc=0mm,colback=yorhabg,colframe=mred,leftrule=10mm,coltext=yorhafg,%
+overlay={\node[anchor=west,outer sep=2pt] at (frame.west) {\includegraphics[width=6mm]{images/imageb.png}}; }}
+
+\newtcolorbox{shortcut}{enhanced,arc=0mm,colback=yorhabg,colframe=mred,leftrule=10mm,coltext=yorhafg, coltitle=yorhabg, title=\texttt{Shortcut.}, 
+overlay={\node[anchor=west,outer sep=2pt] at (frame.west) {\includegraphics[width=6mm]{images/imageb.png}}; }}
+
+\newtcolorbox{question}[1]{
+    enhanced, 
+    colback=yorhabg,
+    colframe=mblue,
+    coltext=yorhafg,
+    coltitle=yorhabg,
+    attach boxed title to top left={yshift*=-\tcboxedtitleheight}, 
+    title=\texttt{#1},
+    boxed title size=title,
+    boxed title style={%
+        rounded corners=northeast, 
+        rounded corners=northwest, 
+        colback=tcbcolframe, 
+        boxrule=0pt,
+    },
+    underlay boxed title={%
+        \path[fill=tcbcolframe] (title.south west)--(title.south east) 
+            to[out=0, in=180] ([xshift=5mm]title.east)--
+            (title.center-|frame.east)
+            [rounded corners=5pt] |- 
+            (frame.north) -| cycle; 
+    },
+}
+\newlength{\eqindent}
+\settowidth{\eqindent}{$(n+1)^3 - (n+1)$}
+
+\newcommand\bb[1]{\textcolor{yorhafg}{\textbf{#1}}}
+
+\title{\textbf{CSCA67 - Exercises \#8}}
+\author{Satyajit Datta \ 1012033336}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\begin{question}{2.1}
+    For every integer $n \ge 1, n^3 - n$ is divisible by $3$.
+\end{question}
+
+Let $P(n)$ be $\exists z \in \mathbb{N}, n^3 - n = 3z$.
+
+\underline{\textbf{Base Case}}
+
+\begin{align*}
+    & n^3 - n \\
+    \Rightarrow & 1^3 - 1 \\
+    = & 0 \\
+    = & 3(0)
+\end{align*}
+
+Therefore, $P(1)$.
+\medbreak
+\underline{\textbf{Induction Step}}
+
+\begin{flalign}
+    &\text{Let k be arbitrary.} \\
+    &\quad\text{Suppose } k \ge 1 \\
+    &\quad\quad\text{Suppose } P(k) & \text{Induction Hypothesis}\\
+    &\quad\quad\quad \exists z \in N, k^3 - k = 3z & \text{Defintion of } P\\
+    &\quad\quad\quad k^3 - k = 3z & \text{4, E.I}\\
+    &\quad\quad\quad (k+1)^3 - (k+1) = k^3 +3k^2 + 3k + 1 - k - 1 \\
+    &\quad\quad\quad \hspace*{\eqindent} = (k^3 - k) + 3k^2 + 3k + 1 - 1 \nonumber \\
+    &\quad\quad\quad \hspace*{\eqindent} = (k^3 - k) + 3k^2 + 3k \nonumber \\
+    &\quad\quad\quad \hspace*{\eqindent} = 3z + 3k^2 + 3k & \text{IH}\nonumber \\
+    &\quad\quad\quad \hspace*{\eqindent} = 3(z + k^2 + k) \nonumber \\
+    &\quad\quad\quad (k+1)^3 - (k+1) = 3j & (z + k^2 + k) \in \mathbb{N} \\
+    &\quad\quad\quad \exists z \in N, (k+1)^3 - (k+1) = 3z & \text{7, E.G}\\
+    &\quad\quad\quad P(k+1) & \text{Definition of } P\\
+    &\quad\quad P(k) \rightarrow P(k+1) & \text{3, 9, Implication}\\
+    &\quad k \ge 1 \rightarrow (P(k) \rightarrow P(k+1)) & \text{2, 10, Implication}\\
+    &\forall k, k \ge 1 \rightarrow (P(k) \rightarrow P(k+1)) & \text{1, 12, Implication}
+\end{flalign}
+
+Therefore, $\forall n \ge 1, P(n) \Longrightarrow \forall n \ge 1, \exists z \in \mathbb{N} \quad \text{s.t} \quad n^3 - n = 3z \blacksquare$.
+
+
+\begin{question}{2.2}
+    For every integer $n \ge 4, 2^n < n!$.
+\end{question}
+
+Let $P(n)$ be $2^n < n!$.
+
+\underline{\textbf{Base Case}}
+
+\begin{align*}
+    & 2^n < n! \\
+    \Rightarrow & 2^4 < 4! \\
+    & 16 < 24 \\
+    & T
+\end{align*}
+
+Therefore, $P(4)$.
+\medbreak
+\underline{\textbf{Induction Step}}
+\newlength{\eqoindent}
+\settowidth{\eqoindent}{$(2^k)(k)$}
+\setcounter{equation}{0}
+\begin{flalign}
+    &\text{Let k be arbitrary.} \\
+    &\quad\text{Suppose } k \ge 4 \\
+    &\quad\quad\text{Suppose } P(k) & \text{Induction Hypothesis}\\
+    &\quad\quad\quad 2^k < k! & \text{Defintion of } P\\
+    &\quad\quad\quad (2^k)(k) < (k!)(2)\\
+    &\quad\quad\quad 2^{k+1} < (k!)(2)\\
+    &\quad\quad\quad \hspace*{\eqoindent} < (k!)(k+1) & (k \ge 4) \nonumber \\
+    &\quad\quad\quad \hspace*{\eqoindent} < (k+1)! \nonumber \\
+    &\quad\quad\quad P(k+1) & \text{Definition of } P\\
+    &\quad\quad P(k) \rightarrow P(k+1) & \text{3, 7, Implication}\\
+    &\quad k \ge 4 \rightarrow (P(k) \rightarrow P(k+1)) & \text{2, 8, Implication}\\
+    &\forall k, k \ge 4 \rightarrow (P(k) \rightarrow P(k+1)) & \text{1, 9, Implication}
+\end{flalign}
+
+Therefore, $\forall n \ge 4, P(n) \Longrightarrow \forall n \ge 4, 2^n < n! \quad  \blacksquare$
+
+\begin{question}{2.3}
+    For every integer $n \ge 1$, if $a, r \in \mathbb{R}$  and $r \ne 1$, then $a+ar+ar^2+\ldots+ar^n = \frac{ar^n+1 - a}{r-1}$. Using summation notation,
+    $\displaystyle \sum_{i = 0}^{n} ar^n = \frac{ar^{n+1} - a}{r-1}$
+\end{question}
+
+Let $P(n)$ be $\displaystyle \sum_{i = 0}^{n} ar^n = \frac{ar^{n+1} - a}{r-1}$
+
+\underline{\textbf{Base Case}}
+
+\begin{align*}
+    \sum_{i = 0}^{n} ar^n = \frac{ar^n+1 - a}{r-1} \\
+    \sum_{i = 0}^{1} ar^n = \frac{ar^2 - a}{r-1} \\
+    a + ar = \frac{ar^2 - a}{r-1} \\
+    a + ar = \frac{a(r^2 - 1)}{r-1} \\
+    a + ar = \frac{a(r+1)(r-1)}{r-1} \\
+    a + ar = a(r+1) \\
+    a + ar = ar + a \\
+    T
+\end{align*}
+
+Therefore, $P(1)$.
+\medbreak
+\underline{\textbf{Induction Step}}
+\newlength{\equindent}
+\settowidth{\equindent}{$\sum_{i = 0}^{n} ar^n + ar^{n+1}$}
+\setcounter{equation}{0}
+\begin{flalign}
+    &\text{Let n be arbitrary.} \\
+    &\quad\text{Suppose } n \ge 1 \\
+    &\quad\quad\text{Suppose } P(n) & \text{Induction Hypothesis}\\
+    &\quad\quad\quad \sum_{i = 0}^{n} ar^n = \frac{ar^{n+1} - a}{r-1} & \text{Defintion of } P\\
+    &\quad\quad\quad \sum_{i = 0}^{n} ar^n + ar^{n+1} = \frac{ar^{n+1} - a}{r-1} + ar^{n+1}\\
+    &\quad\quad\quad \hspace*{\eqoindent} = \frac{ar^{n+1} - a}{r-1} + \frac{(ar^{n+1})(r-1)}{r-1}\nonumber\\
+    &\quad\quad\quad \hspace*{\eqoindent} = \frac{ar^{n+1} - a + ar^{n+1}(r-1)}{r-1}\nonumber\\
+    &\quad\quad\quad \hspace*{\eqoindent} = \frac{ar^{n+1} - a + ar^{n+2}-ar^{n+1}}{r-1}\nonumber\\
+    &\quad\quad\quad \hspace*{\eqoindent} = \frac{ar^{n+2} - a}{r-1}\nonumber\\
+    &\quad\quad\quad \hspace*{\eqoindent} = \frac{ar^{(n+1) + 1} - a}{r-1}\nonumber\\
+    &\quad\quad\quad \sum_{i = 0}^{n+1} ar^n = \frac{ar^{(n+1) + 1} - a}{r-1}\\
+    &\quad\quad\quad P(n+1) & \text{Definition of } P\\
+    &\quad\quad P(n) \rightarrow P(n+1) & \text{3, 7, Implication}\\
+    &\quad n \ge 1 \rightarrow (P(n) \rightarrow P(n+1)) & \text{2, 8, Implication}\\
+    &\forall n, n \ge 1 \rightarrow (P(n) \rightarrow P(n+1)) & \text{1, 9, Implication}
+\end{flalign}
+
+Therefore, $\displaystyle \forall n \ge 1, P(n) \Longrightarrow \forall n \ge 1, \sum_{i = 0}^{n} ar^n = \frac{ar^{n+1} - a}{r-1} \quad \blacksquare$.
+
+\begin{question}{2.4}
+    For every integer $\displaystyle n \ge 2, \sum_{i = 0}^{n} \frac{1}{i^2} < 2 - \frac{1}{n}$
+\end{question}
+
+Let $P(n)$ be $\displaystyle \sum_{i = 0}^{n} \frac{1}{i^2} < 2 - \frac{1}{n}$.
+
+\underline{\textbf{Base Case}}
+
+\begin{align*}
+    & \sum_{i = 0}^{n} \frac{1}{i^2} < 2 - \frac{1}{n} \\
+    & \sum_{i = 0}^{2} \frac{1}{i^2} < 2 - \frac{1}{2} \\
+    & 1 + \frac{1}{2^2} < 2 - \frac{1}{2} \\
+    & 1 + \frac{1}{4} < 2 - \frac{1}{2} \\
+    & \frac{5}{4} < \frac{3}{2} \\
+    & T
+\end{align*}
+
+Therefore, $P(2)$.
+\medbreak
+\underline{\textbf{Induction Step}}
+
+\newlength{\eqqindent}
+\settowidth{\eqqindent}{$\sum_{i = 0}^{n} \frac{1}{i^2} + \frac{1}{(n+1)^2}$}
+\setcounter{equation}{0}
+\begin{flalign}
+    &\text{Let n be arbitrary.} \\
+    &\quad\text{Suppose } n \ge 2 \\
+    &\quad\quad\text{Suppose } P(n) & \text{Induction Hypothesis}\\
+    &\quad\quad\quad \sum_{i = 0}^{n} \frac{1}{i^2} < 2 - \frac{1}{n} & \text{Defintion of } P\\
+    &\quad\quad\quad \sum_{i = 0}^{n} \frac{1}{i^2} + \frac{1}{(n+1)^2} < 2  - \frac{1}{n} + \frac{1}{(n+1)^2}\\
+    &\quad\quad\quad \hspace*{\eqqindent} = 2  - \frac{(n+1)^2 + n}{n(n+1)^2} \nonumber\\
+    &\quad\quad\quad \hspace*{\eqqindent} < 2  - \frac{(n+1)}{n(n+1)^2} \nonumber & n \ge 2\\
+    &\quad\quad\quad \hspace*{\eqqindent} = 2  - \frac{1}{n(n+1)} \nonumber\\
+    &\quad\quad\quad \hspace*{\eqqindent} < 2  - \frac{1}{n+1}\nonumber & n \ge 2\\
+    &\quad\quad\quad \sum_{i = 0}^{n+1} \frac{1}{i^2} < \frac{1}{n+1}\\
+    &\quad\quad\quad P(n+1) & \text{Definition of } P\\
+    &\quad\quad P(n) \rightarrow P(n+1) & \text{3, 7, Implication}\\
+    &\quad n \ge 2 \rightarrow (P(n) \rightarrow P(n+1)) & \text{2, 8, Implication}\\
+    &\forall n, n \ge 2 \rightarrow (P(n) \rightarrow P(n+1)) & \text{1, 9, Implication}
+\end{flalign}
+
+Therefore, $\forall n \ge 1, P(n) \Longrightarrow \forall n \ge 2, \sum_{i = 0}^{n} \frac{1}{i^2} + \frac{1}{(n+1)^2} \quad \blacksquare$.
+
+\end{document}

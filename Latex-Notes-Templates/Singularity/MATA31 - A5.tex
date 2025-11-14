@@ -320,26 +320,7 @@ exponents.
 Therfore, since $\displaystyle \lim_{x\rightarrow c} f(x)$ exists. and 
 $\displaystyle \lim_{x\rightarrow c} f(x) = f(c)$, the function is continuous at 
 $x = 4$.
-\begin{center}
-\begin{tikzpicture}
-\begin{axis}[
-    axis lines=middle,
-    xlabel={$x$},
-    ylabel={$y$},
-    grid=both,
-    xmin=-4, xmax=4,
-    ymin=-5, ymax=10,
-    samples=200,
-    legend style={at={(0.97,0.03)},anchor=south east}
-]
-\addplot[domain=-3:3, thick, red]{x^2 - 3};
-\addlegendentry{$y = x^2 - 3$}
 
-\addplot[domain=-3:3, thick, blue]{3*x + 1};
-\addlegendentry{$y = 3x + 1$}
-\end{axis}
-\end{tikzpicture}
-\end{center}
 \section{Assignment Questions}
 \begin{question}{D}
     Find the supremum and infimum of the following sets, if they exist.

@@ -9,7 +9,7 @@ prohibited. All forms of distribution of this code, whether as given
 or with any changes, are expressly prohibited.
 
 All of the files in this directory and all subdirectories are:
-Copyright (c) 2022 Dominik Luszczynski, 
+Copyright (c) 2022 Dominik Luszczynski,
 Jacqueline Smith, David Liu, and Anya Tafliovich
 
 """
@@ -96,7 +96,7 @@ Element = TypeVar("Element", int, str)
 # on using the matrices above.
 def is_valid_matrix(matrix: list[list[Element]]) -> bool:
     """Return True if and only if the nested list
-    matrix is a valid matrix. A matrix is valid 
+    matrix is a valid matrix. A matrix is valid
     if and only if it is rectangular (same number of
     columns for every row).
 
@@ -107,7 +107,13 @@ def is_valid_matrix(matrix: list[list[Element]]) -> bool:
     >>> is_valid_matrix([[1, 0], [1], [1, 0]])
     False
     """
-    pass
+    num_row = len(matrix)
+    for row in matrix:
+        if len(row) != num_row:
+            return False
+
+    return True
+
 
 
 # We provided a partial doctest in this function as an example of
@@ -119,6 +125,7 @@ def is_valid_matrix(matrix: list[list[Element]]) -> bool:
 #       errors with your doctests
 
 def combine_rows(
+
     matrix1: list[list[Element]], matrix2: list[list[Element]]
 ) -> None:
     """
@@ -138,59 +145,118 @@ def combine_rows(
     >>> BINARY_3X3_COPY
     [[1, 1, 1, 0, 1, 1, 1], [1, 0, 0, 1, 0, 1, 1], [1, 1, 1, 1, 1, 0, 1]]
     """
-    pass
+
+    if len(matrix1) != len(matrix2):
+        return
+    if matrix2 == []:
+        return
+
+
+    for row in range(len(matrix1)):
+        matrix1[row].extend(matrix2[row])
+    return
+
 
 
 def invert_binary_values(matrix: list[list[int]]) -> None:
     """
-    
+
+    >>> matrix = [[1,0,1],[0,1,0]]
+    >>> invert_binary_values(matrix)
+    >>> matrix
+    [[0, 1, 0], [1, 0, 1]]
+
     Mutates? YES
     """
-    pass
+
+    for row in range(len(matrix)):
+        for item in range(len(matrix[row])):
+            matrix[row][item] = (matrix[row][item] + 1) % 2
+    return
 
 
 def convert_binary_to_str(matrix: list[list[int]]) -> None:
     """
-    
+
     Mutates? YES
     """
-    pass
+    if TESTING:
+        for row in range(len(matrix)):
+            for item in range(len(matrix[row])):
+                if matrix[row][item] == 1:
+                    matrix[row][item] = 'a'
+                else:
+                    matrix[row][item] = 'b'
+    else:
+        for row in range(len(matrix)):
+            for item in range(len(matrix[row])):
+                matrix[row][item] = get_random_char(matrix[row][item])
 
 
 def convert_str_to_binary(matrix: list[list[str]]) -> None:
     """
-    
+
     Mutates? YES
     """
-    pass
+    for row in range(len(matrix)):
+        for item in range(len(matrix[row])):
+            if matrix[row][item] in ALL_VOWELS:
+                matrix[row][item] = VOWEL_VALUE
+            else:
+                matrix[row][item] = CONSONANT_VALUE
+    return
 
 
 def encrypt_or_decrypt(matrix: list[list[str]],
                        key: int,
                        encrypt: bool) -> None:
     """
-    
+
     Mutates? Yes
     """
-    pass
+    if encrypt:
+        for row in range(len(matrix)):
+            for item in range(len(matrix[row])):
+                matrix[row][item] = chr(
+                    (ord(matrix[row][item]) + key) % 128
+                )
+    else:
+        for row in range(len(matrix)):
+            for item in range(len(matrix[row])):
+                matrix[row][item] = chr(
+                    (ord(matrix[row][item]) - key) % 128
+                )
+    return
 
 
 def rotate_matrix(matrix: list[list[Element]]) -> list[list[Element]]:
     """
-    
+
     Mutates? NO
     """
-    pass
+    new_matrix = []
+    for i in range(len(matrix[0])):
+        new_row = []
+        for j in range(len(matrix) - 1, -1, -1):
+            new_row.append(matrix[j][i])
+        new_matrix.append(new_row)
+    return new_matrix
 
 
 def flip_matrix(
     matrix: list[list[Element]], horizontal: bool
 ) -> list[list[Element]]:
     """
-    
+
     Mutates? NO
     """
-    pass
+    new_matrix = []
+    if horizontal:
+        return matrix[::1]
+    else:
+        for i in range(len(matrix)):
+            new_matrix.append(matrix[i][::-1])
+    return new_matrix
 
 
 # We provide the docstring in this function as an example of
@@ -235,7 +301,32 @@ def solve_mystery_phrase(
     >>> solve_mystery_phrase(A_ENCRYPTED, 'not-a-hash', 20)
     []
     """
-    pass
+    for key in range(max_key_value + 1):
+        for rotation in range(4):
+            for flip_type in [(False, False), (True, False), (False, True), (True, True)]:
+                encrypted_matrix_copy = deepcopy(encrypted_matrix)
+
+                # Decrypt
+                encrypt_or_decrypt(encrypted_matrix_copy, key, False)
+
+                # Rotate
+                for _ in range(rotation):
+                    encrypted_matrix_copy = rotate_matrix(encrypted_matrix_copy)
+
+                # Flip
+                if flip_type[0]:  # horizontal flip
+                    encrypted_matrix_copy = flip_matrix(encrypted_matrix_copy, True)
+                if flip_type[1]:  # vertical flip
+                    encrypted_matrix_copy = flip_matrix(encrypted_matrix_copy, False)
+
+                # Convert to binary
+                convert_str_to_binary(encrypted_matrix_copy)
+
+                # Check secret message
+                if check_secret_message(encrypted_matrix_copy, target_hash):
+                    return encrypted_matrix_copy
+
+    return []
 
 
 # =========================================================
@@ -295,4 +386,4 @@ def check_secret_message(matrix: list[list[Element]],
 if __name__ == "__main__":
     TESTING = True
     import doctest
-    doctest.testmod()
+    doctest.testmod(verbose=True)

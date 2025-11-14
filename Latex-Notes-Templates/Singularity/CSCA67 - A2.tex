@@ -274,9 +274,23 @@ Only Computer Science students take programming classes.
 Non-Mathematics students take no more than two discrete mathematics classes.
 \end{question}
 \begin{enumerate}[label=(\alph*)]
-    \item \textbf{Logical Expression:}
+    \item \textbf{Logical Expression:} $\forall x,  (\neg M(x) \rightarrow \forall a \forall b \forall c ((D(a) \land D(b) \land D(c) \land T(x, a) \land T(x, b) \land T(x, c)) \rightarrow (a = b \lor a = c \lor b = c)))$
     \item \textbf{English negation:} There exists a non-mathematics students that takes more than two discrete math classes.
     \item \textbf{Negation Proof:}
+    \begin{align*}
+        &\neg (\forall x, (\neg M(x) \rightarrow \forall a \forall b \forall c ((D(a) \land D(b) \land D(c) \land T(x, a) \land T(x, b) \land T(x, c)) \rightarrow (a = b \lor a = c \lor b = c)))) \\
+        &\exists x, \neg(\neg M(x) \rightarrow \forall a \forall b \forall c ((D(a) \land D(b) \land D(c) \land T(x, a) \land T(x, b) \land T(x, c)) \rightarrow (a = b \lor a = c \lor b = c)))    & \text{q.n}\\
+        &\exists x, \neg(\neg\neg M(x) \lor (\forall a \forall b \forall c ((D(a) \land D(b) \land D(c) \land T(x, a) \land T(x, b) \land T(x, c)) \rightarrow (a = b \lor a = c \lor b = c))))     & \text{cond.}\\
+        &\exists x, \neg(M(x) \lor (\forall a \forall b \forall c ((D(a) \land D(b) \land D(c) \land T(x, a) \land T(x, b) \land T(x, c)) \rightarrow (a = b \lor a = c \lor b = c))))              & \text{d.n}\\
+        &\exists x, \neg M(x) \land \neg(\forall a \forall b \forall c ((D(a) \land D(b) \land D(c) \land T(x, a) \land T(x, b) \land T(x, c)) \rightarrow (a = b \lor a = c \lor b = c)))          & \text{deM.}\\
+        &\exists x, \neg M(x) \land (\exists a \exists b \exists c \neg((D(a) \land D(b) \land D(c) \land T(x, a) \land T(x, b) \land T(x, c)) \rightarrow (a = b \lor a = c \lor b = c)))          & \text{q.n}\\
+        &\exists x, \neg M(x) \land (\exists a \exists b \exists c \neg(\neg(D(a) \land D(b) \land D(c) \land T(x, a) \land T(x, b) \land T(x, c)) \lor (a = b \lor a = c \lor b = c)))             & \text{cond.}\\
+        &\exists x, \neg M(x) \land (\exists a \exists b \exists c (D(a) \land D(b) \land D(c) \land T(x, a) \land T(x, b) \land T(x, c)) \land \neg(a = b \lor a = c \lor b = c))                  & \text{deM.}\\
+        &\exists x, \neg M(x) \land (\exists a \exists b \exists c (D(a) \land D(b) \land D(c) \land T(x, a) \land T(x, b) \land T(x, c)) \land (a \ne b \land a \ne c \lor b \ne c))               & \text{deM.}\\
+    \end{align*}
+    \begin{center}
+        As required to show. $\blacksquare$
+    \end{center}
 \end{enumerate}
 
 \begin{question}{2.4}
@@ -284,18 +298,39 @@ There is at least one Statistics student who takes a discrete mathematics class,
 programming classes.
 \end{question}
 \begin{enumerate}[label=(\alph*)]
-    \item \textbf{Logical Expression:} 
-    \item \textbf{English negation:} 
+    \item \textbf{Logical Expression:} $\exists x, (S(x) \land (\exists y, (D(y) \land T(x, y))) \land (\exists y, (L(y) \land T(x, y))) \land (\forall y, (P(y) \rightarrow \neg T(x, y))))$
+    \item \textbf{English negation:} No statistics student takes discrete math, a political science class, and no programming classes.
     \item \textbf{Negation Proof:}
+    \begin{align*}
+        &\neg(\exists x, (S(x) \land (\exists y, (D(y) \land T(x, y))) \land (\exists y, (L(y) \land T(x, y))) \land (\forall y, (P(y) \rightarrow \neg T(x, y)))))             \\
+        &\forall x, \neg(S(x) \land (\exists y, (D(y) \land T(x, y))) \land (\exists y, (L(y) \land T(x, y))) \land (\forall y, (P(y) \rightarrow \neg T(x, y))))               & \text{q.n}\\
+        &\forall x, (\neg S(x) \lor \neg (\exists y, (D(y) \land T(x, y))) \lor \neg(\exists y, (L(y) \land T(x, y))) \lor \neg (\forall y, (P(y) \rightarrow \neg T(x, y))))   & \text{deM.}\\
+        &\forall x, (\neg S(x) \lor (\forall y, \neg (D(y) \land T(x, y))) \lor (\forall y, \neg(L(y) \land T(x, y))) \lor (\exists y, \neg(P(y) \rightarrow \neg T(x, y))))    & \text{q.n}\\
+        &\forall x, (\neg S(x) \lor (\forall y, \neg (D(y) \land T(x, y))) \lor (\forall y, \neg(L(y) \land T(x, y))) \lor (\exists y, \neg(\neg P(y) \lor \neg T(x, y))))      & \text{cond.}\\
+        &\forall x, (\neg S(x) \lor (\forall y, \neg (D(y) \land T(x, y))) \lor (\forall y, \neg(L(y) \land T(x, y))) \lor (\exists y, \neg\neg P(y) \land \neg\neg T(x, y)))   & \text{deM.}\\
+        &\forall x, (\neg S(x) \lor (\forall y, \neg (D(y) \land T(x, y))) \lor (\forall y, \neg(L(y) \land T(x, y))) \lor (\exists y, P(y) \land T(x, y)))                     & \text{d.n}\\
+    \end{align*}
+    \begin{center}
+        As required to show. $\blacksquare$
+    \end{center}
 \end{enumerate}
 
 \begin{question}{2.5}
 At least two Computer Science students take a Political Science class.
 \end{question}
 \begin{enumerate}[label=(\alph*)]
-    \item \textbf{Logical Expression:}
-    \item \textbf{English negation:} No more than one student takes a political science class.
+    \item \textbf{Logical Expression:} $\exists x\exists y\exists z\exists w, (C(x) \land C(y) \land x \ne y \land L(z) \land L(w) \land T(x, z) \land T(y, w))$
+    \item \textbf{English negation:} No two students takes a political science class.
     \item \textbf{Negation Proof:}
+    \begin{align*}
+        &\neg(\exists x\exists y\exists z\exists w, (C(x) \land C(y) \land x \ne y \land L(z) \land L(w) \land T(x, z) \land T(y, w)))                          \\
+        &\forall x\forall y\forall z \forall w, \neg(C(x) \land C(y) \land x \ne y \land L(z) \land L(w) \land T(x, z) \land T(y, w))                           & \text{q.n.}\\
+        &\forall x\forall y\forall z \forall w, (\neg C(x) \lor \neg C(y)\lor \neg (x \ne y) \lor \neg L(z) \neg \lor L(w) \lor \neg T(x, z) \lor \neg T(y, w)) & \text{deM.}\\
+        &\forall x\forall y\forall z \forall w, (\neg C(x) \lor \neg C(y)\lor  x = y \lor \neg L(z) \neg \lor L(w) \lor \neg T(x, z) \lor \neg T(y, w))         & \text{Math}\\
+    \end{align*}
+    \begin{center}
+        As required to show. $\blacksquare$
+    \end{center}
 \end{enumerate}
 
 \section{Deductive Reasoning}
@@ -315,6 +350,91 @@ Let $M(x)$ stand for “$x$ is a mathematics major student”, $C(x)$ stand for 
 $S(x)$ stand for “$x$ is a statistics major student”, $R(x)$ stand for “$x$ is a course”, and $T(x, y)$ stand for “student
 $x$ takes course $y$”. Universe of discourse is students and courses.
 \end{question}
+\setcounter{equation}{0}
+\begin{flalign}
+    &\exists x, R(x) \land (\forall y, (C(y) \lor S(y)) \rightarrow T(y, x)) \\
+    &\exists x, R(x) \land (\forall y, (M(y) \lor S(y)) \rightarrow T(y, x)) \\
+    &C(\text{Alice}) \\
+    &M(\text{Bob}) \\
+    &\therefore \exists x, R(x) \land T(\text{Alice}, x) \land T(\text{Bob}, x)
+\end{flalign}
+
+Let $W \subseteq U$, such that $W = \{\text{Alice}, \text{Bob}, t, u\}$
+
+$R(t)$ is true, and all other properties are false for t
+
+$R(u)$ is true, and all other properties are false for u
+
+$C(\text{Alice})$ is true, and $(T(\text{Alice}, u))$ is true, all other properties are false.
+
+$M(\text{Bob})$ is true, and $(T(\text{Bob}, t))$ is true, all other properties are false.
+\medbreak
+\underline{\textbf{Premise 1}}
+\begin{flalign*}
+    &\exists x, R(x) \land (\forall y, (C(y) \lor S(y)) \rightarrow T(y, x)) \\
+\end{flalign*}
+
+\begin{center}
+It is too verbose to expand this for all possible outcomes, therefore we will show the outcome where this is true
+\end{center}
+
+\begin{flalign*}
+    &R(u) \land ((C(Alice) \lor (S(Alice))) \rightarrow T(Alice, u)) \\
+    &T \land (T \rightarrow T) \\
+    &T
+\end{flalign*}
+\begin{center}
+ Note that since Bob was not a CS nor a Stats student, the conditional would have been vacuously true, making the forall statement true.
+\end{center}
+
+\underline{\textbf{Premise 2}}
+
+\begin{flalign*}
+    &\exists x, R(x) \land (\forall y, (M(y) \lor S(y)) \rightarrow T(y, x)) \\
+\end{flalign*}
+
+\begin{center}
+It is too verbose to expand this for all possible outcomes, therefore we will show the outcome where this is true
+\end{center}
+
+\begin{flalign*}
+    &R(t) \land ((M(Bob) \lor (S(Bob))) \rightarrow T(Bob, t)) \\
+    &T \land (T \rightarrow T) \\
+    &T
+\end{flalign*}
+\begin{center}
+ Note that since Alice was not a Mathematics nor a Stats student, the conditional would have been vacuously true, making the forall statement true.
+\end{center}
+
+\underline{\textbf{Premise 3}}
+
+\begin{flalign*}
+    &C(\text{Alice}) \\
+    &T
+\end{flalign*}
+
+\underline{\textbf{Premise 4}}
+
+\begin{flalign*}
+    &M(\text{Bob}) \\
+    &T
+\end{flalign*}
+
+\underline{\textbf{Conclusion}}
+
+\begin{flalign*}
+    &\exists x, R(x) \land T(\text{Alice}, x) \land T(\text{Bob}, x) \\
+    &\equiv(R(t) \land T(\text{Alice}, t) \land T(\text{Bob}, t)) \lor (R(u) \land T(\text{Alice}, u) \land T(\text{Bob}, u)) \lor (R(Alice) \land T(\text{Alice}, Alice) \land T(\text{Bob}, Alice)) \lor \\ 
+    &\quad (R(Bob) \land T(\text{Alice}, Bob) \land T(\text{Bob}, Bob))\\
+    &\equiv (T \land F \land T) \lor (T \land T \land F) \lor (F \land F \land F) \lor (F \land F \land F) \\
+    &\equiv F \lor F \lor F \lor F \\
+    &\equiv F
+\end{flalign*}
+
+\begin{center}
+    Therefore, we have shown a world where all the premises are true and the conclusion is false, showing that this argument is false. $\blacksquare$.
+\end{center}
+
 
 \begin{question}{3.2}
     Every CMS student is either a mathematics, computer science, or statistics major. All mathematics majors must
@@ -326,7 +446,8 @@ Let $D(x)$ stand for “$x$ is a CMS student”, $M(x)$ stand for “$x$ is a ma
 “student $x$ takes course $y$”, $c$ stand for “the calculus course”, $p$ stand for “the probability course”, and $d$ stand
 for “the databases course”. Universe of discourse is students and courses.
 \end{question}
-    
+    The arguments given are:
+
 \begin{center}
     Conclusion we want to reach:
 \end{center}
@@ -334,6 +455,8 @@ for “the databases course”. Universe of discourse is students and courses.
     \forall x, D(x) \rightarrow (T(x, d) \lor T(x, c) \lor T(x, p))
 \]
 \underline{\textbf{Proof}}
+\setcounter{equation}{0}
+
 \begin{flalign}
     &\forall x, D(x) \rightarrow (C(x) \lor M(x) \lor S(x)) && \text{(Premise 1)} \\
     &\forall x, M(x) \rightarrow T(x, c) && \text{(Premise 2)} \\
@@ -379,6 +502,7 @@ and courses.
     \forall x, C(x) \rightarrow (\exists y\exists z (M(y) \land M(z) \land y \ne z \land W(x, y) \land W(x, z)))
 \]
 \underline{\textbf{Proof.}}
+\setcounter{equation}{0}
 \begin{flalign}
     &\forall x, C(x) \rightarrow (\exists y\exists z (M(y) \land M(z) \land y \ne z \land T(x, y) \land T(x, z))) && (\text{Premise 1}) \\
     &\forall x, M(x) \rightarrow \forall y(T(x, y) \rightarrow W(x, y)) && \text{(Premise 2)} \\
@@ -405,9 +529,294 @@ and courses.
 \begin{center}
     As required to show. $\blacksquare$
 \end{center}
+
 \section{Operations on Sets}
+Prove each of the following statements, and draw Venn diagrams that illustrate the corresponding sets.
+When applicable, use the following definition of subset: $A \subseteq B$ is defined as $\forall x, x \in A \rightarrow x \in B$
+
+\begin{question}{4.1}
+    
+\end{question}
+
+\begin{question}{4.2}
+    
+\end{question}
+
+\begin{question}{4.3}
+    
+\end{question}
+
+\begin{question}{4.4}
+    
+\end{question}
+
+\begin{question}{4.5}
+    
+\end{question}
+
+\begin{question}{4.6}
+    
+\end{question}
+
 \section{Quantifiers and Sets}
+
+Consider a discrete mathematics class with 1 mathematics major who is a 1st year student, 12 mathematics
+majors who are 3rd year students, 15 computer science majors who are 3rd year students, 2 mathematics majors
+who are 2nd year students, 2 computer science majors who are 2nd year students, 1 computer science major who
+is a 4th year student, and 15 statistics majors who are 1st year students. No other students are in this class, and
+nobody can be in more than one major.
+
+Let $M(x)$ stand for “$x$ is a mathematics major”, $C(x)$ stand for “$x$ is a computer science major”, $S(x)$ stand for
+“$x$ is a statistics major”, $F(x)$ stand for “$x$ is a first-year student”, $N(x)$ stand for “$x$ is a second-year student”, $T(x)$
+stand for “$x$ is a third-year student”, $R(x)$ stand for “$x$ is a fourth-year student”. Universe of discourse is students
+in this discrete mathematics class.
+
+For each of the following statements, analyse its logical form, determine whether it is true or false, and provide
+a brief explanation why.
+
+
+\begin{question}{5.1}
+    \begin{center}
+        Some students are second year.
+    \end{center}
+\end{question}
+\begin{enumerate}[label=(\alph*)]
+    \item \textbf{Logical Form:} $\exists x, N(x)$ 
+    \item \textbf{Truth value:} True
+    \item \textbf{Explanation:} There are some students that are second year, for example some CS students.
+\end{enumerate}
+
+\begin{question}{5.2}
+    \begin{center}
+        Every student is a computer science major.
+    \end{center}
+\end{question}
+\begin{enumerate}[label=(\alph*)]
+    \item \textbf{Logical Form:} $\forall x, C(x)$
+    \item \textbf{Truth value:} False
+    \item \textbf{Explanation:} There are students that are other majors, for example the maths major.
+\end{enumerate}
+
+\begin{question}{5.3}
+    \begin{center}
+        Every computer science student is not first year.
+    \end{center}
+\end{question}
+\begin{enumerate}[label=(\alph*)]
+    \item \textbf{Logical Form:} $\forall x, C(x) \rightarrow \neg F(x)$
+    \item \textbf{Truth value:} True
+    \item \textbf{Explanation:} There does not exist a first year CS student.
+\end{enumerate}
+
+\begin{question}{5.4}
+    \begin{center}
+        All first year students are statistics major.
+    \end{center}
+\end{question}
+\begin{enumerate}[label=(\alph*)]
+    \item \textbf{Logical Form:} $\forall x, F(x) \rightarrow S(x)$
+    \item \textbf{Truth value:} False
+    \item \textbf{Explanation:} There is a first year studen that is a math major.
+\end{enumerate}
+
+\begin{question}{5.5}
+    \begin{center}
+        All statistics students are first year.
+    \end{center}
+\end{question}
+\begin{enumerate}[label=(\alph*)]
+    \item \textbf{Logical Form:} $\forall x, S(x) \rightarrow F(x)$
+    \item \textbf{Truth value:} True
+    \item \textbf{Explanation:} There does not exist a statistic student who is not a first year.
+\end{enumerate}
+
+\begin{question}{5.6}
+    \begin{center}
+        All fourth year students are computer science majors.
+    \end{center}
+\end{question}
+\begin{enumerate}[label=(\alph*)]
+    \item \textbf{Logical Form:} $\forall x, R(x) \rightarrow C(x)$
+    \item \textbf{Truth value:} True
+    \item \textbf{Explanation:} No fourth year student is a math major or stats major.
+\end{enumerate}
+
+\begin{question}{5.7}
+    \begin{center}
+        All second year students are mathematics majors.
+    \end{center}
+\end{question}
+\begin{enumerate}[label=(\alph*)]
+    \item \textbf{Logical Form:} $\forall x, N(x) \rightarrow M(x)$
+    \item \textbf{Truth value:} False
+    \item \textbf{Explanation:} There are second year students that are CS majors.
+\end{enumerate}
+
+\begin{question}{5.8}
+    \begin{center}
+        All non-mathematics students are either first-year or computer science majors.
+    \end{center}
+\end{question}
+\begin{enumerate}[label=(\alph*)]
+    \item \textbf{Logical Form:} $\forall x, \neg M(x) \rightarrow (F(x) \lor C(x))$
+    \item \textbf{Truth value:} True
+    \item \textbf{Explanation:} All CS majors are non mathematics students, and all the statistics students are first-year.
+\end{enumerate}
+
+
 \section{Quantifiers and Logical Equivalence}
+For each of the following pairs of expressions, either prove they are equivalent by using the above technique, or
+prove they are not equivalent by providing a counterexample world.
+
+\begin{question}{6.1}
+    \[
+        \forall x, \forall y, P(x, y) \leftrightarrow \forall y, \forall x, P(y, x)
+    \]
+\end{question}
+
+We will prove this argument.
+
+\underline{\textbf{Proof.}}
+\setcounter{equation}{0}
+\begin{flalign}
+    &\text{Suppose}  \forall x, \forall y, P(x, y)\\
+    &\quad \text{Let } z \text{ be arbitrary} \\
+    &\quad\quad \text{Let } w \text{ be arbitrary} \\
+    &\quad\quad\quad P(w, z)& \text{1, 2, 3, U.I}\\
+    &\quad\quad \forall x, P(x, z) & \text{4, 3 U.G}\\
+    &\quad\forall y \forall x, P(x, y) & \text{5, 2 U.G} \\
+    &\forall x, \forall y, P(x, y) \rightarrow \forall y, \forall x, P(x, y) & \text{1, 6 imp.} \\
+    &\text{Suppose} \forall y, \forall x, P(x, y) \\
+    &\quad \text{Let } z \text{ be arbitrary} \\
+    &\quad\quad \text{Let } w  \text{  be arbitrary} \\
+    &\quad\quad\quad P(z, w) &  \text{8, 9, 10, U.I} \\
+    &\quad\quad \forall y, P(z, x)& \text{10, 11 U.G} \\
+    &\quad\forall x \forall y, P(x, y) & \text{12, 9 U.G}\\
+    &\forall y, \forall x, P(x, y) \rightarrow \forall x, \forall y, P(x, y) & \text{8, 13 imp.}\\
+    &\forall x, \forall y, P(x, y) \leftrightarrow \forall y, \forall x, P(x, y) & \text{7, 14 conj., bicond.}
+\end{flalign}
+\begin{center}
+    As required to show $\blacksquare$
+\end{center}
+
+\begin{question}{6.2}
+    \[
+        x
+    \]
+\end{question}
+
+We will           this argument.
+\underline{\textbf{Proof.}}
+\setcounter{equation}{0}
+\begin{flalign}
+    &\text{Suppose} \\
+    &\text{Suppose}
+\end{flalign}
+\begin{center}
+    As required to show $\blacksquare$
+\end{center}
+
+\begin{question}{6.3}
+    \[
+        x
+    \]
+\end{question}
+
+We will           this argument.
+\underline{\textbf{Proof.}}
+\setcounter{equation}{0}
+\begin{flalign}
+    &\text{Suppose} \\
+    &\text{Suppose}
+\end{flalign}
+\begin{center}
+    As required to show $\blacksquare$
+\end{center}
+
+\begin{question}{6.4}
+    \[
+        x
+    \]
+\end{question}
+
+We will           this argument.
+\underline{\textbf{Proof.}}
+\setcounter{equation}{0}
+\begin{flalign}
+    &\text{Suppose} \\
+    &\text{Suppose}
+\end{flalign}
+\begin{center}
+    As required to show $\blacksquare$
+\end{center}
+
+\begin{question}{6.5}
+    \[
+        x
+    \]
+\end{question}
+
+We will           this argument.
+\underline{\textbf{Proof.}}
+\setcounter{equation}{0}
+\begin{flalign}
+    &\text{Suppose} \\
+    &\text{Suppose}
+\end{flalign}
+\begin{center}
+    As required to show $\blacksquare$
+\end{center}
+
+\begin{question}{6.6}
+    \[
+        x
+    \]
+\end{question}
+
+We will           this argument.
+\underline{\textbf{Proof.}}
+\setcounter{equation}{0}
+\begin{flalign}
+    &\text{Suppose} \\
+    &\text{Suppose}
+\end{flalign}
+\begin{center}
+    As required to show $\blacksquare$
+\end{center}
+
+\begin{question}{6.7}
+    \[
+        x
+    \]
+\end{question}
+
+We will           this argument.
+\underline{\textbf{Proof.}}
+\setcounter{equation}{0}
+\begin{flalign}
+    &\text{Suppose} \\
+    &\text{Suppose}
+\end{flalign}
+\begin{center}
+    As required to show $\blacksquare$
+\end{center}
+
+\begin{question}{6.8}
+    \[
+        x
+    \]
+\end{question}
+
+We will           this argument.
+\underline{\textbf{Proof.}}
+\setcounter{equation}{0}
+\begin{flalign}
+    &\text{Suppose} \\
+    &\text{Suppose}
+\end{flalign}
+\begin{center}
+    As required to show $\blacksquare$
+\end{center}
 
 
 \end{document}

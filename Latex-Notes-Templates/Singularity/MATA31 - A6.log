@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.9.18)  21 OCT 2025 03:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.9.18)  3 NOV 2025 19:39
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -807,44 +807,60 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 102.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `T1/fnc/m/n' will be
-(Font)              scaled to size 7.06795pt on input line 104.
+(Font)              scaled to size 13.39188pt on input line 104.
+LaTeX Font Info:    Font shape `T1/fnc/b/n' will be
+(Font)              scaled to size 13.39188pt on input line 104.
 LaTeX Font Info:    Font shape `T1/fnc/m/n' will be
-(Font)              scaled to size 5.57996pt on input line 104.
+(Font)              scaled to size 7.06795pt on input line 107.
+LaTeX Font Info:    Font shape `T1/fnc/m/n' will be
+(Font)              scaled to size 5.57996pt on input line 107.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 9.19998pt on input line 104.
+(Font)              scaled to size 9.19998pt on input line 107.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 6.99199pt on input line 104.
+(Font)              scaled to size 6.99199pt on input line 107.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 5.51999pt on input line 104.
+(Font)              scaled to size 5.51999pt on input line 107.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 9.19998pt on input line 104.
+(Font)              scaled to size 9.19998pt on input line 107.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 6.99199pt on input line 104.
+(Font)              scaled to size 6.99199pt on input line 107.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 5.51999pt on input line 104.
+(Font)              scaled to size 5.51999pt on input line 107.
 
 
 [1
 
-{c:/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/texlive/2025/texmf-dist/fonts/enc/dvips/base/8r.enc}{c:/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}] (./MATA31 - A6.aux)
+{c:/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/texlive/2025/texmf-dist/fonts/enc/dvips/base/8r.enc}{c:/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}]
+
+[2]
+
+[3]
+
+[4]
+
+[5]
+
+[6]
+
+[7] (./MATA31 - A6.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 22879 strings out of 467797
- 485675 string characters out of 5435982
- 898115 words of memory out of 5000000
- 51084 multiletter control sequences out of 15000+600000
- 658587 words of font info for 99 fonts, out of 8000000 for 9000
+ 22963 strings out of 467797
+ 487420 string characters out of 5435982
+ 916116 words of memory out of 5000000
+ 51151 multiletter control sequences out of 15000+600000
+ 671361 words of font info for 118 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 98i,7n,101p,486b,1369s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<c:/texlive/2025/texmf-dist/fonts/type1/public/fourier/fourier-ms.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb><c:/texlive/2025/texmf-dist/fonts/type1/urw/ncntrsbk/uncb8a.pfb><c:/texlive/2025/texmf-dist/fonts/type1/urw/ncntrsbk/uncr8a.pfb>
-Output written on "MATA31 - A6.pdf" (1 page, 49092 bytes).
+ 98i,10n,101p,496b,1373s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<c:/texlive/2025/texmf-dist/fonts/type1/public/fourier/fourier-mex.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/fourier/fourier-mlit.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/fourier/fourier-ms.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb><c:/texlive/2025/texmf-dist/fonts/type1/urw/ncntrsbk/uncb8a.pfb><c:/texlive/2025/texmf-dist/fonts/type1/urw/ncntrsbk/uncr8a.pfb><c:/texlive/2025/texmf-dist/fonts/type1/urw/ncntrsbk/uncri8a.pfb>
+Output written on "MATA31 - A6.pdf" (7 pages, 104935 bytes).
 PDF statistics:
- 69 PDF objects out of 1000 (max. 8388607)
- 33 compressed objects within 1 object stream
+ 109 PDF objects out of 1000 (max. 8388607)
+ 59 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  157 words of extra memory for PDF output out of 10000 (max. 10000000)
 
