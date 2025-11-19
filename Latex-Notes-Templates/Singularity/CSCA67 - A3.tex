@@ -1,0 +1,418 @@
+\documentclass[]{article}
+
+% Imports the catppuccin theme, using the mocha flavor,
+% from the directory above. Actual implementation
+% wouldn't need the import package unless the theme
+% and the document are in different directories.
+\usepackage{import}
+\usepackage{xcolor}
+% \usepackage{fancyhdr}
+\usepackage{cancel}
+\usepackage{mathtools}
+
+% For permutations and combinations
+\newcommand\Myperm[2][^n]{\prescript{#1\mkern-2.5mu}{}P_{#2}}
+\newcommand\Mycomb[2]{\prescript{#1\mkern-0.5mu}{}C_{#2}}
+
+% Colors
+\definecolor{yorhabg}{HTML}{FFFFFF}
+\definecolor{yorhafg}{HTML}{000000}
+\definecolor{yorhagrid}{HTML}{B5AF9C}
+\definecolor{mred}{HTML}{D67069}
+\definecolor{mblue}{HTML}{6887A1}
+
+\pagecolor{yorhabg}
+\color{yorhafg}
+
+\usepackage{preamble}
+
+% Removes padding above title
+\usepackage{titling}
+\setlength{\droptitle}{-10em}
+
+% Font package
+\usepackage[T1]{fontenc}
+
+\usepackage{fouriernc}
+
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[skins, most]{tcolorbox}
+\usepackage{enumitem}
+
+\DeclareMathOperator{\sgn}{sgn}
+
+\usepackage{tikz}
+\usepackage{eso-pic}
+\usetikzlibrary{calc,shadows.blur}
+\usetikzlibrary{angles, quotes}
+\usetikzlibrary{3d}
+
+% Margins
+\topmargin=0in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\AtBeginEnvironment{tcolorbox}{\small}
+
+\newtcolorbox{imp}{enhanced,arc=0mm,colback=yorhabg,colframe=mred,leftrule=10mm,coltext=yorhafg,%
+overlay={\node[anchor=west,outer sep=2pt] at (frame.west) {\includegraphics[width=6mm]{images/imageb.png}}; }}
+
+\newtcolorbox{shortcut}{enhanced,arc=0mm,colback=yorhabg,colframe=mred,leftrule=10mm,coltext=yorhafg, coltitle=yorhabg, title=\texttt{Shortcut.}, 
+overlay={\node[anchor=west,outer sep=2pt] at (frame.west) {\includegraphics[width=6mm]{images/imageb.png}}; }}
+
+\newtcolorbox{question}[1]{
+    enhanced, 
+    colback=yorhabg,
+    colframe=mblue,
+    coltext=yorhafg,
+    coltitle=yorhabg,
+    attach boxed title to top left={yshift*=-\tcboxedtitleheight}, 
+    title=\texttt{#1},
+    boxed title size=title,
+    boxed title style={%
+        rounded corners=northeast, 
+        rounded corners=northwest, 
+        colback=tcbcolframe, 
+        boxrule=0pt,
+    },
+    underlay boxed title={%
+        \path[fill=tcbcolframe] (title.south west)--(title.south east) 
+            to[out=0, in=180] ([xshift=5mm]title.east)--
+            (title.center-|frame.east)
+            [rounded corners=5pt] |- 
+            (frame.north) -| cycle; 
+    },
+}
+
+\newcommand\bb[1]{\textcolor{yorhafg}{\textbf{#1}}}
+
+\title{\textbf{CSCA67 - Assignment \#3}}
+\author{Satyajit Datta \ 1012033336}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\section*{1. Proof Strategies}
+\begin{question}{1.1}
+    We write a|b, read “a divides b”, to stand for $\exists k, b = ak$. Prove that if 4 divides $a-b$, then it also divides $a^2 - b^2$.
+\end{question}
+
+\underline{\textbf{Proof}}
+\newlength{\eqaindent}
+\settowidth{\eqaindent}{$a^2-b^2$}
+
+\begin{flalign}
+    &\text{Suppose } 4\mid(a+b)\\
+    &\quad \exists k, a+b = 4k &\text{1, Def of $x\mid y$} \\
+    &\quad a + b = 4k &\text{2, E.I} \\
+    &\quad a^2 - b^2 = (a+b)(a-b) \\
+    &\quad\hspace*{\eqaindent} = 4k(a-b) &\text{Math} \nonumber\\
+    &\quad\exists k, a^2 - b^2 = 4k &\text{4, E.G}\\
+    &\quad 4\mid(a^2-b^2) &\text{5, Def of $x \mid y$}\\
+    &4\mid(a+b) \rightarrow 4\mid(a^2 + b^2) &\text{1, 6, Implication}
+\end{flalign}
+
+As required to prove. $\blacksquare$.
+
+\begin{question}{1.2}
+    For all real numbers $x$ and $y$, $min(x, y) = (x + y - \mid x - y\mid)/2$ and $\max(x, y) =  (x + y + \mid x - y\mid)/2$
+\end{question}
+
+\begin{question}{1.3}
+    Recall that x is irrational if there are no integers a and b, such that $x = \frac{a}{b}$. Prove that the third power of any
+real number is irrational only if the number itself is irrational.
+\end{question}
+
+WTS: $x^3 \notin \mathbb{Q} \rightarrow x \notin \mathbb{Q}$
+
+\underline{\textbf{Proof.}}
+
+\setcounter{equation}{0}
+\begin{flalign}
+    &\text{Suppose } x \in \mathbb{Q} \\
+    &\quad \exists a, b \in \mathbb{Z} (x = \frac{a}{b}) \land (b \ne 0) &\text{1, Def$^n$ of $\mathbb{Q}$} \\
+    &\quad (x = \frac{a}{b}) \land (b \ne 0) &\text{2, E.I} \\
+    &\quad x = \frac{a}{b} &\text{3, simp.} \\
+    &\quad b \ne 0 &\text{3, simp.} \\
+    &\quad x^3 = \frac{a^3}{b^3} &\text{4, math} \\
+    &\quad c = a^3 &\text{2, 6} \\
+    &\quad d = b^3 &\text{2, 6} \\
+    &\quad d \ne 0 &\text{7, 5} \\
+    &\quad x^3 = \frac{c}{d} &\text{6, 7, 8}\\
+    &\quad (x^3 = \frac{c}{d}) \land (d \ne 0) &\text{9, 10, conj.}\\
+    &\quad \exists a, b \in \mathbb{Z}, (x^3 = \frac{a}{b}) \land (b \ne 0) &\text{11, E.G}\\
+    &\quad x^3 \in \mathbb{Q} &\text{12, Def$^n$ of $\mathbb{Q}$}\\
+    & x \in \mathbb{Q} \rightarrow x^3 \in \mathbb{Q} &\text{1, 13, imp.} \\
+    & x^3 \notin \mathbb{Q} \rightarrow x \notin \mathbb{Q} &\text{14, contr.}
+\end{flalign}
+
+As required to show. $\blacksquare$.
+
+\begin{question}{1.4}
+    Prove that if x is rational, then $x + \sqrt{2}$ is not. You may use the fact that $\sqrt{2}$ is irrational, as we proved in class.
+\end{question}
+\newlength{\spacingA}
+\settowidth{\spacingA}{$x + \sqrt{x} - x$}
+\setcounter{equation}{0}
+\begin{flalign}
+    &\text{Suppose } x \in \mathbb{Q} \\
+    &\quad\text{Suppose } x + \sqrt{2} \in \mathbb{Q} &\text{For contradiction} \\
+    &\quad\quad \exists a, b \in \mathbb{Z}, (x = \frac{a}{b}) \land (b \ne 0) &\text{1, Def$^n$ of $\mathbb{Q}$} \\
+    &\quad\quad \exists a, b \in \mathbb{Z}, (x + \sqrt{2} = \frac{a}{b}) \land (b \ne 0) &\text{2, Def$^n$ of $\mathbb{Q}$} \\
+    &\quad\quad (x = \frac{a}{b}) \land (b \ne 0) &\text{3, E.I} \\
+    &\quad\quad (x + \sqrt{2} = \frac{c}{d}) \land (d \ne 0) &\text{4, E.I} \\
+    &\quad\quad x = \frac{a}{b} &\text{5, simp.} \\
+    &\quad\quad x + \sqrt{2} = \frac{c}{d} &\text{6, simp.} \\
+    &\quad\quad b \ne 0 &\text{5, simp} \\
+    &\quad\quad d \ne 0 &\text{6, simp} \\
+    &\quad\quad x + \sqrt{2} - x = \frac{a}{b} - \frac{c}{d} &\text{7, 8} \\
+    &\quad\quad \hspace*{\spacingA} = \frac{ad - bc}{bd} \nonumber \\
+    &\quad\quad \sqrt{2} = \frac{ad - bc}{bd} &\text{11, math} \\
+    &\quad\quad bd \ne 0 &\text{9, 10} \\
+    &\quad\quad (\sqrt{2} = \frac{ad - bc}{bd}) \land (bd \ne 0) &\text{12, 13, conj.} \\
+    &\quad\quad \exists f, g \in \mathbb{Z}, (\sqrt{x} = \frac{f}{g}) \land (g \ne 0) &\text{14, E.G} \\
+    &\quad\quad \sqrt{2} \in \mathbb{Q} &\text{15, Def$^n$ of $\mathbb{Q}$} \\
+    &\quad\quad \text{A contradiction} \\
+    &\quad x + \sqrt{2} \notin \mathbb{Q} &\text{2, 16, contradiction} \\
+    &x \in \mathbb{Q} \rightarrow x + \sqrt{2} \notin \mathbb{Q} &\text{1, 17, imp.} 
+\end{flalign}
+
+As required to show. $\blacksquare$.
+
+\begin{question}{1.5}
+    Using the same definition of rational as above, prove or disprove: If x is irrational, then so is $x + \sqrt{2}$
+\end{question}
+
+We will disprove this statement.
+
+Let $x = -\sqrt{2}$
+
+Therefore, x is irrational.
+
+$x + \sqrt{2} = -\sqrt{2} + \sqrt{2} = 0$
+
+0 is rational.
+
+Therefore, we have shown a counterexample where the hypothesis is true and the conclusion is false, therefore this statement is not valid.
+
+\section*{2. Induction}
+
+\begin{question}{2.1}
+    Prove that: 
+    \begin{align*}
+        \sum_{i = 1}^{n} i^2 = \frac{n(n+1)(2n+1)}{6}
+    \end{align*}
+
+    for all positive integers $n$.
+\end{question}
+
+\underline{\textbf{Base Case.}}
+\begin{align*}
+    \sum_{i = 1}^{n} i^2 = 1 \\
+    \frac{(1)(1+1)(2+1)}{6} = 1
+\end{align*}
+
+Therefore, P(1)
+
+Let $P(n)$ be $\sum_{i = 1}^{n} i^2 = \frac{n(n+1)(2n+1)}{6}$.
+
+WTS: $\forall k \ge 0, P(k) \rightarrow P(k+1)$
+
+\newlength{\spacingB}
+\settowidth{\spacingB}{$\sum_{i = 1}^{n+1} i^2$}
+\setcounter{equation}{0}
+\begin{flalign}
+    &\text{Let k be arbitrary} \\
+    &\quad\text{Suppose } k \ge 1 \\
+    &\quad\quad\text{Suppose P(k)} &\text{Induction Hypothesis} \\
+    &\quad\quad\quad \sum_{i = 1}^{k} i^2 = \frac{k(k+1)(2k+1)}{6} &\text{3, Def$^n$ of P} \\
+    &\quad\quad\quad \sum_{i = 1}^{k+1} i^2 = \sum_{i = 1}^{k} i^2 + (k+1)^2 &\text{math} \\
+    &\quad\quad\quad \hspace*{\spacingB} = \frac{k(k+1)(2k+1)}{6} + (n+1)^2 &\text{IH} \nonumber\\
+    &\quad\quad\quad \hspace*{\spacingB} = \frac{k(k+1)(2k+1)}{6} + \nonumber \\
+    &\quad\quad\quad \hspace*{\spacingB} = \frac{k(k+1)(2k+1) + 6(k+1)^2}{6} \nonumber \\
+    &\quad\quad\quad \hspace*{\spacingB} = \frac{(k+1)(k(2k+1) + 6(k+1))}{6} \nonumber \\
+    &\quad\quad\quad \hspace*{\spacingB} = \frac{(k+1)(2k^2+k + 6k+6)}{6} \nonumber \\ 
+    &\quad\quad\quad \hspace*{\spacingB} = \frac{(k+1)(2k^2+7k+6)}{6} \nonumber\\ 
+    &\quad\quad\quad \hspace*{\spacingB} = \frac{(k+1)(k+3)(2k+3)}{6} \nonumber \\
+    &\quad\quad\quad \hspace*{\spacingB} = \frac{(k+1)(k+2)(2k+3)}{6} \nonumber \\
+    &\quad\quad\quad \hspace*{\spacingB} = \frac{(k+1)((k+1)+1)(2(k+1)+1)}{6} \nonumber \\
+    &\quad\quad\quad P(k+1) &\text{5, Def$^n$ of P}\\
+    &\quad\quad P(k) \rightarrow P(k+1) &\text{3, 6, implication}\\
+    &\quad k \ge 1 \rightarrow (P(k) \rightarrow P(k+1)) &\text{2, 7, implication}\\
+    &\forall k \ge 1, P(k) \rightarrow P(k+1) &\text{1, 8, U.G}
+\end{flalign}
+
+Therefore, $\forall n \ge 1, P(n)$, as required to show. $\blacksquare$.
+
+\begin{question}{2.2}
+    Prove that
+    \begin{align*}
+        n! > 2^n 
+    \end{align*}
+
+    for all $n \ge 4$
+\end{question}
+
+\underline{\textbf{Base Case.}}
+\begin{align*}
+    4! = 24 \\
+    2^4 = 16
+\end{align*}
+
+Therefore, P(4)
+
+Let $P(n)$ be $n! > 2^n$.
+
+WTS: $\forall k \ge 4, P(k) \rightarrow P(k+1)$
+
+\newlength{\spacingC}
+\settowidth{\spacingC}{$(k+1)!$}
+\setcounter{equation}{0}
+\begin{flalign}
+    &\text{Let k be arbitrary} \\
+    &\quad\text{Suppose } k \ge 4 \\
+    &\quad\quad\text{Suppose P(k)} &\text{Induction Hypothesis} \\
+    &\quad\quad\quad (k+1)! = k! \cdot (k+1) &\text{Math} \\
+    &\quad\quad\quad \hspace*{\spacingC} < 2^n \cdot (k+1) &\text{IH} \nonumber\\
+    &\quad\quad\quad \hspace*{\spacingC} < 2^n \cdot 2 &\text{$2 \le 4 \le k$} \nonumber\\
+    &\quad\quad\quad \hspace*{\spacingC} = 2^{n+1} \nonumber\\
+    &\quad\quad\quad P(k+1) &\text{4, Def$^n$ of P}\\
+    &\quad\quad P(k) \rightarrow P(k+1) &\text{3, 5, implication}\\
+    &\quad k \ge 4 \rightarrow (P(k) \rightarrow P(k+1)) &\text{2, 6, implication}\\
+    &\forall k \ge 4, P(k) \rightarrow P(k+1) &\text{1, 7, U.G}
+\end{flalign}
+
+Therefore, $\forall n \ge 4, P(n)$, as required to show. $\blacksquare$.
+
+\begin{question}{2.3}
+    Prove that $3^{2n} - 1$ is divisible by $8$, for all positive integers $n$.
+\end{question}
+
+\underline{\textbf{Base Case.}}
+\begin{align*}
+    3^{2} - 1 = 8 \\
+    8 \mid 8
+\end{align*}
+
+Therefore, P(1)
+
+Let $P(n)$ be $\exists k, 3^{2n} - 1 = 8k$.
+
+WTS: $\forall k \ge 0, P(k) \rightarrow P(k+1)$
+
+\newlength{\spacingD}
+\settowidth{\spacingD}{$3^{2(k+1)} - 1$}
+\setcounter{equation}{0}
+\begin{flalign}
+    &\text{Let k be arbitrary} \\
+    &\quad\text{Suppose } k \ge 1 \\
+    &\quad\quad\text{Suppose P(k)} &\text{Induction Hypothesis} \\
+    &\quad\quad\quad \exists m, 3^{2k} -1 = 8m &\text{3, Def$^n$ of P} \\
+    &\quad\quad\quad 3^{2k} - 1 = 8m &\text{4, E.I} \\
+    &\quad\quad\quad 3^{2(k+1)} - 1 = 3^{2k+2} - 1 &\text{math} \\
+    &\quad\quad\quad \hspace*{\spacingD} = (9)3^{2k} - 1 \nonumber \\
+    &\quad\quad\quad \hspace*{\spacingD} = (8+1)3^{2k} - 1 \nonumber \\
+    &\quad\quad\quad \hspace*{\spacingD} = 8(3^{2k}) + 3^{2k} - 1 \nonumber \\
+    &\quad\quad\quad \hspace*{\spacingD} = 8(3^{2k}) + 3^{2k} - 1 \nonumber \\  
+    &\quad\quad\quad \hspace*{\spacingD} = 8(3^{2k}) + 8m &\text{5, IH}\nonumber \\  
+    &\quad\quad\quad \hspace*{\spacingD} = 8(3^{2k} + m) \nonumber \\  
+    &\quad\quad\quad \exists m, 3^{2(k+1)} - 1 = 8m &\text{6, E.G} \\  
+    &\quad\quad\quad P(k+1) &\text{7, Def$^n$ of P}\\  
+    &\quad\quad P(k) \rightarrow P(k+1) &\text{3, 8, implication}\\
+    &\quad k \ge 1 \rightarrow (P(k) \rightarrow P(k+1)) &\text{2, 9, implication}\\
+    &\forall k \ge 1, P(k) \rightarrow P(k+1) &\text{1, 10, U.G}
+\end{flalign}
+
+Therefore, $\forall n \ge 1, P(n)$, as required to show. $\blacksquare$.
+
+\begin{question}{2.4}
+    Prove that
+    \begin{align*}
+        \sum_{j = 1}^{n} \frac{j}{(j+1)!} \le 1 - \frac{1}{(n+1)!}
+    \end{align*}
+    for all $n \ge 1$.
+\end{question}
+
+\underline{\textbf{Base Case.}}
+\begin{align*}
+    \sum_{j = 1}^{1} \frac{j}{(j+1)!} = \frac{1}{2} \\
+    1 - \frac{1}{(1+1)!} = \frac{1}{2}
+\end{align*}
+
+Therefore, P(1)
+
+Let $P(n)$ be $\sum_{j = 1}^{n} \frac{j}{(j+1)!} \le 1 - \frac{1}{(n+1)!}$.
+
+WTS: $\forall k \ge 0, P(k) \rightarrow P(k+1)$
+
+\newlength{\spacingE}
+\settowidth{\spacingE}{$\sum_{j = 1}^{n} \frac{j}{(j+1)!}$}
+\setcounter{equation}{0}
+\begin{flalign}
+    &\text{Let k be arbitrary} \\
+    &\quad\text{Suppose } k \ge 1 \\
+    &\quad\quad\text{Suppose P(k)} &\text{Induction Hypothesis} \\
+    &\quad\quad\quad \sum_{j = 1}^{k+1} \frac{j}{(j+1)!} = \sum_{j = 1}^{k} \frac{j}{(j+1)!} + \frac{k+1}{(k+2)!} \\ 
+    &\quad\quad\quad \hspace*{\spacingE} \le 1 - \frac{1}{(k+1)!} + \frac{k+1}{(k+2)!} &\text{IH} \nonumber \\
+    &\quad\quad\quad \hspace*{\spacingE} = 1 - (\frac{1}{(k+1)!} - \frac{k+1}{(k+2)!}) \nonumber \\
+    &\quad\quad\quad \hspace*{\spacingE} = 1 - (\frac{k+2}{(k+1)!(k+2)} - \frac{k+1}{(k+2)!})  \nonumber \\
+    &\quad\quad\quad \hspace*{\spacingE} = 1 - (\frac{k+2}{(k+2)!} - \frac{k+1}{(k+2)!})  \nonumber \\
+    &\quad\quad\quad \hspace*{\spacingE} = 1 - \frac{k+2 - (k+1)}{(k+2)!} \nonumber \\
+    &\quad\quad\quad \hspace*{\spacingE} = 1 - \frac{1}{(k+2)!}  \nonumber \\
+    &\quad\quad\quad \hspace*{\spacingE} = 1 - \frac{1}{((k+1)+1)!}  \nonumber \\
+    &\quad\quad\quad P(k+1) &\text{4, Def$^n$ of P}\\  
+    &\quad\quad P(k) \rightarrow P(k+1) &\text{3, 5, implication}\\
+    &\quad k \ge 1 \rightarrow (P(k) \rightarrow P(k+1)) &\text{2, 6, implication}\\
+    &\forall k \ge 1, P(k) \rightarrow P(k+1) &\text{1, 7, U.G}
+\end{flalign}
+
+Therefore, $\forall n \ge 1, P(n)$, as required to show. $\blacksquare$.
+
+\begin{question}{3.5}
+    Prove that if $A_1, A_2, \ldots A_n$ and $B$ are sets, then
+    \begin{align*}
+        (A_1 \ B) \cup (A_2 \ B)\cup \ldots \cup (A_n \ B) = (A_1 \cup A_2 \cup \ldots \cup A_n) \ B
+    \end{align*}
+    for all $n \ge 2$
+\end{question}
+
+\underline{\textbf{Base Case.}}
+\begin{align*}
+    (A_1 \ B) \cup (A_2 \ B)  &= {x : (x \in A_1 \land x \notin B) \lor (x \in A_2 \land x \notin B)} \\
+    &= {x : (x \notin B) \land (x \in A_1 \lor x \in A_2)} \\
+    &= (A_1 \cup A_2) \ B
+\end{align*}
+
+Therefore, P(2)
+
+Let $P(n)$ be $(A_1 \ B) \cup (A_2 \ B)\cup \ldots \cup (A_n \ B) = (A_1 \cup A_2 \cup \ldots \cup A_n) \ B$.
+
+WTS: $\forall k \ge 2, P(k) \rightarrow P(k+1)$
+
+\newlength{\spacingF}
+\settowidth{\spacingF}{$(A_1 \ B) \cup (A_2 \ B)\cup \ldots \cup (A_{n+1} \ B) \ B$}
+\setcounter{equation}{0}
+\begin{flalign}
+    &\text{Let k be arbitrary} \\
+    &\quad\text{Suppose } k \ge 2 \\
+    &\quad\quad\text{Suppose P(k)} &\text{Induction Hypothesis} \\
+    &\quad\quad\quad (A_1 \ B) \cup (A_2 \ B)\cup \ldots \cup (A_{k+1} \ B) = (A_1 \ B) \cup (A_2 \ B)\cup \ldots \cup (A_k \ B) \cup (A_{k+1} \ B) \\ 
+    &\quad\quad\quad \hspace*{\spacingF} = (A_1 \cup A_2 \cup \ldots \cup A_k) \cup (A_{k+1} \ B) &\text{IH} \nonumber \\
+    &\quad\quad\quad  = {x : (x \notin B \land (x \in A_1 \lor x \in A_2 \lor \ldots \lor A_k)) \lor (x \notin B \land x \in A_{k+1})} \nonumber \\
+    &\quad\quad\quad \hspace*{\spacingF} = {x : (x \notin B) \land (x \in A_1 \lor x \in A_2 \lor \ldots  \lor x \in A_{k+1})} \nonumber \\
+    &\quad\quad\quad \hspace*{\spacingF} = (A_1 \cup A_2 \cup \ldots\cup A_{k+1}) \ B \nonumber \\
+    &\quad\quad\quad P(k+1) &\text{4, Def$^n$ of P}\\  
+    &\quad\quad P(k) \rightarrow P(k+1) &\text{3, 5, implication}\\
+    &\quad k \ge 2 \rightarrow (P(k) \rightarrow P(k+1)) &\text{2, 6, implication}\\
+    &\forall k \ge 2, P(k) \rightarrow P(k+1) &\text{1, 7, U.G}
+\end{flalign}
+
+\end{document}
