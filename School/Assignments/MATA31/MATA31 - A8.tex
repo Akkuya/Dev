@@ -1,0 +1,457 @@
+\documentclass[]{article}
+
+% Imports the catppuccin theme, using the mocha flavor,
+% from the directory above. Actual implementation
+% wouldn't need the import package unless the theme
+% and the document are in different directories.
+\usepackage{import}
+\usepackage{xcolor}
+% \usepackage{fancyhdr}
+\usepackage{cancel}
+\usepackage{mathtools}
+
+% For permutations and combinations
+\newcommand\Myperm[2][^n]{\prescript{#1\mkern-2.5mu}{}P_{#2}}
+\newcommand\Mycomb[2]{\prescript{#1\mkern-0.5mu}{}C_{#2}}
+
+% Colors
+\definecolor{yorhabg}{HTML}{FFFFFF}
+\definecolor{yorhafg}{HTML}{000000}
+\definecolor{yorhagrid}{HTML}{B5AF9C}
+\definecolor{mred}{HTML}{D67069}
+\definecolor{mblue}{HTML}{6887A1}
+
+\pagecolor{yorhabg}
+\color{yorhafg}
+
+\usepackage{preamble}
+
+% Removes padding above title
+\usepackage{titling}
+\setlength{\droptitle}{-10em}
+
+% Font package
+\usepackage[T1]{fontenc}
+
+\usepackage{fouriernc}
+
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[skins, most]{tcolorbox}
+\usepackage{enumitem}
+
+\DeclareMathOperator{\sgn}{sgn}
+
+\usepackage{tikz}
+\usepackage{eso-pic}
+\usetikzlibrary{calc,shadows.blur}
+\usetikzlibrary{angles, quotes}
+\usetikzlibrary{3d}
+
+% Margins
+\topmargin=0in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\AtBeginEnvironment{tcolorbox}{\small}
+
+\newtcolorbox{imp}{enhanced,arc=0mm,colback=yorhabg,colframe=mred,leftrule=10mm,coltext=yorhafg,%
+overlay={\node[anchor=west,outer sep=2pt] at (frame.west) {\includegraphics[width=6mm]{images/imageb.png}}; }}
+
+\newtcolorbox{shortcut}{enhanced,arc=0mm,colback=yorhabg,colframe=mred,leftrule=10mm,coltext=yorhafg, coltitle=yorhabg, title=\texttt{Shortcut.}, 
+overlay={\node[anchor=west,outer sep=2pt] at (frame.west) {\includegraphics[width=6mm]{images/imageb.png}}; }}
+
+\newtcolorbox{question}[1]{
+    enhanced, 
+    colback=yorhabg,
+    colframe=mblue,
+    coltext=yorhafg,
+    coltitle=yorhabg,
+    attach boxed title to top left={yshift*=-\tcboxedtitleheight}, 
+    title=\texttt{#1},
+    boxed title size=title,
+    boxed title style={%
+        rounded corners=northeast, 
+        rounded corners=northwest, 
+        colback=tcbcolframe, 
+        boxrule=0pt,
+    },
+    underlay boxed title={%
+        \path[fill=tcbcolframe] (title.south west)--(title.south east) 
+            to[out=0, in=180] ([xshift=5mm]title.east)--
+            (title.center-|frame.east)
+            [rounded corners=5pt] |- 
+            (frame.north) -| cycle; 
+    },
+}
+
+\newcommand\bb[1]{\textcolor{yorhafg}{\textbf{#1}}}
+
+\title{\textbf{MATA31 - Assignment \#8}}
+\author{Satyajit Datta \ 1012033336}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\begin{question}{2.3.64}
+    Find the derivative of
+    \begin{align*}
+        f(x) = \frac{(x-2)^2}{(x^2+1)(x-3)}
+    \end{align*}
+\end{question}
+
+\begin{align*}
+    f(x) &= \frac{(x-2)^2}{(x^2+1)(x-3)} \\
+    &= \frac{x^2-2x+4}{x^3-3x^2+x-3}
+\end{align*}
+
+\begin{align*}
+    \frac{d}{dx} f(x) &= \frac{x^2-2x+4}{x^3-3x^2+x-3} \\
+    &= \frac{(x^3-3x^2+x-3)(2x-2)-(x^2-2x+4)(3x^2-6x+1)}{(x^3-3x^2+x-3)^2} \\
+    &= \frac{(2x^4-8x^3+8x^2-8x+6)-(3x^4-12x^3+25x^2-26x+4)}{(x^3-3x^2+x-3)^2} \\
+    &= \frac{-x^4+8x^3-23x^2+18x+8}{(x^3-3x^2+x-3)^2} \\
+\end{align*}
+
+
+\begin{question}{2.3.88}
+    Use the definition of the derivative to prove the following
+special case of the product rule:
+
+    \begin{align*}
+        \frac{d}{dx}(x^2f(x)) = 2xf(x) +x^2f'(x)
+    \end{align*}
+\end{question}
+
+\begin{align*}
+    g'(x) &= \lim_{h\to0}\frac{(x+h^2)f(x+h) - x^2f(x)}{h} \\
+    &=\lim_{h\to0}\frac{(x^2+2xh+h^2)f(x+h) - x^2f(x)}{h} \\
+    &=\lim_{h\to0}\frac{x^2f(x+h) - x^2f(x)}{h} +  \lim_{h\to0}\frac{2xhf(x+h)}{h} + \lim_{h\to0}\frac{h^2f(x+h)}{h} \\
+    &=\lim_{h\to0}\frac{x^2(f(x+h)-f(x))}{h} +  \lim_{h\to0} 2xf(x+h) + \lim_{h\to0}hf(x+h) \\
+    &=x^2\lim_{h\to0}\frac{f(x+h)-f(x)}{h} +  2xf(x) \\
+    &=x^2f'(x) +  2xf(x) \\
+\end{align*}
+
+As required to show. $\blacksquare$.
+
+\begin{question}{2.3.92}
+    Consider the piecewise-defined function
+    \begin{align*}
+        f(x) = \begin{cases*}
+            g(x) \quad \text{if } x \le c \\
+            h(x) \quad \text{if } x > c
+        \end{cases*}
+    \end{align*}
+    Prove that if $g(x)$ and $h(x)$ are continuous and differentiable at $x = c$, and if $g(c) = h(c)$ and $g(c) = h(c)$, then $f$
+    is differentiable at $x = c$.
+\end{question}
+
+Note that since $f(x) = g(x)$ at $x = c$, and $g(c) = h(c)$, then $f(c) = g(c) = h(c)$ \textbf{Lemma 1} 
+
+Suppose $g(x)$ is differentiable at c, and $h(x)$ is differentiable at $c$, and $g'(c) = h'(c) = L$. Then:
+
+\begin{align*}
+    &\lim_{x \to c} \frac{g(x) - g(c)}{x-c} = L \\
+    \text{and } &\lim_{x \to c} \frac{h(x) - h(c)}{x-c} = L
+\end{align*}
+
+In turn, by limit definition, this means that:
+
+\begin{align*}
+    &\forall \varepsilon > 0, \exists\;\delta_1 > 0 \quad \text{s.t.} \quad 0< |x-c| < \delta_1 \implies |\frac{g(x) - g(c)}{x-c} - L| < \varepsilon \\
+    \text{and } &\forall \varepsilon > 0, \exists\;\delta_2 > 0 \quad \text{s.t.} \quad 0< |x-c| < \delta_2 \implies |\frac{h(x) - h(c)}{x-c} - L| < \varepsilon \\
+\end{align*}
+
+Let $\delta = \min(\delta_1, \delta_2)$
+
+Suppose $0< |x-c| < \delta$
+
+Suppose $x \le c$. Then $f(x) = g(x)$, therefore:
+
+\begin{align*}
+    |\frac{f(x) - f(c)}{x-c} - L| &= |\frac{g(x) - g(c)}{x-c} - L| \\
+    & < \varepsilon
+\end{align*}
+
+Suppose $x > c$. Then $f(x) = h(x)$, therefore:
+
+\begin{align*}
+    |\frac{f(x) - f(c)}{x-c} - L| &= |\frac{h(x) - h(c)}{x-c} - L| \\
+    & < \varepsilon
+\end{align*}
+
+
+Therefore, for all $x$,
+\begin{align*}
+    |\frac{f(x) - f(c)}{x-c} - L| < \varepsilon
+\end{align*}
+
+Which means that:
+
+\begin{align*}
+    &\forall \varepsilon > 0, \exists\;\delta > 0 \quad \text{s.t.} \quad 0< |x-c| < \delta \implies |\frac{f(x) - f(c)}{x-c} - L| < \varepsilon \\
+\end{align*}
+
+Which in turn, means:
+
+\begin{align*}
+    \lim_{x\to c}\frac{f(x) - f(c)}{x-c} = L
+\end{align*}
+
+Which implies $f$ is differentiable at $x = c$, as required to show. $\blacksquare$.
+
+\begin{question}{2.4.78}
+    Find the derivative of:
+
+    \[
+        3y = 5x^2 + \sqrt[3]{y-2}
+    \]
+\end{question}
+
+Taking the derivative of both sides, we get:
+
+\begin{align*}
+    3\frac{dy}{dx} &= 10x + \frac{1}{3}(y-2)^{\frac{2}{3}}\frac{dy}{dx} \\
+    3\frac{dy}{dx} -  \frac{1}{3}(y-2)^{-\frac{2}{3}}\frac{dy}{dx} &= 10x  \\
+    \frac{dy}{dx}(3 -  \frac{1}{3}(y-2)^{-\frac{2}{3}}) &= 10x  \\ 
+    \frac{dy}{dx} &= \frac{10x}{(3 -  \frac{1}{3}(y-2)^{-\frac{2}{3}})}  \\ 
+\end{align*}
+
+\begin{question}{2.4.84}
+    \[
+        y^3 -3y -x = 1
+    \]
+\end{question}'
+
+(a):
+
+\begin{align*}
+    y^3 -3y -x = 1\\
+    y^3 -3y = 0\\
+    y(y^2 - 3) = 0\\
+    y = 0, \pm \sqrt{3}
+\end{align*}
+
+\begin{align*}
+    3y^2\frac{dy}{dx} -3\frac{dy}{dx} - 1 = 0\\
+    \frac{dy}{dx}(3y^2 - 3) = 1\\
+   \frac{dy}{dx}= \frac{1}{3(y^2-1)}\\
+    \frac{dy}{dx}\Big|_{y=0} = -\frac{1}{3} \\
+    \frac{dy}{dx}\Big|_{y=\sqrt{3}} = \frac{1}{6} \\
+    \frac{dy}{dx}\Big|_{y=-\sqrt{3}} = \frac{1}{6} \\
+\end{align*}
+
+(b):
+
+\begin{align*}
+    y^3 -3y -x = 1\\
+    8 - 6 - x  = 1\\
+    x = 1\\
+\end{align*}
+
+\begin{align*}
+    3y^2\frac{dy}{dx} -3\frac{dy}{dx} - 1 = 0\\
+    \frac{dy}{dx}(3y^2 - 3) = 1\\
+   \frac{dy}{dx}= \frac{1}{3(y^2-1)}\\
+    \frac{dy}{dx}\Big|_{y=2} = \frac{1}{9} \\
+\end{align*}
+
+(c):
+
+
+\begin{align*}
+    3y^2\frac{dy}{dx} -3\frac{dy}{dx} - 1 = 0\\
+    \frac{dy}{dx}(3y^2 - 3) = 1\\
+   \frac{dy}{dx}= \frac{1}{3(y^2-1)}\\
+   0 = \frac{1}{3(y^2-1)}\\
+     0 = 1 \\
+    DNE
+\end{align*}
+
+
+
+(d):
+
+
+\begin{align*}
+    3y^2\frac{dy}{dx} -3\frac{dy}{dx} - 1 = 0\\
+    \frac{dy}{dx}(3y^2 - 3) = 1\\
+    \frac{dy}{dx}= \frac{1}{3(y^2-1)}\\
+    0 = \frac{1}{3(y^2-1)}\\
+    3(y^2 -1) = 0
+    y^2 - 1 = 0
+    y = \pm 1
+\end{align*}
+
+\begin{align*}
+    y^3 -3y -x = 1\\
+    1 - 3 -x =  1\\
+    x = -3\\
+    (-3, 1)
+\end{align*}
+
+\begin{align*}
+    y^3 -3y -x = 1\\
+    -1 + 3  -x = 1\\
+    x = 1\\
+    (1, -1)
+\end{align*}
+\begin{question}{2.5.26}
+    Find the derivative of
+    
+    \[
+        f(x) = 3^x + \log_3 x
+    \]
+\end{question}
+
+\begin{align*}
+    f'(x) = \ln3(3^x) + \frac{1}{x\ln3}
+\end{align*}
+
+\begin{question}{2.5.36}
+    Find the derivative of
+    
+    \[
+        f(x) = \sqrt{\ln(x^2 + 1)}
+    \]
+\end{question}
+\begin{align*}
+    f(x) = (\ln(x^2 + 1))^{\frac{1}{2}} \\
+\end{align*}
+
+\begin{align*}
+    f'(x) &= \frac{1}{2}(\ln(x^2 + 1))^{-\frac{1}{2}} \cdot \frac{1}{x^2 + 1} \cdot 2x \quad \text{Chain Rule}\\
+    &= \frac{1}{2\sqrt{\ln(x^2 + 1)}} \cdot \frac{2x}{x^2 + 1} \\
+    &= \frac{2x}{2(x^2+1)\sqrt{\ln(x^2 + 1)}} \\
+    &= \frac{x}{(x^2+1)\sqrt{\ln(x^2 + 1)}} \\
+\end{align*}
+
+\begin{question}{2.5.42}
+    Find the derivative of
+    
+    \[
+        f(x) = \ln(x^x)
+    \]
+\end{question}
+
+\begin{align*}
+    f(x) = x\ln x
+\end{align*}
+
+\begin{align*}
+    f'(x) &= x\frac{1}{x} + \ln x \quad \text{Product Law}\\
+    &= 1 + \ln x 
+\end{align*}
+
+\begin{question}{2.5.52}
+    Find the derivative of
+
+    \[
+        f(x) = \frac{e^{2x}(x^3-2)^4}{x(3e^{5x}+1)}
+    \]
+\end{question}
+
+    \begin{align*}
+        \ln(y) = \ln(\frac{e^{2x}(x^3-2)^4}{x(3e^{5x}+1)})
+    \end{align*}
+
+    \begin{align*}
+        \ln(y) &= \ln(e^{2x}) + 4\ln(x^3-2) - \ln x - \ln(3e^{5x} + 1) \\
+        \frac{1}{y} y' &= 2 + \frac{12x^2}{x^3-2} - \frac{1}{x} - \frac{15e^{5x}}{3e^{5x} + 1} \\
+        f'(x) &= (y)(2 + \frac{12x^2}{x^3-2} - \frac{1}{x} - \frac{15e^{5x}}{3e^{5x} + 1}) \\
+        f'(x) &= (\frac{e^{2x}(x^3-2)^4}{x(3e^{5x}+1)})(2 + \frac{12x^2}{x^3-2} - \frac{1}{x} - \frac{15e^{5x}}{3e^{5x} + 1}) \\
+    \end{align*}
+
+\begin{question}{2.6.30}
+    Find the derivative of 
+
+    \[
+        f(x) = \frac{\log_3(3^x)}{\sin^2x + \cos^2x}
+    \]
+\end{question}
+
+\begin{align*}
+    f(x) &= \frac{\log_3(3^x)}{\sin^2x + \cos^2x} \\
+    &= \frac{\log_3(3^x)}{1} \\
+    &= \log_3(3^x) \\
+    &= x\log_3(3) \\
+    &= x(1) \\
+    &= x
+\end{align*}
+
+\begin{align*}
+    f'(x) = 1
+\end{align*}
+\begin{question}{2.6.36}
+    Find the derivative of 
+
+    \[
+        f(x) = \ln(x\sin x)
+    \]
+\end{question}
+
+\begin{align*}
+    f'(x) &= \frac{1}{x\sin x} \cdot (x\cos x + \sin x) \\
+    &= \frac{x\cos x + \sin x}{x\sin x} \\
+    &= \frac{x\cos x}{x \sin x} + \frac{\sin x}{x \sin x} \\
+    &= \frac{\cos x}{\sin x} + \frac{1}{x} \\
+    &= \cot x + 1
+\end{align*}
+
+\begin{question}{2.6.64}
+    Find the derivative of
+
+    \[
+        y = (\sec x)^x
+    \]
+\end{question}
+\begin{align*}
+    \ln y &= \ln((\sec x)^x) \\
+    &= x\ln(\sec x)
+\end{align*}
+
+\begin{align*}
+    \frac{y'}{y} &= \ln(\sec x) + x \cdot \frac{1}{\sec x} \cdot \sec(x)\tan(x) \\
+    &= \ln(\sec x) + x\tan x \\
+    y' &= (y)(\ln(\sec x) + x\tan x) \\
+    y' &= ((\sec x)^x)(\ln(\sec x) + x\tan x)
+\end{align*}
+\begin{question}{2.6.74}
+    Find a function that has the derivative:
+
+    \[
+        f'(x) = \frac{1}{1-9x^2}
+    \]
+\end{question}
+
+We notice how this function looks similar to the derivative of the inverse hyperbolic tangent function:
+
+\begin{align*}
+    \frac{dy}{dx} \tanh^{-1} x = \frac{1}{1-x^2}
+\end{align*}
+
+Let's sub in $3x$ in the argument of $\tanh^{-1}$ to get $1-9x^2$ in the denominator:
+
+\begin{align*}
+    \frac{dy}{dx} \tanh^{-1} 3x &= \frac{1}{1-(3x)^2}(3) \\
+    &= \frac{3}{1-9x^2}
+\end{align*}
+
+Finally, lets multiply the function by $\frac{1}{3}$ to get rid of the numerator.
+
+\begin{align*}
+    \frac{dy}{dx} (\frac{1}{3}\tanh^{-1} 3x) &= \frac{1}{3}\frac{1}{1-(3x)^2}(3) \\
+    &= \frac{1}{3}\frac{3}{1-9x^2} \\
+    &= \frac{1}{1-9x^2} \\
+\end{align*}
+
+Therefore, a function that has the derivative $ \frac{1}{1-9x^2}$ is $\frac{1}{3} \tanh^{-1} 3x$, as required to show. $\blacksquare$.
+
+Note that since $\tanh^{-1} x$ is defined strictly on $(-1, 1)$, $f(x)$ is defined on solely $(-\frac{1}{3}, \frac{1}{3})$. The derivative is also only defined on the same interval.
+\end{document}

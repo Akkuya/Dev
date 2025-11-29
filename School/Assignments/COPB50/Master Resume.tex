@@ -1,0 +1,189 @@
+% article class because we want to fully customize the page and not use a cv template
+\documentclass[a4paper,12pt]{article}
+
+%----------------------------------------------------------------------------------------
+%	FONT
+%----------------------------------------------------------------------------------------
+
+% % fontspec allows you to use TTF/OTF fonts directly
+% \usepackage{fontspec}
+% \defaultfontfeatures{Ligatures=TeX}
+
+% % modified for ShareLaTeX use
+% \setmainfont[
+% SmallCapsFont = Fontin-SmallCaps.otf,
+% BoldFont = Fontin-Bold.otf,
+% ItalicFont = Fontin-Italic.otf
+% ]
+% {Fontin.otf}
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES
+%----------------------------------------------------------------------------------------
+\usepackage{url}
+\usepackage{parskip} 	
+
+%other packages for formatting
+\RequirePackage{color}
+\RequirePackage{graphicx}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[scale=0.9]{geometry}
+
+%tabularx environment
+\usepackage{tabularx}
+
+%for lists within experience section
+\usepackage{enumitem}
+
+% centered version of 'X' col. type
+\newcolumntype{C}{>{\centering\arraybackslash}X} 
+
+%to prevent spillover of tabular into next pages
+\usepackage{supertabular}
+\usepackage{tabularx}
+\newlength{\fullcollw}
+\setlength{\fullcollw}{0.47\textwidth}
+
+%custom \section
+\usepackage{titlesec}				
+\usepackage{multicol}
+\usepackage{multirow}
+
+%CV Sections inspired by: 
+%http://stefano.italians.nl/archives/26
+\titleformat{\section}{\Large\scshape\raggedright}{}{0em}{}[\titlerule]
+\titlespacing{\section}{0pt}{10pt}{10pt}
+
+%for publications
+\usepackage[style=authoryear,sorting=ynt, maxbibnames=2]{biblatex}
+
+%Setup hyperref package, and colours for links
+\usepackage[unicode, draft=false]{hyperref}
+\definecolor{linkcolour}{rgb}{0,0.2,0.6}
+\hypersetup{colorlinks,breaklinks,urlcolor=linkcolour,linkcolor=linkcolour}
+\addbibresource{citations.bib}
+\setlength\bibitemsep{1em}
+
+%for social icons
+\usepackage{fontawesome5}
+
+%debug page outer frames
+%\usepackage{showframe}
+
+
+% job listing environments
+\newenvironment{jobshort}[2]
+    {
+    \begin{tabularx}{\linewidth}{@{}l X r@{}}
+    \textbf{#1} & \hfill &  #2 \\[3.75pt]
+    \end{tabularx}
+    }
+    {
+    }
+
+\newenvironment{joblong}[2]
+    {
+    \begin{tabularx}{\linewidth}{@{}l X r@{}}
+    \textbf{#1} & \hfill &  #2 \\[3.75pt]
+    \end{tabularx}
+    \begin{minipage}[t]{\linewidth}
+    \begin{itemize}[nosep,after=\strut, leftmargin=1em, itemsep=3pt,label=--]
+    }
+    {
+    \end{itemize}
+    \end{minipage}    
+    }
+
+
+
+%----------------------------------------------------------------------------------------
+%	BEGIN DOCUMENT
+%----------------------------------------------------------------------------------------
+\begin{document}
+
+% non-numbered pages
+\pagestyle{empty} 
+
+%----------------------------------------------------------------------------------------
+%	TITLE
+%----------------------------------------------------------------------------------------
+
+% \begin{tabularx}{\linewidth}{ @{}X X@{} }
+% \huge{Your Name}\vspace{2pt} & \hfill \emoji{incoming-envelope} email@email.com \\
+% \raisebox{-0.05\height}\faGithub\ username \ | \
+% \raisebox{-0.00\height}\faLinkedin\ username \ | \ \raisebox{-0.05\height}\faGlobe \ mysite.com  & \hfill \emoji{calling} number
+% \end{tabularx}
+
+\begin{tabularx}{\linewidth}{@{} C @{}}
+\Huge{Satyajit Datta} \\[7.5pt]
+\end{tabularx}
+
+%----------------------------------------------------------------------------------------
+%	SKILLS
+%----------------------------------------------------------------------------------------
+\section{Skills}
+\begin{tabularx}{\linewidth}{@{}l X@{}}
+Python &  \normalsize{3+ years of experience with a variety of Python libraries.}\\
+Git  &  \normalsize{Used to version control many projects, and to streamline collaboration with other developers.}\\  
+Web Development  &  \normalsize{Created a portfolio website using React to effectively portray my personal projects.}\\  
+Java &  \normalsize{Used in game development, and created a inventory management system in the console.}\\  
+\end{tabularx}
+
+%----------------------------------------------------------------------------------------
+% EXPERIENCE SECTIONS
+%----------------------------------------------------------------------------------------
+
+%Experience
+\section{Work Experience}
+
+\begin{joblong}{Digital Marketer - 23e2 Business Services}{Jul 2024 - Aug 2024}
+\item Generated over \$1000 in sales by utilizing communications techniques to attract clients.
+\item Boosted worker effiency by 50\% by creating a python script to automate tasks that were repeated monotonously. 
+\end{joblong}
+
+\begin{joblong}{Project Manager}{Apr 2025 - Jun 2025}
+\item Assumed responsibility of 3 members in my team and assigned over 15 tasks for effiency and timely delivery.
+\item Hosted 9 weekly stand-up meetings to track progress, resolve obstacles, and improve team communication.
+\item Created an effective link with the developer and design team, making the final product reflect the proposed idea flawlessly.
+\end{joblong}
+
+
+
+%----------------------------------------------------------------------------------------
+%	Projects
+%----------------------------------------------------------ff------------------------------
+\section{Projects}
+\begin{joblong}{Digital Marketer - 23e2 Business Services}{}
+\item Built a multi-command Discord bot using Python and Discord.py to automate server tasks.
+\item Implemented command handling, API calls, and data storage for persistent server info.
+\end{joblong}
+
+\begin{joblong}{React Web App – Personal Dashboard}{}
+\item Built a simple frontend dashboard using React and functional components.
+\item Used hooks (useState/useEffect) to manage state and dynamic UI behavior.
+\end{joblong}
+
+%Projects
+\section{Relevant Coursework}
+
+\begin{tabularx}{\linewidth}{ @{}l r@{} }
+\textbf{Introduction to Computer Science} & \\[3pt]
+\multicolumn{2}{@{}X@{}}{Created a fantasy hocket draft program where I utliized Python libaries to create an effective draft system. I created unit tests to thoroughly test my code, and utliized string manipulation to read and edit lines in a seperate file.} \\
+
+\textbf{Introduction to Computer Science} & \\[3pt]
+\multicolumn{2}{@{}X@{}}{Created an advanced encryption system in python using binary matrices. I developed algorithms to rotate, flip, and shift matrices, and to convert binary data to string messages.}
+
+\end{tabularx}
+%----------------------------------------------------------------------------------------
+%	EDUCATION
+%----------------------------------------------------------ff------------------------------
+\section{Education}
+\begin{tabularx}{\linewidth}{@{}l X@{}}	
+2025 - present & Hons. Bachelors in Computer Science at \textbf{University of Toronto} \hfill \normalsize (GPA: 4.0/4.0) \\
+\end{tabularx}
+
+
+\vfill
+\center{\footnotesize Last updated: \today}
+
+\end{document}
