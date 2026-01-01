@@ -1,0 +1,602 @@
+\documentclass[]{article}
+
+% Imports the catppuccin theme, using the mocha flavor,
+% from the directory above. Actual implementation
+% wouldn't need the import package unless the theme
+% and the document are in different directories.
+\usepackage{import}
+\usepackage{xcolor}
+% \usepackage{fancyhdr}
+\usepackage{cancel}
+\usepackage{mathtools}
+
+% For permutations and combinations
+\newcommand\Myperm[2][^n]{\prescript{#1\mkern-2.5mu}{}P_{#2}}
+\newcommand\Mycomb[2]{\prescript{#1\mkern-0.5mu}{}C_{#2}}
+
+% Colors
+\definecolor{yorhabg}{HTML}{FFFFFF}
+\definecolor{yorhafg}{HTML}{000000}
+\definecolor{yorhagrid}{HTML}{B5AF9C}
+\definecolor{mred}{HTML}{D67069}
+\definecolor{mblue}{HTML}{6887A1}
+
+\pagecolor{yorhabg}
+\color{yorhafg}
+
+\usepackage{preamble}
+
+% Removes padding above title
+\usepackage{titling}
+\setlength{\droptitle}{-10em}
+
+% Font package
+\usepackage[T1]{fontenc}
+
+\usepackage{fouriernc}
+
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[skins, most]{tcolorbox}
+\usepackage{enumitem}
+
+\DeclareMathOperator{\sgn}{sgn}
+
+\usepackage{tikz}
+\usepackage{eso-pic}
+\usetikzlibrary{calc,shadows.blur}
+\usetikzlibrary{angles, quotes}
+\usetikzlibrary{3d}
+
+% Margins
+\topmargin=0in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\AtBeginEnvironment{tcolorbox}{\small}
+
+\newtcolorbox{imp}{enhanced,arc=0mm,colback=yorhabg,colframe=mred,leftrule=10mm,coltext=yorhafg,%
+overlay={\node[anchor=west,outer sep=2pt] at (frame.west) {\includegraphics[width=6mm]{images/imageb.png}}; }}
+
+\newtcolorbox{shortcut}{enhanced,arc=0mm,colback=yorhabg,colframe=mred,leftrule=10mm,coltext=yorhafg, coltitle=yorhabg, title=\texttt{Shortcut.}, 
+overlay={\node[anchor=west,outer sep=2pt] at (frame.west) {\includegraphics[width=6mm]{images/imageb.png}}; }}
+
+\newtcolorbox{question}[1]{
+    enhanced, 
+    colback=yorhabg,
+    colframe=mblue,
+    coltext=yorhafg,
+    coltitle=yorhabg,
+    attach boxed title to top left={yshift*=-\tcboxedtitleheight}, 
+    title=\texttt{#1},
+    boxed title size=title,
+    boxed title style={%
+        rounded corners=northeast, 
+        rounded corners=northwest, 
+        colback=tcbcolframe, 
+        boxrule=0pt,
+    },
+    underlay boxed title={%
+        \path[fill=tcbcolframe] (title.south west)--(title.south east) 
+            to[out=0, in=180] ([xshift=5mm]title.east)--
+            (title.center-|frame.east)
+            [rounded corners=5pt] |- 
+            (frame.north) -| cycle; 
+    },
+}
+
+\newcommand\bb[1]{\textcolor{yorhafg}{\textbf{#1}}}
+
+\title{\textbf{CSCA67 - Assignment \#4}}
+\author{Satyajit Datta \ 1012033336}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{Simple Induction}
+\begin{question}{1.1}
+    Prove that $\sum_{i=1}^{n} F_i^2=F_nF_{n+1}$ for all $n > 0$.
+\end{question}
+
+\underline{\textbf{Base Case}}
+
+\begin{align*}
+    \sum_{i = 0}^{n} F_i^2 = F_nF_{n+1} \\
+    \sum_{i = 0}^{1} F_i^2 = F_1F_{1+1}\\
+    F_1^2 = F_1F_2 \\
+    0^2 = 0 \cdot 1 \\
+    0 = 0 \\
+    T
+\end{align*}
+
+Therefore, $P(1)$.
+\medbreak
+\underline{\textbf{Induction Step}}
+
+\newlength{\spacingA}
+\settowidth{\spacingA}{$\sum_{i = 0}^{k+1} F_i^2$}
+\setcounter{equation}{0}
+\begin{flalign}
+    &\text{Let k be arbitrary.} \\
+    &\quad \text{Suppose k } \ge 1 \\
+    &\quad\quad\text{Suppose } P(k) & \text{Induction Hypothesis} \\
+    &\quad\quad\quad \sum_{i = 0}^{k+1} F_i^2 = \sum_{i = 0}^{k} F_i^2 + F_{k+1}^2 \\
+    &\quad\quad\quad \hspace*{\spacingA} = F_kF_{k+1} + F_{k+1}^2\nonumber &\text{IH} \\
+    &\quad\quad\quad \hspace*{\spacingA} = F_{k+1}(F_k + F_{k+1}) \nonumber\\
+    &\quad\quad\quad \hspace*{\spacingA} = F_{k+1}F_{k+2} \nonumber &\text{Def of } F\\
+    &\quad\quad\quad P(k+1) & \text{Definition of } P\\
+    &\quad\quad P(k) \rightarrow P(k+1) & \text{3, 5, Implication}\\
+    &\quad k \ge 1 \rightarrow (P(k) \rightarrow P(k+1)) & \text{2, 6, Implication}\\
+    &\forall k \ge 1, P(k) \rightarrow P(k+1) & \text{1, 7, Implication}
+\end{flalign}
+
+As required to show. $\blacksquare$.
+
+\begin{question}{1.2}
+    Prove that $\sum_{i=1}^{n} F_{2i-1}=F_{2n}$ for all $n > 0$.
+\end{question}
+
+\underline{\textbf{Base Case}}
+
+\begin{align*}
+    \sum_{i=1}^{n} F_{2i-1}=F_{2n} \\
+    \sum_{i=1}^{1} F_{2i-1}=F_{2}\\
+    F_{2-1} = F_2 \\
+    F_1 = F_2 \\
+    1 = 1 \\
+    T
+\end{align*}
+
+Therefore, $P(1)$.
+\medbreak
+\underline{\textbf{Induction Step}}
+
+\newlength{\spacingB}
+\settowidth{\spacingB}{$\sum_{i = 0}^{k+1} F_{2i+1}$}
+\setcounter{equation}{0}
+\begin{flalign}
+    &\text{Let k be arbitrary.} \\
+    &\quad \text{Suppose k } \ge 1 \\
+    &\quad\quad\text{Suppose } P(k) & \text{Induction Hypothesis} \\
+    &\quad\quad\quad \sum_{i = 0}^{k+1} F_{2i+1} = \sum_{i = 0}^{k} F_{2i+1} + F_{2k+1} \\
+    &\quad\quad\quad \hspace*{\spacingB} = F_{2k} + F_{2k+1}\nonumber &\text{IH} \\
+    &\quad\quad\quad \hspace*{\spacingB} = F_{2k+2} \nonumber &\text{Def of } F\\
+    &\quad\quad\quad \hspace*{\spacingB} = F_{2(k+1)} \\
+    &\quad\quad\quad P(k+1) & \text{Definition of } P\\
+    &\quad\quad P(k) \rightarrow P(k+1) & \text{3, 5, Implication}\\
+    &\quad k \ge 1 \rightarrow (P(k) \rightarrow P(k+1)) & \text{2, 6, Implication}\\
+    &\forall k \ge 1, P(k) \rightarrow P(k+1) & \text{1, 7, Implication}
+\end{flalign}
+
+
+
+\section*{2. Simple and Strong Induction}'
+
+\begin{question}{1}
+    Determine which amounts can be formed using just \$2 bills and \$5 bills. You don’t need to provide an
+explanation, simply state your result.
+\end{question}
+
+Any amount starting from 4 dollars can be made. Also, 2 dollars can be made.
+
+\begin{question}{2}
+    Prove this result using simple induction
+\end{question}
+
+$(2 \ge 0 ) \land (0 \ge 0) \land (4 = 2(2) = 5(0)) = P(4)$
+
+\setcounter{equation}{0}
+\begin{flalign}
+    &\text{Let k be arbitrary} \\
+    &\quad\text{Suppose } k \ge 4 \\
+    &\quad\quad \text{Suppose } P(k) &\text{Induction Hypothesis} \\
+    &\quad\quad\quad \exists x, y, (x \ge 0) \land (y \ge 0) \land (k = 2x + 5y) &\text{3, def}\\
+    &\quad\quad\quad (a \ge 0) \land (b \ge 0) \land (k = 2a + 5b) &\text{4, E.I}\\
+    &\quad\quad\quad a \ge 0 &\text{5, simp.}\\
+    &\quad\quad\quad b \ge 0 &\text{5, simp.}\\
+    &\quad\quad\quad k = 2a + 5b &\text{5, simp.}\\
+    &\quad\quad\quad \text{Suppose } b = 1 &\text{Case 1, no 5 dollar bills.} \\
+    &\quad\quad\quad\quad 2a = k - 5b \ge 4 - 0 = 4 &\text{2, 7 8} \\
+    &\quad\quad\quad\quad a \ge 2 &\text{10} \\
+    &\quad\quad\quad\quad a-2 \ge 0 &\text{11} \\
+    &\quad\quad\quad\quad b+1 \ge 0 &\text{7} \\
+    &\quad\quad\quad\quad 2(a-2) + 5(b+1) = 2a + 5b + 1 = k+1 &\text{8} \\
+    &\quad\quad\quad\quad \exists x, y, (x \ge 0) \land (y \ge 0) \land (k+1 = 2x + 5y) &\text{12-14, conj, E.G}\\
+    &\quad\quad\quad\quad P(k+1) &\text{15, def} \\
+    &\quad\quad\quad \text{Suppose } b \ge 1 &\text{Case 2, at least 1 5 dollar bills.} \\
+    &\quad\quad\quad\quad b - 1 \ge 0  &\text{17} \\
+    &\quad\quad\quad\quad a + 2 \ge 0 &\text{6} \\
+    &\quad\quad\quad\quad 3(a+2) + 5(b-1) = k-1 &\text{8} \\
+    &\quad\quad\quad\quad \exists x, y, (x \ge 0) \land (y \ge 0) \land (k+1 = 2x + 5y) &\text{18-20, conj, E.G}\\
+    &\quad\quad\quad P(k+1) &\text{9, 16, 17, 22, cases}\\
+    &\quad\quad P(k) \rightarrow P(k+1) &\text{3, 23, implication} \\
+    &\quad(k \ge 4) \rightarrow  P(k) \rightarrow P(k+1) &\text{2, 24, implication} \\
+    &\forall k \ge 4,  P(k) \rightarrow P(k+1) &\text{1, 25, U.G} \\
+\end{flalign}
+
+\begin{question}{3}
+    Prove this result using strong induction
+\end{question}
+
+
+\setcounter{equation}{0}
+\begin{flalign}
+    &\text{Let k be arbitrary.} \\
+    &\quad \text{Suppose k } \ge 4 \\
+    &\quad\quad\text{Suppose } \forall 4 \le i < k, P(i) & \text{Induction Hypothesis} \\
+    &\quad\quad\quad\text{Suppose } k \le 5 \\
+    &\quad\quad\quad\quad (2 \ge 0) \land (0 \ge 0) \land (4 = 2\cdot 2 + 0 \cdot 5) \\
+    &\quad\quad\quad\quad (0 \ge 0) \land (1 \ge 0) \land (5 = 0\cdot 2 + 1 \cdot 5) \\
+    &\quad\quad\quad\quad \exists x, y, (x \ge 0) \land (y \ge 0) \land (k = 2x + 5y) &\text{5, 6, Cases}\\
+    &\quad\quad\quad\quad P(k) &\text{7, def}\\
+    &\quad\quad\quad\text{Suppose } k \ge 6 \\
+    &\quad\quad\quad\quad 4 \le k-2 \le k \\
+    &\quad\quad\quad\quad P(k-3) &\text{3, 10, UMP, IH}\\
+    &\quad\quad\quad\quad \exists x, y, (x \ge 0) \land (y \ge 0) \land (k-2 = 2x + 5y) &\text{11, def}\\
+    &\quad\quad\quad\quad (x \ge 0) \land (y \ge 0) \land (k-2 = 2x + 5y) &\text{12, E.I}\\
+    &\quad\quad\quad\quad (x+1 \ge 0) \land (y \ge 0) \land (k = 2(x+1) + 5y) &\text{Add 2 dollar bill}\\
+    &\quad\quad\quad\quad \exists x, y, (x \ge 0) \land (y \ge 0) \land (k = 2x + 5y) &\text{14, E.G}\\
+    &\quad\quad\quad\quad P(k) &\text{15, def}\\
+    &\quad\quad\quad P(k) &\text{4, 8, 9, 16, Cases} \\
+    &\quad\quad \forall 4 \le i < k, P(i) \rightarrow P(k) &\text{3, 17, implication} \\
+    &\quad(k \ge 4) \rightarrow  \forall 4 \le i < k, P(i) \rightarrow P(k) &\text{2, 18, implication} \\
+    &\forall k \ge 4, P(k) &\text{1, 19, U.G, Strong Induction}
+\end{flalign}
+
+\section*{3. Strong Induction}
+
+\begin{question}{3.1}
+    Consider the following sequence definition:
+    \begin{align*}
+        &a_0 = 1 \\
+        &a_1 = 2 \\
+        &a_n = 5a_{n-1} - 6a_{n-2} \text{ for } n \ge 2
+    \end{align*}
+    Prove that $a_n = 2^n$ for all integers $n \ge 0$
+\end{question}
+
+\setcounter{equation}{0}
+\newlength{\spacingC}
+\settowidth{\spacingC}{$a_k$}
+\begin{flalign}
+&\text{Let k be arbitrary.} \\
+&\quad \text{Suppose k } \ge 0 \\
+&\quad\quad\text{Suppose } \forall 0 \le i < k, P(i) & \text{Induction Hypothesis} \\
+&\quad\quad\quad\text{Assume } k = 0 \\
+&\quad\quad\quad\quad a_0 = 1 \\
+&\quad\quad\quad\quad \quad = 2^0 \nonumber \\
+&\quad\quad\quad\quad P(k)&\text{5, definition of P} \\
+&\quad\quad\quad\text{Assume } k = 0 \\
+&\quad\quad\quad\quad a_1 = 2 \\
+&\quad\quad\quad\quad \quad = 2^1 \nonumber \\
+&\quad\quad\quad\quad P(k)&\text{8, definition of P}\\
+&\quad\quad\quad\text{Assume } k \ge 2 \\
+&\quad\quad\quad\quad a_k = 5a_{k-1} - 6a_{k-2} \\
+&\quad\quad\quad\quad \hspace*{\spacingC} = 5(2^{k-1}) - 6(2^{k-2}) &\text{IH} \nonumber\\
+&\quad\quad\quad\quad \hspace*{\spacingC} = 2^{k-2}(5(2) - 6) \nonumber\\
+&\quad\quad\quad\quad \hspace*{\spacingC} = 2^{k-2}(4) \nonumber\\
+&\quad\quad\quad\quad \hspace*{\spacingC} = 2^{k-2}(2^2) \nonumber\\
+&\quad\quad\quad\quad \hspace*{\spacingC} = 2^{k} \nonumber\\
+&\quad\quad\quad\quad P(k) &\text{11, definition of P}\\
+&\quad\quad\quad P(k) &\text{4, 6, 7, 9, 10, 12, Cases}\\
+&\quad\quad \forall 0 \le i < k, P(i) \rightarrow P(k) &\text{3, 14, implication}\\
+&\quad (k \ge 0) \rightarrow  \forall 0 \le i < k, P(i) \rightarrow P(k) &\text{2, 15, implication}\\
+&\forall k \ge 0, \forall 0 \le i < k, P(i) \rightarrow P(k) &\text{1, 16, U.G}\\
+&\forall k \ge 0, P(k) &\text{17, Strong Induction}\\
+\end{flalign}
+
+As required to show. $\blacksquare$.
+
+
+\section*{4. Counting} 
+\begin{question}{a}
+    Exactly 6 characters, each character is a lowercase letter or a digit?
+\end{question}
+
+\begin{align*}
+    &\text{Each character: 26 letters + 10 digits = 36 choices.} \\
+    &\text{Total 6-character strings: } 36^6 &\text{Product Rule}
+\end{align*}
+
+\begin{question}{b}
+    At least 5 characters and at most 7 characters, each character is a lowercase letter or a digit?
+\end{question}
+
+\begin{align*}
+    &\text{Each character: 26 letters + 10 digits = 36 choices.} \\
+    &\text{Total 5-character strings: } 36^5 &\text{Product Rule} \\
+    &\text{Total 6-character strings: } 36^6 &\text{Product Rule} \\
+    &\text{Total 7-character strings: } 36^7 &\text{Product Rule} \\
+    &\text{Total strings: } 36^5 + 36^6 + 36^7 &\text{Sum Rule} \\
+\end{align*}
+
+\begin{question}{C}
+    Exactly 6 characters, each character is a lowercase letter or a digit, cannot start with a digit?
+\end{question}
+
+\begin{align*}
+    &\text{Each character: 26 letters + 10 digits = 36 choices.} \\
+    &\text{Total 4-character strings: } 36^4 &\text{Product Rule} \\
+    &\text{Number of letters: } 26  \\
+    &\text{Total strings: } 26 \cdot 36^4  &\text{Product Rule} \\
+\end{align*}
+
+\begin{question}{d}
+    Exactly 6 characters, each character is a lowercase letter or a digit, must start with a letter and end with a
+    digit?
+\end{question}
+
+\begin{align*}
+    &\text{Each character: 26 letters + 10 digits = 36 choices.} \\
+    &\text{Total 4-character strings: } 36^4 &\text{Product Rule} \\
+    &\text{Number of letters: } 26  \\
+    &\text{Number of numbers: } 10  \\
+    &\text{Total strings: } 26 \cdot 36^4 \cdot 10 &\text{Product Rule} \\
+    &\text{Total strings: } 260 \cdot 36^4  \\
+\end{align*}
+
+\begin{question}{e}
+    Exactly 6 characters, each character is a lowercase letter or a digit, with no repeated characters?
+\end{question}
+
+\begin{align*}
+    &\text{Each character: 26 letters + 10 digits = 36 choices.} \\
+    &\text{r: } 6  \\
+    &\text{r-permutations } P(36, 6)  \\
+    &\text{r-permutations } \frac{36!}{(36-6)!}  \\
+    &\text{r-permutations } 36 \cdot 35 \cdot 34 \cdot 33 \cdot \cdot 32 \cdot 31 &\text{Product Rule} \\
+\end{align*}
+
+\begin{question}{f}
+    Exactly 6 characters, each character is a lowercase letter or a digit, palindromes are not allowed?
+\end{question}
+
+\begin{align*}
+    &\text{Each character: 26 letters + 10 digits = 36 choices.} \\
+    &\text{Total 6-character strings: } 36^6 &\text{Product Rule} \\
+    &\text{Palindromes } 36^3  \\
+    &\text{No palindromes } 36^6 - 36^3  \\
+    &\text{No palindromes } 36^3(36^3 - 1)  \\
+\end{align*}
+
+\begin{question}{g}
+    Exactly 6 characters, each character is a lowercase letter or a digit, starts with “a67”?
+\end{question}
+
+\begin{align*}
+    &\text{Each character: 26 letters + 10 digits = 36 choices.} \\
+    &\text{Total 6-character strings starting with a67: } 36^3 &\text{Product Rule} \\
+\end{align*}
+
+\begin{question}{h}
+    Exactly 6 characters, each character is a lowercase letter or a digit, starts with “a67” and ends with “a67”?
+\end{question}
+
+\begin{align*}
+    &\text{Each character: 26 letters + 10 digits = 36 choices.} \\
+    &\text{Total 6-character strings starting and ending with a67: } 1 &\text{a67a67} \\
+\end{align*}
+
+\begin{question}{i}
+    Exactly 6 characters, each character is a lowercase letter or a digit, starts with “a67” or ends with “a67”?
+\end{question}
+
+\begin{align*}
+    &\text{Each character: 26 letters + 10 digits = 36 choices.} \\
+    &\text{Total 6-character strings starting with a67: } 36^3 &\text{Product Law} \\
+    &\text{Total 6-character strings ending with a67: } 36^3 &\text{Product Law} \\
+    &\text{Total strings} 2(36^3) &\text{Sum Law} \\
+\end{align*}
+
+\begin{question}{j}
+    Exactly 6 characters, each character is a lowercase letter or a digit, contains “a67” (any number of times,
+anywhere)?
+\end{question}
+
+\begin{align*}
+    &\text{Each character: 26 letters + 10 digits = 36 choices.} \\
+    &\text{Positions that a67 could be} 4 &\text{1, 2, 3, 4} \\
+    &\text{Total strings: } 4(36^3) - 1 &\text{Product Law, Difference Law (position 1 and 4 both contain a67a67)} \\
+\end{align*}
+
+\begin{question}{k}
+    Exactly 6 characters, each character is a lowercase letter or a digit, contains “a67” exactly once?
+\end{question}
+
+\begin{align*}
+    &\text{Each character: 26 letters + 10 digits = 36 choices.} \\
+    &\text{Positions that a67 could be} 4 &\text{1, 2, 3, 4} \\
+    &\text{Total strings: } 4(36^3) - 2 &\text{Product Law, Difference Law (position 1 and 4 both contain a67a67)} \\
+\end{align*}
+
+
+\begin{question}{k}
+    Exactly 6 characters, each character is a lowercase letter or a digit, does not contain “a67”?
+\end{question}
+
+\begin{align*}
+    &\text{Each character: 26 letters + 10 digits = 36 choices.} \\
+    &\text{Positions that a67 could be} 4 &\text{1, 2, 3, 4} \\
+    &\text{Total strings that contain a67: } 4(36^3) - 1 &\text{Product Law, Difference Law (position 1 and 4 both contain a67a67)} \\
+    &\text{Total possible } 36^6 &\text{Product Law} \\
+    &\text{Not containing a67, } 36^6 - 4(36^3) + 1 &\text{Complement of containing a67} \\
+\end{align*}
+
+\section*{5. Counting}
+A Department has 12 faculty members, 6 staff, 200 undergraduate students, and 50 graduate students. It is
+forming a committee to decide on a new program in Machine Learning. In how many ways can we form this
+committee, if we make the following decisions?
+
+\begin{question}{1}
+    It contains 2 faculty members, 1 staff member, and nobody else?
+\end{question}
+
+\begin{align*}
+    &\text{Ways to pick 2 faculty: } C(12, 2)    \\
+    &\text{Ways to pick 2 faculty: } \frac{12!}{2!10!}    \\
+    &\text{Ways to pick 2 faculty: } 66    \\
+    &\text{Staff members} 6  \\
+    &\text{Combinations } 66 \cdot 6 = 396 &\text{Product Law}
+\end{align*}
+
+\begin{question}{2}
+    It contains 2 faculty members, 1 staff member, 1 undergraduate student, and 1 graduate student?
+\end{question}
+
+\begin{align*}
+    &\text{Ways to pick 2 faculty: } 66    \\
+    &\text{Staff members} 6  \\
+    &\text{graduate stduents} 200  \\
+    &\text{undergraduate stduents} 50  \\
+    &\text{Combinations } 66 \cdot 6 \cdot 200 \cdot 50 = 4950000 &\text{Product Law}
+\end{align*}
+
+\begin{question}{3}
+    It contains at least 2 faculty members, at least 1 student, and no staff; and it contains 5 members in total?
+\end{question}
+
+Suppose the possible faculty members are k, then the students in that scenario is 5-k, then the possible scenarios for faculty vs student is
+\begin{align*}
+    2 : 3  \\
+    3 : 2 \\ 
+    4 : 1
+\end{align*}
+
+For each scenario, choosing faculty is C(12, k), students is C(250, 5-k). Then, you add up the scenarios for every K value.
+Therefore, the possible scenarios 
+\begin{align*}
+    &C(12, 2) \cdot C(250, 3) + C(12, 3) \cdot C(250, 2) \cdot C(12, 4) \cdot C(250, 1) \\
+    &=\frac{12!}{2!10!} \cdot \frac{250!}{3!247!} + \frac{12!}{3!9!} \cdot \frac{250!}{2!248!} + \frac{12!}{4!8!} \cdot \frac{250!}{249!}\\
+    &=\frac{12 \cdot 11}{2} \cdot \frac{250 \cdot 249 \cdot 248}{6} + \frac{12 \cdot 11 \cdot 10}{6} + \cdot \frac{250 \cdot 249}{2} + \frac{12 \cdot 11 \cdot 10 \cdot 9}{24} \cdot 250 \\
+    &=6 \cdot 125 \cdot 83 \cdot 248 + 220 \cdot 125 \cdot 249+ 30\cdot 99 \cdot 250
+\end{align*}
+
+\begin{question}{4}
+    It contains at least 1 faculty member and at least 1 staff member, and has at least as many students as
+non-students; and it contains 6 members in total?
+\end{question}
+
+Either there are 2 non-student members (1 faculty, 1 staff), or 3 non-student members (2 faculty, 1 staff) or (1 faculty, 2 staff), The non-students is given as $C(250, 6-k)$, where k is the non-student members.
+
+If there are 2 non student members: $12 \cdot 6 \cdot \frac{250!}{4!246!} = 12 \cdot 6 \cdot 250 \cdot 83 \cdot 31 \cdot 247 = S_1$
+If there are (2 faculty, 1 staff): $C(12, 2) \cdot 6 \cdot \frac{250!}{4!247!} = 66 \cdot 6 \cdot 125 \cdot 83 \cdot 248 = S_2$
+If there are (1 faculty, 2 staff): $12 \cdot C(6, 2) \cdot \frac{250!}{4!247!} = 12 \cdot 15 \cdot 125 \cdot 83 \cdot 248 = S_3$
+ All of the above are derived from product rule, then from sum rule, the total possibilities are $S_1 + S_2 + S_3$
+
+\begin{question}{5}
+    It contains at least 1 faculty or staff member; and it contains 6 members in total?
+\end{question}
+
+Take scenarios where there are no faculty or staff (only students)
+\begin{align*}
+    &C(250, 6) \\
+    &C(268, 6) &\text{Possible combinations of any 6 people} \\
+    &C(268, 6) - C(250, 6) &\text{Complement of only students} \\
+    &= \frac{268!}{6!262!} - \frac{250!}{6!244!} \\
+    &= \frac{268 \cdot 267 \cdot 266 \cdot 265 \cdot 264 \cdot 263 \cdot 250 \cdot 249 \ldots \cdot 245}{6!}
+\end{align*}
+
+\begin{question}{6}
+    Two graduate students have a conflict of interest and may not serve on a committee together. The committee
+contains 1 faculty member, 1 staff member, and 3 students (either graduate or undergraduate).
+\end{question}
+
+\begin{question}{7}
+    The committee needs a Chair, which must be a faculty member or a staff member. It contains 5 members in
+total.
+\end{question}
+
+18 possibilities for a chair, 5 seats left with 267 possible candidates:
+Combinations: $18 \cdot C(267, 5)= 18 \cdot \frac{267!}{5!262!}$ 
+
+\section*{6. Counting}
+
+\begin{question}{1}
+    How many permutations of the letter ABCDEFG contain the string “BCD”?
+\end{question}
+
+Treat "BCD" as 1 letter. Then with the 4 other letters, there are 5! ways to arrage the sequence.
+
+\begin{question}{2}
+How many permutations of the letter ABCDEFG contain the string “CFGA”?
+\end{question}
+
+Treat "CFGA" as 1 letter. Then with the 3 other letters, there are 4! ways to arrage the sequence.
+
+\begin{question}{3}
+ How many permutations of the letter ABCDEFG contain the strings “ABC” and “GFE”?\end{question}
+
+ Treat "ABC" as 1 letter. Treat "GFE" as another letter. The only remaining letter is D. Therefore there are 3! ways to arrage the sequence.
+ 
+\begin{question}{4}
+    How many permutations of the letter ABCDEFG contain the strings “BC”, “AF”, and “DE”?
+\end{question} 
+
+Treat "BC", "AF", "DE" as one letter each. Only remaining letter is G. Therefor there are 4! ways to arrage this sequence
+
+\begin{question}{5}
+    How many ways are there for four men and five women to stand in a line, so that all men stand together?
+\end{question}
+
+Treat the 4 men as one person. Then, with the 5 other women, there are 6! ways to arrage the people such that then men are togehter.
+However, the 4 men can be arranged in a group together, so there are 4! ways to arrage that.
+In total, by product law, there are 6!4! ways to arrage all the people.
+
+
+\begin{question}{6}
+    How many ways are there for four men and five women to stand in a line, so that all women stand together?
+\end{question}
+
+Treat the 5 women as one person. Then, with the 4 other men, there are 5! ways to arrage the people such that then men are togehter.
+However, the 5 women can be arranged in a group together, so there are 5! ways to arrage that.
+In total, by product law, there are $(5!)^2$ ways to arrage all the people.
+
+\begin{question}{7}
+     How many ways are there for four men and five women to stand in a line, so that no two men stand next to
+each other?
+\end{question}
+
+After every man, there is a woman, therefore after using 4 women, there is 1 woman that can be placed anywhere in the sequence. There are 8 people, therefore there are 9 places to put the remaining woman, resulting in 9 possible ways.
+
+\begin{question}{8}
+     How many bit strings contain exactly eight 0s and ten 1s, if every 0 must be immediately followed by a 1?
+
+\end{question}
+
+    Similarly to the previous question, treating every "01" as one character, we have 8 characters, and 2 extra ones, resulting in 11! ways to arrage this sequence.
+
+\begin{question}{9}
+    How many licence plates consisting of 4 uppercase letters followed by 3 numbers, contain no repeated letters
+and no repeated digits?
+\end{question}
+
+    There are 26 uppercase letters, 10 numbers. 
+
+    4 digit sequence of uppercase letters: P(26, 4)
+    3 digit sequence of numbers: P(10, 3)
+    Product law: $P(26, 4) \cdot P(10, 3) = \frac{26!10!}{3!4!7!22!}$
+    
+\begin{question}{10}
+    How many licence plates consisting of 4 uppercase letters followed by 3 numbers, contain no repeated letters
+or no repeated digits?
+\end{question}
+
+    There are 26 uppercase letters, 10 numbers. 
+
+    4 digit sequence of uppercase letters: P(26, 4)
+    3 digit sequence of numbers: P(10, 3)
+
+    4 uppercase and repeating numbers: $P(26, 4) \cdot 1000$ ($10^3$) product law
+    repeating letters and 3 numbers: $26^4 \cdot P(10, 3)$  product law
+    Product law: $P(26, 4) \cdot P(10, 3) = \frac{26!10!}{3!4!7!22!}$ (Sequences with both not repeating)
+    Difference Rule: $P(26, 4) \cdot 1000 + 26^4 \cdot P(10, 3) - P(26, 4) \cdot P(10, 3)$
+    $= \frac{1000(26!)}{4!22!} + \frac{(26^4)10!}{3!10!} - \frac{26!10!}{3!4!7!22!}$
+\end{document}
