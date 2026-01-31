@@ -1,0 +1,9 @@
+model:
+  name: llama3
+
+memory:
+  vault_path: "./memory/vault"
+
+permissions:
+  allow_file_read: true
+  allow_file_write: true
