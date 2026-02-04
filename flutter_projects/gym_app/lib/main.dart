@@ -57,7 +57,7 @@ class _MyAppState extends State<MyApp> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.bar_chart),
-              label: 'Analytics',
+              label: 'Test',
             ),
           ],
         ),
