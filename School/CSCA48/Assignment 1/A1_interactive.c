@@ -24,10 +24,23 @@
  * tests below.
  */
 
-#include "MDB-c.c"  // <--- This will import your code so we can
-                    //	use your solution to create a linked
-                    //	list of movie reviews for testing!
+#include "MDB-c.c" // <--- This will import your code so we can
+                   //	use your solution to create a linked
+                   //	list of movie reviews for testing!
+void printNames(ReviewNode *movie)
+{
+    CastList *p;
 
+    if (movie == NULL || movie->review.cast == NULL)
+        return;
+    p = movie->review.cast;
+    printf("The cast for this movie are:\n");
+    while (p != NULL)
+    {
+        printf("Cast Member: %s, Salary: %f\n", p->name, p->salary);
+        p = p->next;
+    }
+}
 /**
  * Reads a movie's name, title, and year from the terminal.
  * Required for inserting new reviews, search, updating, and deletion.
@@ -164,7 +177,7 @@ int main()
             getTitleStudioYear(title, studio, &year);
             printf("Enter the name of the actor you want to add to this movie:\n");
             fgets(name, MAX_STR_LEN, stdin);
-	    printf("Enter the salary for this cast member:\n");
+            printf("Enter the salary for this cast member:\n");
             scanf("%f", &salary);
             getchar();
             insertCastMember(title, studio, year, MDB_head, name, salary);
@@ -172,9 +185,10 @@ int main()
         }
         else if (choice == 10)
         {
-	    whosTheStar(MDB_head);
+            whosTheStar(MDB_head);
         }
-        else if (choice == 11) break;
+        else if (choice == 11)
+            break;
     }
 
     MDB_head = deleteReviewList(MDB_head);
