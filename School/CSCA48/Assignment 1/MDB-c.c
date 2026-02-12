@@ -130,7 +130,13 @@ ReviewNode *newMovieReviewNode()
     /***************************************************************************/
 
     ReviewNode *new_node = NULL;
-
+    MovieReview m;
+    
+    strcpy(m.movie_title, "");
+    strcpy(m.movie_studio, "");
+    m.year = -1;
+    
+    
     return (new_node);
 }
 
