@@ -45,10 +45,10 @@
 
 /* Student identification:
  *
- * Student Name (Last name, First name):
- * Student Number:
- * UTORid:
- * Your instructor's name is:
+ * Student Name (Datta, Sayajit):
+ * Student Number: 1012033336
+ * UTORid: dattasa2
+ * Your instructor's name is: Yiqing Irene Huang
  */
 
 /* Academic Integrity Statement:
@@ -58,7 +58,7 @@
  * including my fellow students, external tutoring services, the internet,
  * or algorithm implementations found online.
  *
- * Sign here with your name:
+ * Sign here with your name: Satyjit Datta
  *
  *
  */
@@ -130,13 +130,16 @@ ReviewNode *newMovieReviewNode()
     /***************************************************************************/
 
     ReviewNode *new_node = NULL;
-    MovieReview m;
-    
-    strcpy(m.movie_title, "");
-    strcpy(m.movie_studio, "");
-    m.year = -1;
-    
-    
+    new_node = calloc(1, sizeof(ReviewNode));
+
+    strcpy(new_node->review.movie_title, "");
+    strcpy(new_node->review.movie_studio, "");
+    new_node->review.year = -1;
+    new_node->review.BO_total = -1;
+    new_node->review.score = -1;
+    new_node->review.cast = NULL;
+    new_node->next = NULL;
+
     return (new_node);
 }
 
@@ -156,6 +159,18 @@ ReviewNode *findMovieReview(char title[MAX_STR_LEN], char studio[MAX_STR_LEN], i
     /***************************************************************************/
     /**********  TO DO: Complete this function *********************************/
     /***************************************************************************/
+
+    ReviewNode *curr = head;
+
+    while (curr != NULL)
+    {
+        MovieReview review = curr->review;
+        if (strcmp(title, review.movie_title) == 0 && strcmp(studio, review.movie_studio) == 0 && year == review.year)
+        {
+            return curr;
+        }
+        curr = curr->next;
+    }
 
     return NULL;
 }
@@ -183,7 +198,29 @@ ReviewNode *insertMovieReview(char title[MAX_STR_LEN], char studio[MAX_STR_LEN],
     /**********  TO DO: Complete this function *********************************/
     /***************************************************************************/
 
-    return NULL; // Remove this before you implement your solution!
+    if (findMovieReview(title, studio, year, head) != NULL)
+    {
+        return head;
+    }
+
+    // Initialize reviewNode and assign values+
+    ReviewNode *r = newMovieReviewNode();
+    strcpy(r->review.movie_title, title);
+    strcpy(r->review.movie_studio, studio);
+    r->review.year = year;
+    r->review.BO_total = BO_total;
+    r->review.score = score;
+
+    // If current list is empty, return the newly created node as the new head,
+    // Its "next" field is already NULL.
+    if (head == NULL)
+    {
+        return r;
+    }
+
+    // Otherwise, change the head of the newly created review to the current head, and return it.
+    r->next = head;
+    return r;
 }
 
 int countReviews(ReviewNode *head)
@@ -195,8 +232,15 @@ int countReviews(ReviewNode *head)
     /***************************************************************************/
     /**********  TO DO: Complete this function *********************************/
     /***************************************************************************/
+    int count = 0;
+    ReviewNode *curr = head;
 
-    return 0; // Remove this before you implement your solution
+    while (curr != NULL)
+    {
+        count++;
+        curr = curr->next;
+    }
+    return count;
 }
 
 void updateMovieReview(char title[MAX_STR_LEN], char studio[MAX_STR_LEN], int year, float BO_total, int score, ReviewNode *head)
@@ -211,6 +255,16 @@ void updateMovieReview(char title[MAX_STR_LEN], char studio[MAX_STR_LEN], int ye
     /***************************************************************************/
     /**********  TO DO: Complete this function *********************************/
     /***************************************************************************/
+
+    ReviewNode *query = findMovieReview(title, studio, year, head);
+    if (query == NULL)
+    {
+        printf("%s", "Sorry, no such movie exists in the database");
+        return;
+    }
+
+    query->review.BO_total = BO_total;
+    query->review.score = score;
 }
 
 ReviewNode *deleteMovieReview(char title[MAX_STR_LEN], char studio[MAX_STR_LEN], int year, ReviewNode *head)
@@ -226,8 +280,29 @@ ReviewNode *deleteMovieReview(char title[MAX_STR_LEN], char studio[MAX_STR_LEN],
     /***************************************************************************/
     /**********  TO DO: Complete this function *********************************/
     /***************************************************************************/
-
-    return NULL; // Remove this before implementing your solution
+    ReviewNode *query = findMovieReview(title, studio, year, head);
+    if (query == NULL)
+    {
+        return head;
+    }
+    else if (query == head)
+    {
+        ReviewNode *new_head = head->next;
+        free(head);
+        return new_head;
+    }
+    ReviewNode *curr = head;
+    while (curr != NULL)
+    {
+        if (curr->next == query)
+        {
+            curr->next = query->next;
+            free(query);
+            return head;
+        }
+        curr = curr->next;
+    }
+    return head;
 }
 
 float printMovieReviews(ReviewNode *head)
@@ -249,9 +324,16 @@ float printMovieReviews(ReviewNode *head)
 
     /***************************************************************************/
     /**********  TO DO: Complete this function *********************************/
-    /***************************************************************************/
-
-    return 0; // Remove this before you implement your solution
+    /*********************************************  ******************************/
+    ReviewNode *curr = head;
+    float BO_total = 0;
+    while (curr != NULL)
+    {
+        MovieReview r = curr->review;
+        printf("%s\n\n%s\n\n%d\n%6f\n%d\n**********************\n", r.movie_title, r.movie_studio, r.year, r.BO_total, r.score);
+        BO_total += r.BO_total;
+    }
+    return BO_total;
 }
 
 float queryReviewsByStudio(char studio[MAX_STR_LEN], ReviewNode *head)
@@ -268,8 +350,19 @@ float queryReviewsByStudio(char studio[MAX_STR_LEN], ReviewNode *head)
     /***************************************************************************/
     /**********  TO DO: Complete this function *********************************/
     /***************************************************************************/
+    ReviewNode *curr = head;
+    float BO_total = 0;
 
-    return 0; // Remove this before you implement your solution
+    while (curr != NULL)
+    {
+        if (strcmp(curr->review.movie_studio, studio) == 0)
+        {
+            MovieReview r = curr->review;
+            printf("%s\n\n%s\n\n%d\n%6f\n%d\n**********************\n", r.movie_title, r.movie_studio, r.year, r.BO_total, r.score);
+            BO_total += r.BO_total;
+        }
+    }
+    return BO_total; // Remove this before you implement your solution
 }
 
 float queryReviewsByScore(int min_score, ReviewNode *head)
@@ -287,8 +380,19 @@ float queryReviewsByScore(int min_score, ReviewNode *head)
     /***************************************************************************/
     /**********  TO DO: Complete this function *********************************/
     /***************************************************************************/
+    ReviewNode *curr = head;
+    float BO_total = 0;
 
-    return 0;
+    while (curr != NULL)
+    {
+        if (curr->review.score >= min_score)
+        {
+            MovieReview r = curr->review;
+            printf("%s\n\n%s\n\n%d\n%6f\n%d\n**********************\n", r.movie_title, r.movie_studio, r.year, r.BO_total, r.score);
+            BO_total += r.BO_total;
+        }
+    }
+    return BO_total;
 }
 
 ReviewNode *deleteReviewList(ReviewNode *head)
@@ -304,8 +408,19 @@ ReviewNode *deleteReviewList(ReviewNode *head)
     /***************************************************************************/
     /**********  TO DO: Complete this function *********************************/
     /***************************************************************************/
+    ReviewNode *curr = NULL;
+    ReviewNode *next = NULL;
 
-    return head; // Remove this before you implement your solution
+    curr = head;
+
+    while (curr != NULL)
+    {
+        next = curr->next;
+        free(curr);
+        curr = next;
+    }
+
+    return NULL;
 }
 
 /* CRUNCHY SECTION! Do not work on the functions below until
@@ -326,7 +441,29 @@ ReviewNode *sortReviewsByTitle(ReviewNode *head)
     /***************************************************************************/
     /**********  TO DO: Complete this function *********************************/
     /***************************************************************************/
+    if (head == NULL || head->next == NULL)
+    {
+        return head;
+    }
 
+    ReviewNode *newList_head = head;
+
+    ReviewNode *traverse = head->next;
+
+
+    ReviewNode *newListPrev = newList_head;
+    ReviewNode *newListNext = newList_head;
+
+    while (traverse != NULL)
+    {
+        if (strcmp(traverse->review.movie_title, newList_head->review.movie_title) < 0) {
+            
+            traverse->next = newList_head;
+            newList_head = traverse->next;
+        }
+
+        
+    }
     return NULL; // Remove this before you implement your solution
 }
 
@@ -334,7 +471,7 @@ void insertCastMember(char title[MAX_STR_LEN], char studio[MAX_STR_LEN], int yea
 {
     /*
      * This function inserts the name of a cast member for the given movie into the
-     * linked list of cast members. The new cast member must go to the end of the list.
+     * linked list of cast members. The list must be sorted in order of decreasing salary.
      *
      * Duplicate names are allowed - this time!
      *
@@ -352,6 +489,60 @@ void insertCastMember(char title[MAX_STR_LEN], char studio[MAX_STR_LEN], int yea
     /***************************************************************************/
     /**********  TO DO: Complete this function *********************************/
     /***************************************************************************/
+    ReviewNode *movie = findMovieReview(title, studio, year, head);
+    if (movie == NULL)
+    {
+        return;
+    }
+
+    CastList *member = NULL;
+    member = calloc(1, sizeof(CastList));
+    strcpy(member->name, name);
+    member->salary = salary;
+    member->next = NULL;
+
+    CastList *cast = movie->review.cast;
+    if (cast == NULL)
+    {
+        movie->review.cast = member;
+        return;
+    }
+
+    while (cast->next != NULL)
+    {   
+        if (cast->next->salary <= salary) {
+            member->next = cast->next->next;
+            cast->next = member;
+        }
+        else {
+            cast = cast->next;
+        }
+    }
+    
+    cast->next = member;
+}
+
+typedef struct actor_struct
+{
+    char name[MAX_STR_LEN];
+    float earnings;
+    Actor *next;
+} Actor;
+
+Actor *findActor(char[MAX_STR_LEN], Actor *actor_head) {
+    
+}
+
+float calculateEarnings(MovieReview movie) {
+    float BO_Total = movie.BO_total;
+
+    CastList *actor = movie.cast;
+    float salaries = 0;
+    while (actor != NULL) {
+        salaries += actor->salary;
+        actor = actor->next;
+    }
+    return BO_Total - salaries;
 }
 
 void whosTheStar(ReviewNode *head)
@@ -381,4 +572,12 @@ void whosTheStar(ReviewNode *head)
     /***************************************************************************/
     /**********  TO DO: Complete this function *********************************/
     /***************************************************************************/
+    ReviewNode *current = head;
+
+    while (current != NULL) {
+        CastList *curr_cast = current->review.cast;
+        while (curr_cast != NULL) {
+
+        }
+    }
 }

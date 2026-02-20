@@ -10,6 +10,38 @@ time.sleep(5)  # Time to switch to the target application
 
 print("Running macro...")
 for i in range(999):
-    pyautogui.press("down")
-    pyautogui.press("space")
+    pyautogui.keyDown("ctrl")
+    pyautogui.press("l")
+    time.sleep(0.1)
+    pyautogui.keyUp("ctrl")
+    pyautogui.keyDown("ctrl")
+    pyautogui.press("c")
+    time.sleep(0.1)
+    pyautogui.keyUp("ctrl")
+    pyautogui.keyDown("alt")
+    pyautogui.press("tab")
+    time.sleep(0.1)
 
+    pyautogui.keyUp("alt")
+    pyautogui.keyDown("ctrl")
+    pyautogui.press("v")
+    time.sleep(0.1)
+
+    pyautogui.keyUp("ctrl")
+    pyautogui.press("enter")
+    pyautogui.keyDown("ctrl")
+    pyautogui.press("t")
+    time.sleep(0.1)
+
+    pyautogui.keyUp("ctrl")
+    pyautogui.keyDown("alt")
+    pyautogui.press("tab")
+    time.sleep(0.1)
+
+    pyautogui.keyUp("alt")
+
+    pyautogui.keyDown("ctrl")
+    pyautogui.press("tab")
+    time.sleep(0.1)
+
+    pyautogui.keyUp("ctrl")
