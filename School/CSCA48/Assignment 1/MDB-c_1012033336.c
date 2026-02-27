@@ -45,7 +45,7 @@
 
 /* Student identification:
  *
- * Student Name (Datta, Sayajit):
+ * Student Name (Datta, Satyajit):
  * Student Number: 1012033336
  * UTORid: dattasa2
  * Your instructor's name is: Yiqing Irene Huang
@@ -58,7 +58,7 @@
  * including my fellow students, external tutoring services, the internet,
  * or algorithm implementations found online.
  *
- * Sign here with your name: Satyjit Datta
+ * Sign here with your name: Satyajit Datta
  *
  *
  */
@@ -87,7 +87,7 @@ typedef struct castList_struct
 {
     char name[MAX_STR_LEN];
     float salary;
-    CastList *next;
+    struct castList_struct *next;
 } CastList;
 
 typedef struct movieReview_struct
@@ -97,13 +97,13 @@ typedef struct movieReview_struct
     int year;
     float BO_total;
     int score;
-    CastList *cast;
+    struct castList_struct *cast;
 } MovieReview;
 
 typedef struct reviewNode_struct
 {
-    MovieReview review;
-    ReviewNode *next;
+    struct movieReview_struct review;
+    struct reviewNode_struct *next;
 } ReviewNode;
 
 ReviewNode *newMovieReviewNode()
@@ -281,6 +281,8 @@ ReviewNode *deleteMovieReview(char title[MAX_STR_LEN], char studio[MAX_STR_LEN],
     /**********  TO DO: Complete this function *********************************/
     /***************************************************************************/
     ReviewNode *query = findMovieReview(title, studio, year, head);
+    CastList *cast_curr = NULL;
+    CastList *cast_next = NULL;
     if (query == NULL)
     {
         return head;
@@ -288,15 +290,30 @@ ReviewNode *deleteMovieReview(char title[MAX_STR_LEN], char studio[MAX_STR_LEN],
     else if (query == head)
     {
         ReviewNode *new_head = head->next;
+        cast_curr = head->review.cast;
+        while (cast_curr != NULL)
+        {
+            cast_next = cast_curr->next;
+            free(cast_curr);
+            cast_curr = cast_next;
+        }
         free(head);
         return new_head;
     }
     ReviewNode *curr = head;
     while (curr != NULL)
     {
+
         if (curr->next == query)
         {
             curr->next = query->next;
+            cast_curr = query->review.cast;
+            while (cast_curr != NULL)
+            {
+                cast_next = cast_curr->next;
+                free(cast_curr);
+                cast_curr = cast_next;
+            }
             free(query);
             return head;
         }
@@ -330,8 +347,9 @@ float printMovieReviews(ReviewNode *head)
     while (curr != NULL)
     {
         MovieReview r = curr->review;
-        printf("%s\n\n%s\n\n%d\n%6f\n%d\n**********************\n", r.movie_title, r.movie_studio, r.year, r.BO_total, r.score);
+        printf("%s\n\n%s\n\n%d\n%.6f\n%d\n**********************\n", r.movie_title, r.movie_studio, r.year, r.BO_total, r.score);
         BO_total += r.BO_total;
+        curr = curr->next;
     }
     return BO_total;
 }
@@ -361,6 +379,7 @@ float queryReviewsByStudio(char studio[MAX_STR_LEN], ReviewNode *head)
             printf("%s\n\n%s\n\n%d\n%6f\n%d\n**********************\n", r.movie_title, r.movie_studio, r.year, r.BO_total, r.score);
             BO_total += r.BO_total;
         }
+        curr = curr->next;
     }
     return BO_total; // Remove this before you implement your solution
 }
@@ -391,6 +410,7 @@ float queryReviewsByScore(int min_score, ReviewNode *head)
             printf("%s\n\n%s\n\n%d\n%6f\n%d\n**********************\n", r.movie_title, r.movie_studio, r.year, r.BO_total, r.score);
             BO_total += r.BO_total;
         }
+        curr = curr->next;
     }
     return BO_total;
 }
@@ -410,12 +430,21 @@ ReviewNode *deleteReviewList(ReviewNode *head)
     /***************************************************************************/
     ReviewNode *curr = NULL;
     ReviewNode *next = NULL;
+    CastList *cast_curr = NULL;
+    CastList *cast_next = NULL;
 
     curr = head;
 
     while (curr != NULL)
     {
         next = curr->next;
+        cast_curr = curr->review.cast;
+        while (cast_curr != NULL)
+        {
+            cast_next = cast_curr->next;
+            free(cast_curr);
+            cast_curr = cast_next;
+        }
         free(curr);
         curr = next;
     }
@@ -445,26 +474,29 @@ ReviewNode *sortReviewsByTitle(ReviewNode *head)
     {
         return head;
     }
-
-    ReviewNode *newList_head = head;
-
-    ReviewNode *traverse = head->next;
-
-
-    ReviewNode *newListPrev = newList_head;
-    ReviewNode *newListNext = newList_head;
-
-    while (traverse != NULL)
+    ReviewNode *sorted_head = NULL;
+    ReviewNode *curr = head;
+    while (curr != NULL)
     {
-        if (strcmp(traverse->review.movie_title, newList_head->review.movie_title) < 0) {
-            
-            traverse->next = newList_head;
-            newList_head = traverse->next;
+        ReviewNode *next = curr->next;
+        if (sorted_head == NULL || strcmp(curr->review.movie_title, sorted_head->review.movie_title) < 0)
+        {
+            curr->next = sorted_head;
+            sorted_head = curr;
         }
-
-        
+        else
+        {
+            ReviewNode *sorted_curr = sorted_head;
+            while (sorted_curr->next != NULL && strcmp(curr->review.movie_title, sorted_curr->next->review.movie_title) >= 0)
+            {
+                sorted_curr = sorted_curr->next;
+            }
+            curr->next = sorted_curr->next;
+            sorted_curr->next = curr;
+        }
+        curr = next;
     }
-    return NULL; // Remove this before you implement your solution
+    return sorted_head;
 }
 
 void insertCastMember(char title[MAX_STR_LEN], char studio[MAX_STR_LEN], int year, ReviewNode *head, char name[MAX_STR_LEN], float salary)
@@ -508,17 +540,19 @@ void insertCastMember(char title[MAX_STR_LEN], char studio[MAX_STR_LEN], int yea
         return;
     }
 
-    while (cast->next != NULL)
-    {   
-        if (cast->next->salary <= salary) {
-            member->next = cast->next->next;
-            cast->next = member;
-        }
-        else {
-            cast = cast->next;
-        }
+    if (cast == NULL || salary > cast->salary)
+    {
+        member->next = cast;
+        movie->review.cast = member;
+        return;
     }
-    
+
+    while (cast->next != NULL && cast->next->salary >= salary)
+    {
+        cast = cast->next;
+    }
+
+    member->next = cast->next;
     cast->next = member;
 }
 
@@ -526,23 +560,32 @@ typedef struct actor_struct
 {
     char name[MAX_STR_LEN];
     float earnings;
-    Actor *next;
+    int movie_count;
+    struct actor_struct *next;
 } Actor;
 
-Actor *findActor(char[MAX_STR_LEN], Actor *actor_head) {
-    
-}
-
-float calculateEarnings(MovieReview movie) {
-    float BO_Total = movie.BO_total;
+float calculateEarnings(MovieReview movie)
+{
+    float BO_total = movie.BO_total;
 
     CastList *actor = movie.cast;
     float salaries = 0;
-    while (actor != NULL) {
+    while (actor != NULL)
+    {
         salaries += actor->salary;
         actor = actor->next;
     }
-    return BO_Total - salaries;
+    return BO_total - salaries;
+}
+
+Actor *createNewActor(char name[MAX_STR_LEN], float earnings, Actor *head)
+{
+    Actor *new_actor = calloc(1, sizeof(Actor));
+    strcpy(new_actor->name, name);
+    new_actor->earnings = earnings;
+    new_actor->movie_count = 1;
+    new_actor->next = head;
+    return new_actor;
 }
 
 void whosTheStar(ReviewNode *head)
@@ -572,12 +615,52 @@ void whosTheStar(ReviewNode *head)
     /***************************************************************************/
     /**********  TO DO: Complete this function *********************************/
     /***************************************************************************/
-    ReviewNode *current = head;
-
-    while (current != NULL) {
-        CastList *curr_cast = current->review.cast;
-        while (curr_cast != NULL) {
-
+    Actor *actor_head = NULL;
+    ReviewNode *curr = head;
+    while (curr != NULL)
+    {
+        MovieReview movie = curr->review;
+        CastList *cast = movie.cast;
+        float earnings = calculateEarnings(movie);
+        while (cast != NULL)
+        {
+            Actor *actor_curr = actor_head;
+            while (actor_curr != NULL)
+            {
+                if (strcmp(actor_curr->name, cast->name) == 0)
+                {
+                    actor_curr->earnings += earnings;
+                    actor_curr->movie_count += 1;
+                    break;
+                }
+                actor_curr = actor_curr->next;
+            }
+            if (actor_curr == NULL)
+            {
+                Actor *new_actor = createNewActor(cast->name, earnings, actor_head);
+                actor_head = new_actor;
+            }
+            cast = cast->next;
         }
+        curr = curr->next;
+    }
+
+    Actor *star = NULL;
+    Actor *actor_curr = actor_head;
+    float star_avg = 0;
+    while (actor_curr != NULL)
+    {
+        float avg = actor_curr->earnings / actor_curr->movie_count;
+        if (star == NULL || avg > star_avg)
+        {
+            star_avg = avg;
+            star = actor_curr;
+        }
+        actor_curr = actor_curr->next;
+    }
+
+    if (star != NULL)
+    {
+        printf("%s\n%.6f\n", star->name, star_avg);
     }
 }
