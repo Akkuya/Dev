@@ -1,0 +1,3 @@
+[submodule "CanvasYoink"]
+	path = CanvasYoink
+	url = https://github.com/Akkuya/CanvasYoink.git
