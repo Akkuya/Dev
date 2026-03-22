@@ -48,7 +48,9 @@ def load_super_productivity_tasks(file_path):
     return tasks
 
 if __name__ == "__main__":
-    file_path = 'data.json'
+    file_path = 'data2.json'
     tasks = load_super_productivity_tasks(file_path)
     for task in tasks:
-        print(f"Title: {task['title']}, Project: {task['project']}, Tags: {', '.join(task['tags'])}")
+        if task['project'] != "Gym App":
+            continue
+        print(f"Title: {task['title']}")
