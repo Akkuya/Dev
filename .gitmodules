@@ -4,3 +4,6 @@
 [submodule "QuantProjects/PuzzleSolver"]
 	path = QuantProjects/PuzzleSolver
 	url = https://github.com/Akkuya/PuzzleSolver.git
+[submodule "papers-we-love"]
+	path = papers-we-love
+	url = https://github.com/papers-we-love/papers-we-love
