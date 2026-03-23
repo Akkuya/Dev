@@ -1,3 +1,6 @@
 [submodule "CanvasYoink"]
 	path = CanvasYoink
 	url = https://github.com/Akkuya/CanvasYoink.git
+[submodule "QuantProjects/PuzzleSolver"]
+	path = QuantProjects/PuzzleSolver
+	url = https://github.com/Akkuya/PuzzleSolver.git
