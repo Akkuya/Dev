@@ -7,3 +7,6 @@
 [submodule "papers-we-love"]
 	path = papers-we-love
 	url = https://github.com/papers-we-love/papers-we-love
+[submodule "QuantProjects/PairsTradingBot"]
+	path = QuantProjects/PairsTradingBot
+	url = https://github.com/akkuya/PairsTradingBot
